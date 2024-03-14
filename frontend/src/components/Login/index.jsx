@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import NavBar from "../NavBar/NavBar";
 
 const Login = () => {
   const [data, setData] = useState({ email: "", password: "" });
@@ -32,9 +33,9 @@ const Login = () => {
   return (
     <div>
       <div>
+        <NavBar></NavBar>
         <div>
           <form onSubmit={handleSubmit}>
-            <h1>FoodShare</h1>
             <h1>Login to Your Account</h1>
             <input
               type='email'
