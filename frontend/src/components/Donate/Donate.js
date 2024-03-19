@@ -1,13 +1,13 @@
-import React from 'react'
-import NavBar from '../NavBar/NavBar'
+import React from "react";
+import NavBar from "../NavBar/NavBar";
 
 function Donate() {
   return (
     <div>
       <NavBar></NavBar>
-      Donate Page
+      <h1>Donate Page</h1>
     </div>
-  )
+  );
 }
 
-export default Donate
+export default Donate;
