@@ -1,13 +1,15 @@
 {
-  "name": "SDP_Project",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "backend": "nodemon backend/index.js",
     "frontend": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "Deepak Kumar",

@@ -1,4 +1,5 @@
 import express from "express";
+
 import {
   createUser,
   loginUser,
@@ -25,6 +26,9 @@ router
   .get(authenticate, getCurrentUserProfile)
   .put(authenticate, updateCurrentUserProfile);
 
+// sign up
+
+router.post("/signup", createUser);
 // ADMIN ROUTES 👇
 router
   .route("/:id")
