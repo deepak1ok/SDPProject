@@ -1,0 +1,55 @@
+.container {
+    max-width: 133rem !important;
+    margin: 0 auto !important;
+    padding: 0 2.5rem !important;
+}
+.about-main {
+    margin: 10rem auto;
+    display: flex;
+    grid-gap: 5rem;
+    gap: 5rem;
+    max-width: 100rem;
+    align-items: center;
+}
+.about-main__img {
+    width: 55rem;
+    height: 58rem;
+}
+.about-main__text {
+    color: #010103;
+    display: flex;
+    flex-direction: column;
+}
+.about-main__text h3 {
+    font-size: 2.2rem;
+    font-family: "Rubik", sans-serif;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+.about-main__text h2 {
+    font-size: 4.2rem;
+    line-height: 1.2;
+}
+.about-main__text p {
+    font-size: 1.6rem;
+    color: #706f7b;
+    font-family: "Rubik", sans-serif;
+    line-height: 1.5;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+.hero-content__text__btns {
+    display: flex;
+    grid-gap: 2rem;
+    gap: 2rem;
+    font-size: 1.6rem;
+    font-family: "Rubik", sans-serif;
+    background-color: #010103;
+}
+.hero-content__text__btns a {
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    background-color: black;
+    padding: 10px 15px;
+}

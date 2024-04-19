@@ -8,7 +8,14 @@ import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
 import Donate from "./components/Donate/Donate";
 import NavBar from "./components/NavBar/NavBar";
+import NeedyPeople from "./components/NeedyPeople/NeedyPeople";
+import Partner from "./components/Partners/Partner.js";
+import DeliveryAgents from "./components/DeliveryAgents/DeliveryAgents.js";
 
+import DonationsHome from "./MainPages/Donations/Home.js";
+import DonationsCreate from "./MainPages/Donations/create.js";
+import DonationsUpdate from "./MainPages/Donations/update.js";
+// import DonationsHome from "./MainPages/Donations/view.js";
 function App() {
   const user = localStorage.getItem("token");
 
@@ -23,12 +30,19 @@ function App() {
           <Route path='/about' exact element={<About />} />
           <Route path='/contact' exact element={<Contact />} />
           <Route path='/donate' exact element={<Donate />} />
-        </Routes>
-      </BrowserRouter>
 
-      {/* {["/", "/about", "/contact", "/login", "/signup"].includes(
-        window.location.pathname
-      ) && <Navbar />} */}
+          <Route path='/needyPeople' exact element={<NeedyPeople />} />
+          <Route path='/partners' exact element={<Partner />} />
+          <Route path='/deliveryagents' exact element={<DeliveryAgents />} />
+
+          <Route path='/donations' element={<DonationsHome />} />
+          <Route path='/create-donation' element={<DonationsCreate />} />
+          <Route path='/update-donation/:id' element={<DonationsUpdate />} />
+        </Routes>
+        {/* {["/", "/about", "/contact", "/login", "/signup"].includes(
+          window.location.pathname
+        )} */}
+      </BrowserRouter>
     </>
   );
 }

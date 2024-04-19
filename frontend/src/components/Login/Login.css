@@ -1,0 +1,116 @@
+.Outer{
+    display: flex;
+    width: 100%;
+    /* height: 100vh; */
+    height: auto;
+    justify-content: space-between;
+    background-color: rgb(255 249 49 / 67%);
+}
+.cont1{
+    padding: 6rem 2rem 2rem;
+    width: 45rem;
+    background-color: bisque;
+}
+
+.text-logo{
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+}
+.text-logo .text{
+    font-weight: 600;
+    font-size: 3.2rem;
+    color: chocolate;
+    padding-left: 10px;
+}
+.Logo_img {
+    width: 8.5rem;
+  }
+  .Logo_img img {
+    width: 100%;
+    height: 100%;
+  }
+  .cont2{
+    padding-right: 5rem;
+    padding-top: 3rem;
+  }
+  .para1{
+    font-size: 3.2rem;
+    margin-top: 1em ;
+    padding-left: 12px;
+  }
+  .para2{
+    margin-top: 1.5rem;
+  }
+  .para2 span{
+    font-size: 2rem;
+    padding-left: 12px;
+    font-weight: 600;
+  }
+  .signup_link{
+
+  }
+  .btn button{
+    all: unset;
+    border: 1px solid #707070;
+    padding: 0.5em 6em;
+    font-size: 2em;
+    margin-left: 10px;
+    color: #636363;
+    border-radius: 7px;
+    margin-top: 2em;
+    cursor: pointer;
+  }
+  .btn button:hover{
+    background-color: #303ffb;
+    color: white;
+  }
+  
+  
+  .para3{
+    display: flex;
+    margin-top: 1em;
+    margin-left: 10px;
+    font-size: 14px;
+    width: 310px;
+  }
+  .para3 p{
+    width: 62px;
+    height: 2px;
+    background-color: black;
+    margin-top: 7px;
+  }
+  .para3 .text{
+    padding: 0 5px;
+    color: #636363;
+  }
+
+  form{
+    margin-top: 3em;
+  }
+  label{
+    font-size: 1.6em;
+    margin-left: 10px;
+  }
+  input{
+    padding: 0.6em 0;
+    width: 18.6em;
+    padding-left: 10px;
+    font-size: 1.6em;
+    margin-left: 10px;
+    color: #636363;
+    border-radius: 5px;
+    margin: .5em 10px 2em;
+  }
+  .login{
+    all: unset;
+    border: 1px solid #707070;
+    padding: 0.5em 2em;
+    font-size: 2em;
+    margin-left: 10px;
+    color: #ffe3e3;
+    border-radius: 7px;
+    margin-top: .2em;
+    cursor: pointer;
+    background-color: chocolate;
+  }

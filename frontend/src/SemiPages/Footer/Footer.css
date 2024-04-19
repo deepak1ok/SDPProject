@@ -1,0 +1,123 @@
+footer {
+    background-color: rgb(249, 247, 247);
+    padding: 10rem 0;
+  }
+  
+  .footer-content {
+    display: grid;
+    color: #010103;
+    grid-template-columns: 27fr 21fr 21fr 21fr;
+    gap: 8rem;
+    justify-content: center;
+    text-align: left;
+    color: black;
+  }
+  @media (max-width: 1100px) {
+    .footer-content {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 650px) {
+    .footer-content {
+      grid-template-columns: 1fr;
+    }
+  }
+  .footer-content__1 {
+    list-style: none;
+  }
+  @media (max-width: 650px) {
+    .footer-content__1 {
+      text-align: center;
+    }
+  }
+  .footer-content__1 li a {
+    text-decoration: none;
+    color: black;
+    transition: all 0.2s;
+  }
+  .footer-content__1 li a:hover {
+    color: orange;
+  }
+  .footer-content__1 li:nth-child(1) {
+    font-size: 1.8em;
+    margin-bottom: 1.5rem;
+  }
+  .footer-content__1 li:nth-child(1) span {
+    font-weight: 700;
+  }
+  .footer-content__1 li:nth-child(2) {
+    font-size: 1.6em;
+    color: gray;
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+  .footer-content__1 li:nth-child(3), .footer-content__1 li:nth-child(4) {
+    font-size: 1.6em;
+    font-family: "sans-serif";
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  .footer-content__2 {
+    list-style: none;
+  }
+  @media (max-width: 650px) {
+    .footer-content__2 {
+      text-align: center;
+    }
+  }
+  .footer-content__2 a {
+    text-decoration: none;
+    color: black;
+    transition: all 0.2s;
+  }
+  .footer-content__2 a:hover {
+    color: #FF9F29;
+  }
+  .footer-content__2 li {
+    font-size: 1.6em;
+    margin-bottom: 1rem;
+  }
+  .footer-content__2 li:nth-child(1) {
+    font-size: 1.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: "sans-serif";
+    cursor: auto;
+  }
+  .footer-content__2 input {
+    font-family: 1.6em;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 26px;
+    background-color: #ececec;
+    border-width: 1px;
+    border-color: transparent;
+    padding: 10px 60px;
+    outline: none;
+    margin-top: 1rem;
+  }
+  @media (max-width: 1100px) {
+    .footer-content__2 input {
+      width: 100%;
+    }
+  }
+  
+  .submit-email {
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    background-color: #FF9F29;
+    padding: 1.5rem 2.5rem;
+    border-radius: 0.3rem;
+    box-shadow: #FF9F29;
+    transition: all 0.3s;
+    border: 2px solid #FF9F29;
+    font-size: 1.6rem;
+    width: fit-content;
+    cursor: pointer;
+    width: 100%;
+  }
+  .submit-email:hover {
+    box-shadow: #FF9F29;
+    background-color: #FF9F29;
+  }
