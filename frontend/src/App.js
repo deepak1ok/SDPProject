@@ -37,7 +37,7 @@ function App() {
 
           <Route path='/donations' element={<DonationsHome />} />
           <Route path='/create-donation' element={<DonationsCreate />} />
-          <Route path='/update-donation/:id' element={<DonationsUpdate />} />
+          {/* <Route path='/update-donation/:id' element={<DonationsUpdate />} /> */}
         </Routes>
         {/* {["/", "/about", "/contact", "/login", "/signup"].includes(
           window.location.pathname

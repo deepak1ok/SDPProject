@@ -3,9 +3,9 @@ import asyncHandler from "../middlewares/asyncHandler.js";
 import bcrypt from "bcryptjs";
 import createToken from "../utils/createTokens.js";
 export const createUser = asyncHandler(async (req, res, next) => {
-  const { username, email, password } = req.body;
-
-  if (!username || !email || !password) {
+  const { fname, lname, email, password } = req.body;
+  console.log(req.body);
+  if (!fname || !lname || !email || !password) {
     throw new Error("Please fill all the inputs");
   }
 
@@ -15,14 +15,15 @@ export const createUser = asyncHandler(async (req, res, next) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
-  const newUser = new User({ username, email, password: hashedPassword });
+  const newUser = new User({ fname, lname, email, password: hashedPassword });
 
   try {
     await newUser.save();
     createToken(res, newUser._id);
     res.status(201).json({
       _id: newUser._id,
-      username: newUser.username,
+      fname: newUser.fname,
+      lname: newUser.lname,
       email: newUser.email,
       isAdmin: newUser.isAdmin,
     });
@@ -47,7 +48,8 @@ export const loginUser = asyncHandler(async (req, res) => {
       createToken(res, existingUser._id);
       res.status(201).json({
         _id: existingUser._id,
-        username: existingUser.username,
+        fname: existingUser.fname,
+        lname: existingUser.lname,
         email: existingUser.email,
         isAdmin: existingUser.isAdmin,
       });

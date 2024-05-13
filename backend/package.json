@@ -9,7 +9,7 @@
     "backend": "nodemon backend/index.js",
     "frontend": "npm start --prefix frontend",
     "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
-    "start": "nodemon index.js"
+    "start": "nodemon server.js"
   },
   "keywords": [],
   "author": "Deepak Kumar",
