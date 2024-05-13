@@ -14,3 +14,24 @@ items:[
     quantity
 ]
 type raw food or cooked
+
+
+ngo
+
+Fname v
+Lname  v
+Name of Ngo  v
+Number of Vol
+Total Feeds
+Total Campaigns
+adults
+children
+city v 
+state v
+phone v
+email v
+zip code v
+Address v
+lat 
+lng
+

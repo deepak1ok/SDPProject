@@ -12,7 +12,7 @@ function NavBar() {
   const { user } = React.useContext(UserContext);
   return (
     <>
-      <div className='navbar border-solid border-2'>
+      <div className='navbar border-solid border-2' style={{height:'70px'}}>
       <div className='navbar-start'>
         <img src={Logo} alt="logo-img" style={{height:"60px",width:"80px"}}/>
         <Link to='/' className='btn btn-ghost text-2xl align-center'>
@@ -22,7 +22,7 @@ function NavBar() {
       <div className='navbar-center hidden lg:flex'>
         <ul className='menu menu-horizontal px-1'>
           <li className="text-2xl">
-            {user && <Link to='/donations'>Donate Now</Link>}
+            {user && <Link to='/main'>Our Services</Link>}
           </li>
           <li className="text-2xl">
             <Link to='/about'>About Us</Link>
@@ -37,9 +37,26 @@ function NavBar() {
         <Button></Button>
       </div>}
 
-      {user && <div className='navbar-end'>
+      {/* {user && <div className='navbar-end'>
           <LogoutButton></LogoutButton>
-      </div>}
+      </div>} */}
+
+<div className="dropdown dropdown-end">
+      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar" >
+        <div className="w-10 rounded-full" style={{height:'30px',width:'30px'}}>
+          <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+        </div>
+      </div>
+      <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-72 ">
+        <li>
+          <a className="justify-between text-2xl font-bold">
+            Profile
+          </a>
+        </li>
+        <li><a className="text-2xl font-bold">Settings</a></li>
+        <li><a className="text-2xl font-bold">Logout</a></li>
+      </ul>
+    </div>
     </div>
     </>
   );
