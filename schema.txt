@@ -1,0 +1,16 @@
+donation req
+
+fname
+lname
+email
+phone 
+state
+Address 
+city
+state
+zip code 
+items:[
+    name
+    quantity
+]
+type raw food or cooked
