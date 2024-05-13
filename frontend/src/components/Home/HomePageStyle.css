@@ -1,0 +1,27 @@
+.container
+{
+    width:  100%;
+    height: 100vh;
+    overflow-y:scroll;
+    scroll-snap-type:y mandatory;
+    background-image:url('../../../public/s.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+
+}
+
+.slides
+{
+    width:100%;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:50px;
+    color:#fff;
+    
+    scroll-snap-align:start;
+
+
+}
+

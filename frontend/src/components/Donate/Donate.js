@@ -36,7 +36,7 @@ function Donate() {
               <div className='hero-content__text__btns'>
                 <Link
                   className='hero-content__text__btns__learn-more'
-                  to='/signup'
+                  to='/create-donations'
                 >
                   Donate Now &nbsp; <i className='fa-solid fa-angle-right'></i>
                 </Link>
