@@ -2,13 +2,16 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import NavBar from "../NavBar/NavBar";
+
 import Logo from "../../Images/Logo/logo.png";
 import Background from "../../Images/BackgroundImg/main-bg.png";
 import "../Login/Login.css";
+
 const Signup = () => {
   const [data, setData] = useState({
-    username: "",
+    // username: "",
+    fname: "",
+    lname: "",
     email: "",
     password: "",
   });
@@ -153,6 +156,9 @@ const Signup = () => {
               SignUp{" "}
             </button>
           </form>
+        </div>
+        <div className='cont2'>
+          <img src={Background} alt='' />
         </div>
       </div>
     </>

@@ -1,10 +1,10 @@
 .faq-section {
-    background-image: url("/src/Images/faq.png");
-    padding: 25rem 0;
+    /* background-image: url("/src/Images/faq.png"); */
+    padding: 10rem 0;
     background-size: auto;
     background-repeat: no-repeat;
     background-position: 0 70%;
-
+    height: 100vh;
     
   }
   

@@ -62,7 +62,7 @@ function Faq() {
                   onClick={() => openQ("q2")}
                   className={`faq-box__answer ${getClassAnswer("q2")}`}
                 >
-                  Saubhagya works by connecting four user groups: food donators,
+                  Foodshare works by connecting four user groups: food donators,
                   needy organizations, partners, and food collection agents.
                   Users can register under any of these groups and use the
                   platform to donate, receive, or facilitate the collection and
@@ -85,7 +85,7 @@ function Faq() {
                 >
                   Anyone can use FoodShare, including individuals,
                   organizations, and volunteers who want to help combat hunger
-                  and malnutrition in Sri Lanka.
+                  and malnutrition .
                 </div>
               </div>
 
@@ -105,7 +105,7 @@ function Faq() {
                   onClick={() => openQ("q4")}
                   className={`faq-box__answer ${getClassAnswer("q4")}`}
                 >
-                  Yes, users can register as food collection agents on Saubhagya
+                  Yes, users can register as food collection agents on Foodshare
                   and volunteer to collect and deliver food donations to needy
                   organizations.
                 </div>
