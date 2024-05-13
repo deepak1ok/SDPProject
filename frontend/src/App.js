@@ -38,9 +38,8 @@ function App() {
           <Route path='/deliveryagents' exact element={<DeliveryAgents />} />
 
           <Route path='/create-donations' element={<Form />} />
-          
-          <Route path='/location' element={<Location></Location>} />
 
+          <Route path='/location' element={<Location></Location>} />
           
 
         

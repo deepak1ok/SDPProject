@@ -9,7 +9,7 @@ function Banner() {
             <div className='banner-content__text'>
               <h2>
                 Join the FoodShare community today and help us fight hunger and
-                malnutrition in Sri Lanka and beyond.
+                malnutrition in India and beyond.
               </h2>
               <p>
                 Together, we can make a difference. With <span>Foodshare,</span>{" "}
