@@ -13,8 +13,9 @@ import Partner from "./components/Partners/Partner.js";
 import DeliveryAgents from "./components/DeliveryAgents/DeliveryAgents.js";
 
 import DonationsHome from "./MainPages/Donations/Home.js";
-import DonationsCreate from "./MainPages/Donations/create.js";
-import DonationsUpdate from "./MainPages/Donations/update.js";
+import Location from "./MainPages/Donations/Location.js";
+import Form from "./MainPages/Donations/Form.js";
+
 // import DonationsHome from "./MainPages/Donations/view.js";
 function App() {
   const user = localStorage.getItem("token");
@@ -29,15 +30,15 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/about' exact element={<About />} />
           <Route path='/contact' exact element={<Contact />} />
-          <Route path='/donate' exact element={<Donate />} />
+          <Route path='/donations' exact element={<Donate />} />
 
           <Route path='/needyPeople' exact element={<NeedyPeople />} />
           <Route path='/partners' exact element={<Partner />} />
           <Route path='/deliveryagents' exact element={<DeliveryAgents />} />
 
-          <Route path='/donations' element={<DonationsHome />} />
-          <Route path='/create-donation' element={<DonationsCreate />} />
-          {/* <Route path='/update-donation/:id' element={<DonationsUpdate />} /> */}
+          <Route path='/create-donations' element={<Form />} />
+
+          <Route path='/location' element={<Location></Location>} />
         </Routes>
         {/* {["/", "/about", "/contact", "/login", "/signup"].includes(
           window.location.pathname

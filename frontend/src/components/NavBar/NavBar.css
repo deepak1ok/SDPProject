@@ -21,11 +21,8 @@
     padding: 0 2.5rem !important;
   }
   
-  /* Firefox */
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: #FF9F29 #ffffff;
-  }
+/* Firefox */
+ 
   
   /* Chrome, Edge and Safari */
   *::-webkit-scrollbar {

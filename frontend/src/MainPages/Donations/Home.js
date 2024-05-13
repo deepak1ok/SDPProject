@@ -1,46 +1,50 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import NavBar from "../../components/NavBar/NavBar";
 
 import "../Donations/Donations.css";
 
 function Home() {
-  const [data, setData] = useState([]);
+  const [donationList, setDonationList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
   const getData = async () => {
-    await axios
-      .get("http://localhost:3000/api/donate")
+    const data=await axios
+      .get("http://localhost:3000/api/donation/donationlist")
       .then((res) => {
-        console.log(res.data.response);
-        setData(res.data.response);
+        console.log(res.data);
+        setDonationList(res.data.donationLists);
       })
       .catch((err) => {
         console.log(err);
       });
+      
+
+      
   };
 
   useEffect(() => {
     getData();
   }, []);
 
-  function handleDelete(id) {
-    const confirm = window.confirm("Are you sure you want to Delete?");
-    if (confirm) {
-      axios
-        .post("http://localhost:3000/api/donate/delete/" + id)
-        .then((res) => {
-          alert("Record Deleted Successfully!");
-          getData();
-        });
-    }
-  }
+  // function handleDelete(id) {
+  //   const confirm = window.confirm("Are you sure you want to Delete?");
+  //   if (confirm) {
+  //     axios
+  //       .post("http://localhost:3000/api/donate/delete/" + id)
+  //       .then((res) => {
+  //         alert("Record Deleted Successfully!");
+  //         getData();
+  //       });
+  //   }
+  // }
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location = "/";
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token");
+  //   window.location = "/";
+  // };
 
   const searchProperties = [
     "name",
@@ -52,34 +56,30 @@ function Home() {
     "needy_people_organization.organization_name",
   ];
 
-  const filteredData = data.filter((item) =>
-    searchProperties.some((prop) => {
-      const propValue = getProperty(item, prop);
-      if (propValue && typeof propValue === "string") {
-        return propValue.toLowerCase().includes(searchTerm.toLowerCase());
-      }
-      return false;
-    })
-  );
+  // const filteredData = data.filter((item) =>
+  //   searchProperties.some((prop) => {
+  //     const propValue = getProperty(item, prop);
+  //     if (propValue && typeof propValue === "string") {
+  //       return propValue.toLowerCase().includes(searchTerm.toLowerCase());
+  //     }
+  //     return false;
+  //   })
+  // );
 
   // Helper function to access nested properties
-  function getProperty(obj, prop) {
-    const propParts = prop.split(".");
-    return propParts.reduce(
-      (result, currentProp) => result && result[currentProp],
-      obj
-    );
-  }
+  // function getProperty(obj, prop) {
+  //   const propParts = prop.split(".");
+  //   return propParts.reduce(
+  //     (result, currentProp) => result && result[currentProp],
+  //     obj
+  //   );
+  // }
 
   return (
-    <div className='main_container'>
-      <nav className='navbar'>
-        <h1>Welcome to Foodshare</h1>
-        <button className='white_btn' onClick={handleLogout}>
-          Logout
-        </button>
-      </nav>
-
+    <div>
+      <div>
+     <NavBar></NavBar>
+     </div>
       <div>
         <h1>Food Donations</h1>
         <br />
@@ -160,17 +160,13 @@ function Home() {
               }}
             >
               <th>Name</th>
-              <th>Organization Name</th>
               <th>Address</th>
               <th>Phone</th>
               <th>Email</th>
               <th>Meal Type</th>
-              <th>Food Name</th>
-              <th>Quantity</th>
-              <th>Other Donations</th>
-              <th>Donate Date</th>
-              <th>Needy People Organization</th>
-              <th>Action</th>
+              <th>Donate Request Date</th>
+              <th>Donate Status</th>
+              
             </tr>
           </thead>
           <tbody
@@ -181,50 +177,15 @@ function Home() {
               textAlign: "center",
             }}
           >
-            {filteredData.map((d, i) => (
+            {donationList.map((d, i) => (
               <tr key={i}>
-                <td>{d.name}</td>
-                <td>{d.organizationname}</td>
+                <td>{d.firstName}</td>
                 <td>{d.address}</td>
-                <td>{d.phone}</td>
+                <td>{d.phoneNumber}</td>
                 <td>{d.email}</td>
                 <td>{d.mealtype}</td>
-                <td>{d.foodname}</td>
-                <td>{d.quantity}</td>
-                <td>{d.additionaldonateitems}</td>
-                <td>{d.pickupdate}</td>
-                <td>{d.needy_people_organization.organization_name}</td>
-                <td>
-                  <br />
-                  <Link to={`/update-donation/${d._id}`}>
-                    <button
-                      type='button'
-                      style={{
-                        backgroundColor: "#FF9F29",
-                        color: "white",
-                        marginRight: "10px",
-                        position: "center",
-                        width: "50px",
-                      }}
-                    >
-                      Update
-                    </button>
-                  </Link>
-                  <br />
-                  <button
-                    onClick={(e) => handleDelete(d._id)}
-                    style={{
-                      backgroundColor: "red",
-                      color: "white",
-                      marginRight: "10px",
-                      position: "center",
-                      width: "50px",
-                    }}
-                  >
-                    Delete
-                  </button>{" "}
-                  <br />
-                </td>
+                <td>{d.date}</td>
+                <td></td>
               </tr>
             ))}
           </tbody>
