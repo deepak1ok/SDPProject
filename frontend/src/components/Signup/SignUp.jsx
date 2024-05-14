@@ -7,6 +7,8 @@ import Logo from "../../Images/Logo/logo.png";
 import Background from "../../Images/BackgroundImg/main-bg.png";
 import "../Login/Login.css";
 
+import { useLocation } from 'react-router-dom';
+
 const Signup = () => {
   const [data, setData] = useState({
     // username: "",
@@ -15,6 +17,10 @@ const Signup = () => {
     email: "",
     password: "",
   });
+
+  const location = useLocation()
+  console.log(location.state); 
+
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -22,13 +28,20 @@ const Signup = () => {
     setData({ ...data, [input.name]: input.value });
   };
 
+  const handleClick=()=>
+  {
+    navigate('/login',{state:{role:location.state.role}})
+  }
+
   const handleSubmit = async (e) => {
+
+    console.log(data);
     e.preventDefault();
     try {
       const url = "http://localhost:3000/api/users";
-      const { data: res } = await axios.post(url, data);
-      navigate("/login");
-      console.log(res.message);
+      const res = await axios.post(url, data);
+      navigate("/login",{state:{role:location.state.role}});
+      console.log(res);
     } catch (error) {
       if (
         error.response &&
@@ -84,18 +97,19 @@ const Signup = () => {
       {/* ----- */}
       <div className='Outer'>
         <div className='cont1'>
-          <div className='text-logo'>
+          {/* <div className='text-logo'>
             <span className='Logo_img'>
               <img src={Logo} alt='' />
             </span>
             <span className='text'>FoodShare</span>
-          </div>
+          </div> */}
+          <div className="container"></div>
           <div className='para1'>Create Your account</div>
           <p className='para2'>
             <span>Already have an account?</span>
 
             <span className='signup_link'>
-              <Link to='/login'>Sign In</Link>
+              <button onClick={handleClick}>Sign In</button>
             </span>
           </p>
           <div className='btn'>
@@ -151,6 +165,15 @@ const Signup = () => {
               required
             />
             <br />
+            
+              {/* <label for="cars">Role</label>
+              <select id="cars" name="role" onChange={handleChange} value={data.role}>
+                  <option value="donor">Donor</option>
+                  <option value="ngo">NGO</option>
+                </select> */}
+
+             Role<input type="text" disabled={true} value={location.state.role} />
+          
             {error && <div>{error}</div>}
             <button className='signup' type='submit'>
               SignUp{" "}

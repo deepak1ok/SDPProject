@@ -5,7 +5,7 @@ import NavBar from "../../components/NavBar/NavBar";
 
 import "../Donations/Donations.css";
 
-function Home() {
+function DonationList() {
   const [donationList, setDonationList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
@@ -56,6 +56,8 @@ function Home() {
     "needy_people_organization.organization_name",
   ];
 
+  console.log(donationList)
+
   // const filteredData = data.filter((item) =>
   //   searchProperties.some((prop) => {
   //     const propValue = getProperty(item, prop);
@@ -81,29 +83,7 @@ function Home() {
      <NavBar></NavBar>
      </div>
       <div>
-        <h1>Food Donations</h1>
-        <br />
-        <button
-          style={{
-            backgroundColor: "#FF9F29",
-            color: "white",
-            marginRight: "10px",
-            width: "8%",
-            height: "25px",
-            fontSize: "15px",
-            fontWeight: "bold",
-          }}
-        >
-          <Link
-            to='/create-donation'
-            style={{ textDecoration: "none", color: "white" }}
-          >
-            + Donate Food
-          </Link>
-          <br />
-        </button>
-        <br />
-        <br />
+        <h1>Food Donations List</h1>
         <input
           type='text'
           placeholder='Search (Name, Organization name, Adddress, Meal Type, Food, Date, Neeedy People) '
@@ -194,4 +174,4 @@ function Home() {
     </div>
   );
 }
-export default Home;
+export default DonationList;

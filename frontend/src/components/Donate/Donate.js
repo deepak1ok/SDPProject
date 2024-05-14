@@ -1,10 +1,14 @@
-import React from "react";
+import React,{useContext} from "react";
 import NavBar from "../NavBar/NavBar";
 import { Link } from "react-router-dom";
 import "../Donate/Donate.css";
 import HeroImage from "../../Images/Donate/donate.png";
 import Footer from "../../SemiPages/Footer/Footer";
+import { UserContext } from "../../Context/UserContext";
+
 function Donate() {
+
+  const {user} = useContext(UserContext);
   return (
     <>
       <section className='about-page'>
@@ -33,21 +37,23 @@ function Donate() {
                 Together, we can work towards a future where everyone has access
                 to the resources they need to thrive.
               </p>
-              <div className='hero-content__text__btns'>
-                <Link
+               <div className='hero-content__text__btns'>
+               {user.role==='donor' && <Link
                   className='hero-content__text__btns__learn-more'
                   to='/create-donations'
                 >
                   Donate Now &nbsp; <i className='fa-solid fa-angle-right'></i>
-                </Link>
+                </Link>}
+              
                 <br />
-                <Link
+                {user.role==='ngo' && <Link
                   className='hero-content__text__btns__learn-more'
-                  to='/on-going-food-donations'
+                  to='/donationslist'
                 >
                   View On Going Food Donations &nbsp;{" "}
                   <i className='fa-solid fa-angle-right'></i>
                 </Link>
+                }
               </div>
             </div>
           </div>

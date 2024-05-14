@@ -21,10 +21,10 @@ ngo
 Fname v
 Lname  v
 Name of Ngo  v
-Number of Vol
-Total Feeds
-Total Campaigns
-adults
+Number of Vol v
+Total Feeds v
+Total Campaigns v
+adults v
 children
 city v 
 state v
@@ -34,4 +34,5 @@ zip code v
 Address v
 lat 
 lng
+desc v
 

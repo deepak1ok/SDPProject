@@ -6,7 +6,7 @@ export const UserContext = createContext();
 // Create the UserProvider component
 export const UserProvider = ({ children }) => {
     // Define the state for user data
-    const [user,setUser]=useState(localStorage.getItem("token"));
+    const [user,setUser]=useState(JSON.parse(localStorage.getItem("token")));
 
 //     useEffect(() => {
 

@@ -10,6 +10,7 @@ import {
   deleteUserById,
   getUserById,
   updateUserById,
+  loginNgo,
 } from "../controllers/userController.js";
 import { authenticate, authorizeAdmin } from "../middlewares/authMiddleware.js";
 
@@ -20,6 +21,7 @@ router
   .post(createUser)
   .get(authenticate, authorizeAdmin, getAllUsers);
 router.post("/auth", loginUser);
+router.post("/ngologin", loginNgo);
 router.post("/logout", logoutCurrentUser);
 router
   .route("/profile")
