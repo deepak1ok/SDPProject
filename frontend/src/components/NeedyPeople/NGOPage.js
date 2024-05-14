@@ -7,6 +7,7 @@ import NavBar from '../NavBar/NavBar'
 import NGOForm from './NGOForm'
 import MoreInfo from './MoreInfo'
 import Location from './Map/Location'
+import EmailCheck from './EmailCheck'
 
 
 function NGOPage() {
@@ -16,6 +17,7 @@ function NGOPage() {
     const [userData,setUserData]=useState('');
 
     const steps=[
+        "Check Email",
         "NGO Information",
         "More Information",
         "Location",
@@ -28,12 +30,15 @@ function NGOPage() {
         switch(step)
         {
             case 1:
-                return <NGOForm></NGOForm>
+                return <EmailCheck></EmailCheck>
 
             case 2:
+                return <NGOForm></NGOForm>
+
+            case 3:
                 return <MoreInfo></MoreInfo>
             
-            case 3:
+            case 4:
                 return <Location></Location>
             
             default:

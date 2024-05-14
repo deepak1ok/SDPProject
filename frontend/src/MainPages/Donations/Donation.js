@@ -6,7 +6,7 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 function Donation() {
   const [foodItem, setFoodItem] = useState([]);
   const [name, setName] = useState("");
-  const [typeOfFood, setTypeOfFood] = useState("");
+  const [typeOfFood, setTypeOfFood] = useState("raw");
   const [quantity, setQuantity] = useState(0);
 
   const inputRef = React.useRef(null);
@@ -27,10 +27,12 @@ function Donation() {
     console.log(foodItem);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     console.log(userData);
     setUserData({ ...userData, items: foodItem, date: new Date() });
   };
+
+
   return (
     <>
       <div className=' grid grid-cols-3 gap-4'>
@@ -87,6 +89,8 @@ function Donation() {
               id='typeOfFood'
               onChange={(e) => setTypeOfFood(e.target.value)}
               class='block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 w-42'
+              value={typeOfFood}
+            
             >
               <option value='raw'>Raw Food</option>
               <option value='cooked'>Cooked Food</option>
@@ -109,10 +113,21 @@ function Donation() {
           </button>
         </div>
 
-        {/*         
-        <button onClick={handleSubmit}>
+                
+        <div style={{ marginTop: "60px" }}>
+          <button
+            onClick={handleSubmit}
+            style={{
+              border: "1px solid black",
+              padding: "3px 25px",
+              backgroundColor: "brown",
+              borderRadius: "6px",
+              color: "aliceblue",
+            }}
+          >
             Submit
-        </button> */}
+          </button>
+        </div>
       </div>
       <div style={{ marginTop: "10px", fontSize: "15px", textAlign: "center" }}>
         List of Items
@@ -136,7 +151,7 @@ function Donation() {
                       <td>{item.name}</td>
                       <td>{item.quantity}</td>
                       <td>{item.typeOfFood}</td>
-                      <td>
+                     <td> 
                         <FontAwesomeIcon
                           icon={faTimes}
                           size='lg'

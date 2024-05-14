@@ -33,3 +33,32 @@ export const createNgo = async (req, res) => {
   }
    
    }
+
+
+   export const checkEmail = async (req, res) => {
+
+    const {email} = req.body;
+
+    if(!email)
+    {
+        throw new Error("Please fill all the inputs");
+    
+    }
+
+    const emailExist = await ngo.findOne({email:email});
+
+    if(emailExist)
+    {
+        return res.status(200).json({
+            emailExist,
+            status:false
+        });
+    }
+    else{
+        return res.status(200).json({
+            status:true
+        });
+    }   
+
+
+   }

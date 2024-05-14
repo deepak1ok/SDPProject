@@ -143,9 +143,10 @@ function DonationList() {
               <th>Address</th>
               <th>Phone</th>
               <th>Email</th>
-              <th>Meal Type</th>
               <th>Donate Request Date</th>
-              <th>Donate Status</th>
+              <th>City</th>
+              <th>State</th>
+              <th>Action</th>
               
             </tr>
           </thead>
@@ -163,9 +164,10 @@ function DonationList() {
                 <td>{d.address}</td>
                 <td>{d.phoneNumber}</td>
                 <td>{d.email}</td>
-                <td>{d.mealtype}</td>
-                <td>{d.date}</td>
-                <td></td>
+                <td>{new Date(d.date).toLocaleDateString()}</td>
+                <td>{d.city}</td>
+                <td>{d.state}</td>
+                <td><Link to={`aboutdonation/${d._id}`}>View</Link></td>
               </tr>
             ))}
           </tbody>

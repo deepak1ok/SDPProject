@@ -49,25 +49,8 @@ const donateSchema = mongoose.Schema(
     date: {
         type: Date,
         required: true,
-      },
-    donateStatus: {
-        type: Boolean,
-        required: true,
-        default:false
-      },
-    typeFood: {
-        type: String,
-        required: true,
-      },
-    
+      }
 
-    //   time: {
-    //     type: String,
-    //     required: true,
-    //   },
-
-      
-    
   },
   { timeStamps: true }
 );
