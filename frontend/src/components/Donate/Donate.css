@@ -44,7 +44,7 @@
     gap: 2rem;
     font-size: 1.6rem;
     font-family: "Rubik", sans-serif;
-    background-color: #010103;
+    /* background-color: #010103; */
 }
 .hero-content__text__btns a {
     text-decoration: none;

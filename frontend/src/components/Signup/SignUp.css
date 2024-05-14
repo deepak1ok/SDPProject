@@ -10,6 +10,7 @@
     padding: 6rem 2rem 2rem;
     width: 45rem;
     background-color: bisque;
+    
 }
 
 .text-logo{
@@ -48,7 +49,7 @@
     font-weight: 600;
   }
   .signup_link{
-
+    color: #303ffb ;
   }
   .btn button{
     all: unset;
@@ -101,8 +102,9 @@
     color: #636363;
     border-radius: 5px;
     margin: .5em 10px 2em;
+    background-color: aliceblue;
   }
-  button .signup{
+  button.signup{
     all: unset;
     border: 1px solid #707070;
     padding: 0.5em 2em;
