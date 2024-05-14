@@ -104,7 +104,7 @@
     margin: .5em 10px 2em;
     background-color: aliceblue;
   }
-  button.signup{
+  .signup{
     all: unset;
     border: 1px solid #707070;
     padding: 0.5em 2em;
