@@ -1,6 +1,4 @@
 
-
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -147,7 +145,7 @@
     color: #FF9F29;
   }
   .navbar__buttons__register {
-    background-color: #FF9F29;
+    //background-color: #FF9F29;
     color: white;
     padding: 1.5rem 3rem;
     border-radius: 3px;

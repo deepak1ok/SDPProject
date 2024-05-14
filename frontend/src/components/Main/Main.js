@@ -8,6 +8,7 @@ import DonatorPartner from "../../Images/usermain/Donator-Partner.png";
 import DeliveryAgent from "../../Images/usermain/Delivery-Agent.png";
 
 import "../Main/Main.css";
+import NavBar from "../NavBar/NavBar";
 const Main = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -16,17 +17,11 @@ const Main = () => {
 
   return (
     <>
-      <div className='main_container'>
-        <nav className='navbar'>
-          <h1>Welcome to Foodshare</h1>
-          <button className='white_btn' onClick={handleLogout}>
-            Logout
-          </button>
-        </nav>
-        <br></br>
+      <div>
+        <NavBar></NavBar>
         <div className='org_container'>
           <div className='card'>
-            <Link to='/needy-people' onClick={Image}>
+            <Link to='/needyPeople' onClick={Image}>
               <img src={NeedyPeople} alt='' />
             </Link>
             <h3>Needy People</h3>

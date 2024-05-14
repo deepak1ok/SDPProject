@@ -1,21 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import { useNavigate } from "react-router-dom";
+
 
 function Button() {
+
+  const navigate=useNavigate();
+
+  const handleClick=()=>
+  {
+    navigate('/login',{state:{
+      role:'ngo'
+    }});
+  }
+
+  const handleClickDonor=()=>
+  {
+    navigate('/login',{state:{
+      role:'donor'
+    }});
+  }
+
   return (
     <>
-      <Link to='/login' >
-        <button className='btn btn-outline btn-info w-44 text-xl mx-1'  style={{height:'50px'}}>
-          Login <i className='fa fa-child' style={{ fontSize: "24px" }}></i>
-        </button>
-      </Link>
-      <Link to='/signup'>
-        <button className='btn btn-outline btn-accent w-44 mx-1 text-xl' style={{height:'50px'}}>
-          Signup
-          <i className='fa fa-handshake-o' style={{ fontSize: "18px" }}></i>
-        </button>
-      </Link>
+      <div className="dropdown dropdown-hover">
+  <div tabIndex={0} role="button" className="btn m-1">Hover</div>
+  <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+    <li><button onClick={()=>handleClick()}>Get Started with NGO</button></li>
+    <li><button onClick={()=>handleClickDonor()}>Get Started with Donor</button></li>
+  </ul>
+</div>
     </>
   );
 }

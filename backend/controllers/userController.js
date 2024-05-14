@@ -2,30 +2,36 @@ import User from "../models/userModel.js";
 import asyncHandler from "../middlewares/asyncHandler.js";
 import bcrypt from "bcryptjs";
 import createToken from "../utils/createTokens.js";
+import Ngo from "../models/ngomodel.js";
+
 export const createUser = asyncHandler(async (req, res, next) => {
+
   const { fname, lname, email, password } = req.body;
-  console.log(req.body);
-  if (!fname || !lname || !email || !password) {
-    throw new Error("Please fill all the inputs");
+
+  if (!fname || !lname || !email || !password) 
+  {
+     throw new Error("Please fill all the inputs");
   }
 
+  console.log(req.body)
+
   const userExists = await User.findOne({ email });
+
+  console.log(userExists)
   if (userExists) return res.status(400).send("User already exists!");
 
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-
-  const newUser = new User({ fname, lname, email, password: hashedPassword });
+  
+  const hashedPassword = await bcrypt.hash(password,10);
+  
+  const newUser = await User.create({ fname, lname, email, password: hashedPassword });
 
   try {
-    await newUser.save();
     createToken(res, newUser._id);
     res.status(201).json({
       _id: newUser._id,
       fname: newUser.fname,
       lname: newUser.lname,
       email: newUser.email,
-      isAdmin: newUser.isAdmin,
     });
   } catch (error) {
     res.status(400);
@@ -51,7 +57,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         fname: existingUser.fname,
         lname: existingUser.lname,
         email: existingUser.email,
-        isAdmin: existingUser.isAdmin,
+        role:'donor',
       });
     }
     return;
@@ -163,5 +169,34 @@ export const updateUserById = asyncHandler(async (req, res) => {
   } else {
     res.status(404);
     throw new Error("User not found");
+  }
+});
+
+export const loginNgo = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+
+  const existingUser = await Ngo.findOne({ email });
+
+  
+
+  if (existingUser) {
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      existingUser.password
+    );
+
+    console.log("sssss")
+
+    if (isPasswordValid) {
+      createToken(res, existingUser._id);
+      res.status(201).json({
+        _id: existingUser._id,
+        fname: existingUser.fname,
+        lname: existingUser.lname,
+        email: existingUser.email,
+        role: 'ngo',
+      });
+    }
+    return;
   }
 });

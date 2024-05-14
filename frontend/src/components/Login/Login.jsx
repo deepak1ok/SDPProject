@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext,useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -6,30 +6,74 @@ import { Link } from "react-router-dom";
 import Logo from "../../Images/Logo/logo.png";
 import Background from "../../Images/BackgroundImg/main-bg.png";
 import "../Login/Login.css";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../Context/UserContext";
+
+import { useLocation } from 'react-router-dom';
+
+
+
 const Login = () => {
-  const [data, setData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const {data,setUser}=useContext(UserContext);
+  const location = useLocation();
 
   const handleChange = ({ currentTarget: input }) => {
-    setData({ ...data, [input.name]: input.value });
+    setFormData({ ...formData, [input.name]: input.value });
   };
+
+  const handleClick=()=>
+  {
+    if(location.state.role==='donor')
+    navigate('/signup',{state:{role:location.state.role}})
+  else
+    navigate('/needyPeople',{state:{role:location.state.role}})
+  }
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const url = "http://localhost:3000/api/users/auth";
-      const { data: res } = await axios.post(url, data);
-      localStorage.setItem("token", res.data);
-      window.location = "/";
-    } catch (error) {
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
-      }
+    // try {
+      
+      
+    // } catch (error) {
+    //   if (
+    //     error.response &&
+    //     error.response.status >= 400 &&
+    //     error.response.status <= 500
+    //   ) {
+    //     setError(error.response.data.message);
+    //   }
+    // }
+
+    let url;
+
+    if(location.state.role==='donor')
+    {
+      url = "http://localhost:3000/api/users/auth";
     }
+    else
+    {
+      url = "http://localhost:3000/api/users/ngologin";
+     
+    }
+
+    const res = await axios.post(url, formData);
+
+    console.log(res.data)
+
+    localStorage.setItem("token", JSON.stringify(res.data));
+
+    console.log("sss")
+    
+    setUser(res.data);
+  
+    navigate("/");
+  
+    
   };
 
   return (
@@ -47,7 +91,7 @@ const Login = () => {
             <span>Don't have an account?</span>
 
             <span className='signup_link'>
-              <Link to='/signup'>Sign Up</Link>
+              <button onClick={handleClick}>Sign Up</button>
             </span>
           </p>
           <div className='btn'>
@@ -66,7 +110,7 @@ const Login = () => {
               placeholder='Email'
               name='email'
               onChange={handleChange}
-              value={data.email}
+              value={formData.email}
               required
             />
             <br />
@@ -77,7 +121,7 @@ const Login = () => {
               placeholder='Password'
               name='password'
               onChange={handleChange}
-              value={data.password}
+              value={formData.password}
               required
             />
             <br />

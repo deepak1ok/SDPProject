@@ -10,7 +10,7 @@ export const requestDonation = async (req, res) => {
 //     throw new Error("Please fill all the inputs");
 //   }
 
-  const newDonate = await Donate.create({address,city,email,firstName,items,lastName,lat,lng,phoneNumber,postalCode,state,date });
+  const newDonate = await Donate.create({address,city,email,firstName,items,lastName,lat,lng,phoneNumber,postalCode,state,date});
 
   console.log(newDonate);
   try {
@@ -38,3 +38,24 @@ export const donationList = async (req, res) => {
   }
 
 }
+
+export const aboutDonation = async (req, res) => {
+
+  console.log(req.params.id);
+ 
+  const data=await Donate.findById(req.params.id)
+
+   if(data)
+   {
+    return res.status(201).json({
+      data:data
+    })
+   }
+   else
+   {
+    return res.status(400).json({
+      message:"Data not found"  
+   })
+   }
+  }
+

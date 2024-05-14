@@ -2,16 +2,26 @@ import React, { useContext } from "react";
 import { StepperContext } from "./Context/StepperContext";
 import axios from "axios";
 
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../Context/UserContext";
+
 function Submit() {
-  const { userData } = useContext(StepperContext);
+  const { userData,setUserData } = useContext(StepperContext);
+  const {user,setUser}=useContext(UserContext);
+
+  const navigate = useNavigate();
 
   async function submitDonation() {
+
     const res = await axios.post(
       "http://localhost:3000/api/donation/request",
       userData
     );
 
     console.log(userData);
+    
+    navigate("/")
+    
   }
 
   return (
@@ -28,7 +38,7 @@ function Submit() {
             fontSize: "large",
           }}
         >
-          Thank you for your donation
+          Thank you for your donation! Click Submit to confirm.
         </div>
         <button
           style={{

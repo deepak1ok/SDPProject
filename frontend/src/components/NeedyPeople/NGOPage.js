@@ -1,24 +1,25 @@
 import {useState} from 'react'
 import Stepper from './Stepper'
 import StepperControl from './StepperControl'
-import Personal from './Personal'
-import Donation from './Donation'
-import Location from './Location'
 import { StepperContext } from './Context/StepperContext'
 import Submit from './Submit'
-import NavBar from '../../components/NavBar/NavBar'
+import NavBar from '../NavBar/NavBar'
+import NGOForm from './NGOForm'
+import MoreInfo from './MoreInfo'
+import Location from './Map/Location'
+import EmailCheck from './EmailCheck'
 
 
-function Form() {
+function NGOPage() {
 
     const [currentStep,setCurrentStep]=useState(1);
 
     const [userData,setUserData]=useState('');
-    const [finalData,setFinalData]=useState([]);
 
     const steps=[
-        "Personal Information",
-        "Donation Information",
+        "Check Email",
+        "NGO Information",
+        "More Information",
         "Location",
         "Confirm"
 
@@ -29,15 +30,18 @@ function Form() {
         switch(step)
         {
             case 1:
-                return <Personal></Personal>
+                return <EmailCheck></EmailCheck>
 
             case 2:
-                return <Donation></Donation>
+                return <NGOForm></NGOForm>
 
             case 3:
-                return <Location></Location>
+                return <MoreInfo></MoreInfo>
             
             case 4:
+                return <Location></Location>
+            
+            default:
                 return <Submit></Submit>
                 
         }
@@ -54,13 +58,14 @@ function Form() {
   return (
    <>
     <NavBar></NavBar>
+    <h1>NGO Registation</h1>
     <div className='md:w-1/2 mx-auto shadow-xl rounded-2xl pb-2 bg-white'>
         <div className='container horizontal mt-5 '>
             <Stepper steps={steps} currentStep={currentStep}></Stepper>
         </div>
 
         <div>
-            <StepperContext.Provider value={{userData,setUserData,finalData,setFinalData}}>
+            <StepperContext.Provider value={{userData,setUserData}}>
                 {displayStep(currentStep)}
             </StepperContext.Provider>
         </div>
@@ -73,4 +78,4 @@ function Form() {
   )
 }
  
-export default Form
+export default NGOPage

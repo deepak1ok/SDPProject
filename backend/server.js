@@ -7,6 +7,7 @@ import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import userRoutes from "./routes/userRoutes.js";
 import donationRoutes from "./routes/donationRoutes.js";
+import ngoroutes from "./routes/ngoroutes.js";
 
 import connectDB from "./config/db.js";
 
@@ -35,6 +36,8 @@ app.use(cookieParser());
 app.use("/api/users", userRoutes);
 
 app.use("/api/donation", donationRoutes);
+
+app.use("/api/ngo", ngoroutes);
 
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
