@@ -37,6 +37,7 @@ function Hero() {
       <section id='home' className='hero-section'>
         <div className='container'>
           <img className='bg-shape' src={BgShape} alt='bg-shape' />
+          <img src={HeroCar} alt='car-img' className='hero-content__car-img' />
           <div className='hero-content'>
             <div className='hero-content__text'>
               <h1>
@@ -44,7 +45,7 @@ function Hero() {
               </h1>
               <h1>
                 Fight against <span>hunger</span> and <span>malnutrition</span>{" "}
-                in Sri Lanka
+                in India
               </h1>
               <p>With FoodShare, donating food has never been easier.</p>
               <div className='hero-content__text__btns'>
@@ -58,11 +59,11 @@ function Hero() {
             </div>
 
             {/* img */}
-            <img
+            {/* <img
               src={HeroCar}
               alt='car-img'
               className='hero-content__car-img'
-            />
+            /> */}
           </div>
         </div>
 

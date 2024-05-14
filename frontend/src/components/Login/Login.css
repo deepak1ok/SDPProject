@@ -48,7 +48,7 @@
     font-weight: 600;
   }
   .signup_link{
-
+    color: #303ffb;
   }
   .btn button{
     all: unset;
@@ -101,6 +101,7 @@
     color: #636363;
     border-radius: 5px;
     margin: .5em 10px 2em;
+    background-color: aliceblue;
   }
   .login{
     all: unset;
