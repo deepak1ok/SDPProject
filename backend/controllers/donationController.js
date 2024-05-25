@@ -1,61 +1,77 @@
 import Donate from "../models/donationModel.js";
 
 export const requestDonation = async (req, res) => {
+  console.log(req.body);
+  const {
+    address,
+    city,
+    email,
+    firstName,
+    items,
+    lastName,
+    lat,
+    lng,
+    phoneNumber,
+    postalCode,
+    state,
+    date,
+  } = req.body;
 
-    console.log(req.body);
- const {address,city,email,firstName,items,lastName,lat,lng,phoneNumber,postalCode,state,date } = req.body;
+  // if (!address || !city || !email || !firstName || !items || !lastName || !lat || !lng || !phoneNumber || !postalCode || !state)
+  //   {
+  //     throw new Error("Please fill all the inputs");
+  //   }
 
-// if (!address || !city || !email || !firstName || !items || !lastName || !lat || !lng || !phoneNumber || !postalCode || !state)
-//   {
-//     throw new Error("Please fill all the inputs");
-//   }
-
-  const newDonate = await Donate.create({address,city,email,firstName,items,lastName,lat,lng,phoneNumber,postalCode,state,date});
+  const newDonate = await Donate.create({
+    address,
+    city,
+    email,
+    firstName,
+    items,
+    lastName,
+    lat,
+    lng,
+    phoneNumber,
+    postalCode,
+    state,
+    date,
+  });
 
   console.log(newDonate);
   try {
     res.status(201).json({
-     meesage:"Sucessfull"
+      meesage: "Sucessfull",
     });
   } catch (error) {
     res.status(400);
     throw new Error("invalid user data");
   }
-
-}
-
+};
 
 export const donationList = async (req, res) => {
-
- const donationLists=await Donate.find({})
+  const donationLists = await Donate.find({});
   try {
     res.status(201).json({
-        donationLists
+      donationLists,
     });
   } catch (error) {
     res.status(400);
     throw new Error("invalid user data");
   }
-
-}
+};
 
 export const aboutDonation = async (req, res) => {
-
   console.log(req.params.id);
- 
-  const data=await Donate.findById(req.params.id)
 
-   if(data)
-   {
+  const data = await Donate.findById(req.params.id);
+
+  if (data) {
     return res.status(201).json({
-      data:data
-    })
-   }
-   else
-   {
+      data: data,
+    });
+  } else {
     return res.status(400).json({
-      message:"Data not found"  
-   })
-   }
+      message: "Data not found",
+    });
   }
-
+};
