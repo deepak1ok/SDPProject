@@ -1,4 +1,4 @@
-import React, { useContext,useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -9,36 +9,30 @@ import "../Login/Login.css";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/UserContext";
 
-import { useLocation } from 'react-router-dom';
-
-
+import { useLocation } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const {data,setUser}=useContext(UserContext);
+  const { data, setUser } = useContext(UserContext);
   const location = useLocation();
 
   const handleChange = ({ currentTarget: input }) => {
     setFormData({ ...formData, [input.name]: input.value });
   };
 
-  const handleClick=()=>
-  {
-    if(location.state.role==='donor')
-    navigate('/signup',{state:{role:location.state.role}})
-  else
-    navigate('/needyPeople',{state:{role:location.state.role}})
-  }
-
+  const handleClick = () => {
+    if (location.state.role === "donor")
+      navigate("/signup", { state: { role: location.state.role } });
+    else navigate("/needyPeople", { state: { role: location.state.role } });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // try {
-      
-      
+
     // } catch (error) {
     //   if (
     //     error.response &&
@@ -51,29 +45,21 @@ const Login = () => {
 
     let url;
 
-    if(location.state.role==='donor')
-    {
+    if (location.state.role === "donor") {
       url = "http://localhost:3000/api/users/auth";
-    }
-    else
-    {
+    } else {
       url = "http://localhost:3000/api/users/ngologin";
-     
     }
 
     const res = await axios.post(url, formData);
 
-    console.log(res.data)
+    console.log(res.data);
 
     localStorage.setItem("token", JSON.stringify(res.data));
 
-    console.log("sss")
-    
     setUser(res.data);
-  
+
     navigate("/");
-  
-    
   };
 
   return (

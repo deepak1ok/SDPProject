@@ -1,4 +1,18 @@
 .container
 {
-    background-color: #ffffff !important;
+    /* background-color: #ffffff !important; */
+}
+.text-base {
+    font-size: 2.4rem;
+}
+.donor-accept-btn{
+    border: 1px solid green;
+    color: aliceblue;
+    background-color: green;
+    font-size: 1.5em;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+.mt-6{
+    margin: 2em 0;
 }

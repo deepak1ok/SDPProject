@@ -31,7 +31,12 @@ function Donation() {
     console.log(userData);
     setUserData({ ...userData, items: foodItem, date: new Date() });
   };
-
+  const handleRemoveRow = (index) => {
+    if (window.confirm("Are you sure you want to remove this item?")) {
+      const updatedData = foodItem.filter((item, idx) => idx !== index);
+      setFoodItem(updatedData);
+    }
+  };
 
   return (
     <>
@@ -88,9 +93,8 @@ function Donation() {
               name='typeOfFood'
               id='typeOfFood'
               onChange={(e) => setTypeOfFood(e.target.value)}
-              class='block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 w-42'
+              className='block rounded-md bg-white my-2 border-0 p-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-md sm:leading-6 '
               value={typeOfFood}
-            
             >
               <option value='raw'>Raw Food</option>
               <option value='cooked'>Cooked Food</option>
@@ -113,7 +117,6 @@ function Donation() {
           </button>
         </div>
 
-                
         <div style={{ marginTop: "60px" }}>
           <button
             onClick={handleSubmit}
@@ -151,13 +154,15 @@ function Donation() {
                       <td>{item.name}</td>
                       <td>{item.quantity}</td>
                       <td>{item.typeOfFood}</td>
-                     <td> 
-                        <FontAwesomeIcon
-                          icon={faTimes}
-                          size='lg'
-                          color='red'
-                          cursor='pointer'
-                        />
+                      <td>
+                        <button onClick={() => handleRemoveRow(index)}>
+                          <FontAwesomeIcon
+                            icon={faTimes}
+                            size='lg'
+                            color='red'
+                            cursor='pointer'
+                          />
+                        </button>
                       </td>
                     </tr>
 

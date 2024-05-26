@@ -1,29 +1,34 @@
-import React,{useEffect,useState} from 'react'
-import { useParams } from 'react-router-dom';
-import axios from 'axios'
-import NavBar from '../../../components/NavBar/NavBar';
-import './aboutdonation.css'
-import Map from './Map'
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import NavBar from "../../../components/NavBar/NavBar";
+import "./aboutdonation.css";
+import Map from "./Map";
+
+import { PaperClipIcon } from "@heroicons/react/20/solid";
 
 function AboutDonation() {
-    
- const { id } = useParams();
+  const { id } = useParams();
 
- const [data,setData]=useState({})
+  const [data, setData] = useState({});
 
- useEffect(()=>
-{
+  useEffect(() => {
     getData();
-},[])
+  }, []);
 
-async function getData()
-{
-    const res=await axios.get(`http://localhost:3000/api/donation/aboutdonation/${id}`);
+  async function getData() {
+    const res = await axios.get(
+      `http://localhost:3000/api/donation/aboutdonation/${id}`
+    );
 
     setData(res.data.data);
 
-    console.log(res.data.data)
-}
+    console.log(res.data.data);
+  }
+
+  const handleButtonClick = () => {
+    alert("Successfully accepted "); // Display alert message
+  };
   return (
     <>
     <NavBar></NavBar>
@@ -55,12 +60,12 @@ async function getData()
     </div>
     <div>
         Donor Location
-        {data.items[0].name}
+        {/* <Map></Map> */}
     </div>
     </div>
     </div>
     </>
-  )
+  );
 }
 
-export default AboutDonation
+export default AboutDonation;

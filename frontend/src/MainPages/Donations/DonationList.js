@@ -11,7 +11,7 @@ function DonationList() {
   const navigate = useNavigate();
 
   const getData = async () => {
-    const data=await axios
+    const data = await axios
       .get("http://localhost:3000/api/donation/donationlist")
       .then((res) => {
         console.log(res.data);
@@ -20,9 +20,6 @@ function DonationList() {
       .catch((err) => {
         console.log(err);
       });
-      
-
-      
   };
 
   useEffect(() => {
@@ -56,7 +53,7 @@ function DonationList() {
     "needy_people_organization.organization_name",
   ];
 
-  console.log(donationList)
+  console.log(donationList);
 
   // const filteredData = data.filter((item) =>
   //   searchProperties.some((prop) => {
@@ -80,10 +77,47 @@ function DonationList() {
   return (
     <div>
       <div>
-     <NavBar></NavBar>
-     </div>
+        <NavBar></NavBar>
+      </div>
       <div>
-        <h1 style={{textAlign:'center'}}>Food Donations List</h1>
+        <h1>Food Donations List</h1>
+        <input
+          type='text'
+          placeholder='Search (Name, Organization name, Adddress, Meal Type, Food, Date, Neeedy People) '
+          onChange={(e) => setSearchTerm(e.target.value)}
+          value={searchTerm}
+          style={{ marginBottom: "10px", width: "28%", height: "25px" }}
+        />
+        <button
+          type='button'
+          style={{
+            backgroundColor: "#24a19b",
+            color: "white",
+            marginLeft: "20px",
+            width: "8%",
+            height: "25px",
+            fontSize: "15px",
+            fontWeight: "bold",
+          }}
+        >
+          Search
+        </button>
+        <Link to='/main'>
+          <button
+            type='button'
+            style={{
+              backgroundColor: "#24a19b",
+              color: "white",
+              marginLeft: "800px",
+              width: "8%",
+              height: "25px",
+              fontSize: "15px",
+              fontWeight: "bold",
+            }}
+          >
+            Home
+          </button>
+        </Link>
         <br />
         <br />
         <table
@@ -110,7 +144,6 @@ function DonationList() {
               <th>City</th>
               <th>State</th>
               <th>Action</th>
-              
             </tr>
           </thead>
           <tbody
@@ -130,7 +163,9 @@ function DonationList() {
                 <td>{new Date(d.date).toLocaleDateString()}</td>
                 <td>{d.city}</td>
                 <td>{d.state}</td>
-                <td><Link to={`aboutdonation/${d._id}`}>View</Link></td>
+                <td>
+                  <Link to={`aboutdonation/${d._id}`}>View</Link>
+                </td>
               </tr>
             ))}
           </tbody>
