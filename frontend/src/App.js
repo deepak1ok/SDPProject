@@ -20,6 +20,8 @@ import { UserContext } from "./Context/UserContext.js";
 import Profile from "./components/Profile/Profile.jsx";
 import DonationList from "./MainPages/Donations/DonationList.js";
 import AboutDonation from "./MainPages/Donations/AboutDonation/AboutDonation.jsx";
+import MyDonations from "./components/Profile/MyDonations.jsx";
+import Forms from '../src/MainPages/Donations/ss/form.js'
 
 // import DonationsHome from "./MainPages/Donations/view.js";
 function App() {
@@ -44,10 +46,17 @@ function App() {
 
           <Route path='/location' element={<Location></Location>} />
 
-          <Route path='/profile' element={<Profile></Profile>} />
+
           <Route path='/donationslist' element={<DonationList></DonationList>} />
 
           <Route path='/donationslist/aboutdonation/:id' element={<AboutDonation></AboutDonation>} />
+
+          <Route path='/profile' element={<MyDonations></MyDonations>} />
+
+          <Route path='/donation1' element={<Forms></Forms>} />
+
+
+
           
 
         

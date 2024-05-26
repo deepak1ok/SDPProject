@@ -83,44 +83,7 @@ function DonationList() {
      <NavBar></NavBar>
      </div>
       <div>
-        <h1>Food Donations List</h1>
-        <input
-          type='text'
-          placeholder='Search (Name, Organization name, Adddress, Meal Type, Food, Date, Neeedy People) '
-          onChange={(e) => setSearchTerm(e.target.value)}
-          value={searchTerm}
-          style={{ marginBottom: "10px", width: "28%", height: "25px" }}
-        />
-        <button
-          type='button'
-          style={{
-            backgroundColor: "#24a19b",
-            color: "white",
-            marginLeft: "20px",
-            width: "8%",
-            height: "25px",
-            fontSize: "15px",
-            fontWeight: "bold",
-          }}
-        >
-          Search
-        </button>
-        <Link to='/main'>
-          <button
-            type='button'
-            style={{
-              backgroundColor: "#24a19b",
-              color: "white",
-              marginLeft: "800px",
-              width: "8%",
-              height: "25px",
-              fontSize: "15px",
-              fontWeight: "bold",
-            }}
-          >
-            Home
-          </button>
-        </Link>
+        <h1 style={{textAlign:'center'}}>Food Donations List</h1>
         <br />
         <br />
         <table

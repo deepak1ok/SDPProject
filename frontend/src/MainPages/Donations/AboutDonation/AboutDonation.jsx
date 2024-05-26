@@ -55,7 +55,7 @@ async function getData()
     </div>
     <div>
         Donor Location
-        {/* <Map></Map> */}
+        {data.items[0].name}
     </div>
     </div>
     </div>

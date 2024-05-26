@@ -59,3 +59,26 @@ export const aboutDonation = async (req, res) => {
    }
   }
 
+
+  export const myDonation = async (req, res) => {
+
+    console.log(req.params.id);
+
+    const data=await Donate.find({email:req.params.id});
+
+    console.log(data)
+
+    try
+    {
+      return res.status(201).json({
+        data:data
+      })
+    }
+    catch(error)
+    {
+      return res.status(400).json({
+        message:"Data not found"  
+     })
+    }
+
+  }
