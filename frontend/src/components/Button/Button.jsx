@@ -26,11 +26,12 @@ function Button() {
     <>
       <div className='dropdown dropdown-hover'>
         <div tabIndex={0} role='button' className='btn m-1'>
-          Hover
+          Get Started
         </div>
         <ul
           tabIndex={0}
-          className='dropdown-content z-[1] bg-white menu p-2 shadow bg-base-100 rounded-box w-52'
+          className='dropdown-content z-[1] bg-white menu p-2 shadow bg-base-100 rounded-box '
+          
         >
           <li>
             <button onClick={() => handleClick()}>Get Started with NGO</button>

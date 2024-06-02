@@ -6,14 +6,21 @@ import { Link } from 'react-router-dom';
 function LogoutButton() {
 
   const navigate=useNavigate();
-  const{setUser}=useContext(UserContext);
+  const{user,setUser}=useContext(UserContext);
 
     function handleLogout()
     {
-        localStorage.removeItem('token');
-        setUser(null);
+
+      
         
+      localStorage.removeItem('token');
+        setUser(null);
+
         navigate('/')
+
+       
+        
+        
     }
 
   return (
@@ -21,17 +28,17 @@ function LogoutButton() {
     <div className="dropdown dropdown-end">
     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
       <div className="w-10 rounded-full">
-        <img alt="Tailwind CSS Navbar component" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+        <img alt="Tailwind CSS Navbar component" src="https://static.vecteezy.com/system/resources/thumbnails/005/544/718/small_2x/profile-icon-design-free-vector.jpg" />
       </div>
     </div>
     <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
       <li>
-        <Link to="/profile">
+        {user.role==='donor' && <Link to="/profile">
           Profile
-        </Link>
+        </Link>}
       </li>
       <li><a>Settings</a></li>
-      <li><Link to="/logout">Logout</Link></li>
+      <li><button onClick={handleLogout}>Logout</button></li>
     </ul>
   </div>
   )

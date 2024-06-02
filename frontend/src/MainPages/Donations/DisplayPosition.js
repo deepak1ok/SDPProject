@@ -43,7 +43,8 @@ import { StepperContext } from "./Context/StepperContext";
       setUserData({
         ...userData,
         lat:position.lat,
-        lng:position.lng
+        lng:position.lng,
+        donationStatus:false
       })
     })
   

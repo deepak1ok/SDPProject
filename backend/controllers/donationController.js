@@ -2,6 +2,7 @@ import Donate from "../models/donationModel.js";
 
 export const requestDonation = async (req, res) => {
   console.log(req.body);
+  
   const {
     address,
     city,
@@ -15,6 +16,7 @@ export const requestDonation = async (req, res) => {
     postalCode,
     state,
     date,
+    donationStatus
   } = req.body;
 
   // if (!address || !city || !email || !firstName || !items || !lastName || !lat || !lng || !phoneNumber || !postalCode || !state)
@@ -35,6 +37,7 @@ export const requestDonation = async (req, res) => {
     postalCode,
     state,
     date,
+    donationStatus
   });
 
   console.log(newDonate);
@@ -49,7 +52,7 @@ export const requestDonation = async (req, res) => {
 };
 
 export const donationList = async (req, res) => {
-  const donationLists = await Donate.find({});
+  const donationLists = await Donate.find({donationStatus:"false"});
   try {
     res.status(201).json({
       donationLists,
@@ -74,4 +77,21 @@ export const aboutDonation = async (req, res) => {
       message: "Data not found",
     });
   }
+}
+
+export const mydonation = async (req, res) => {
+
+  console.log(req.params.id);
+
+  const data = await Donate.find({email:req.params.id});
+  if (data) {
+    return res.status(201).json({
+      data: data,
+    });
+  } else {
+    return res.status(400).json({
+      message: "Data not found",
+    });
+  }
+}
 

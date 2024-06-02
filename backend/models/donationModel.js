@@ -49,6 +49,19 @@ const donateSchema = mongoose.Schema(
     date: {
         type: Date,
         required: true,
+      },
+      donationStatus:
+      {
+        type:String,
+        required:true
+      },
+      ngoID:
+      {
+        type:String,
+      },
+      pickuptime:
+      {
+        type:String,
       }
 
   },

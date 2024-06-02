@@ -14,12 +14,6 @@ function NavBar() {
   const { user, setUser } = React.useContext(UserContext);
   const navigate = useNavigate();
 
-  function handleLogout() {
-    localStorage.removeItem("token");
-    setUser(null);
-
-    navigate("/");
-  }
   return (
     <>
       <div className='navbar border-solid border-2'>

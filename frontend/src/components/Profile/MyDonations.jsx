@@ -18,6 +18,8 @@ function MyDonations() {
     {
         const res=await axios.get(`http://localhost:3000/api/donation/${user.email}`);
 
+        console.log(res.data.data)
+
         setDonations(res.data.data);
         
     }
@@ -25,7 +27,6 @@ function MyDonations() {
 
 },[]);
 
-console.log(donations);
 const [modalIsOpen, setModalIsOpen] = useState(false);
    const [modalData, setModalData] = useState(null);
    const customStyles = {
@@ -41,14 +42,12 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
     },
   }
 
-
-
   return (
     <div>
       <NavBar></NavBar>
       <h1 style={{textAlign:'center'}}>My Profile</h1>
-      <div>Donor's Name: {user.fname} {user.lname}</div>
-      <div>Donor's Email: {user.email}</div>
+      <div style={{fontSize:'20px',textAlign:'center'}}>Donor's Name: {user.fname} {user.lname}</div>
+      <div style={{fontSize:'20px',textAlign:'center'}}>Donor's Email: {user.email}</div>
       <div style={{textAlign:'center',fontSize:'30px'}}>My Donations</div>
       <table style={ modalIsOpen ? { opacity:0.3} : {display : ''} } >
             <thead>
@@ -59,6 +58,8 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
                 <th>City</th>
                 <th>State</th>
                 <th>Phone Number</th>
+                <th>Donation Request Date</th>
+                <th>Donation Pickup Date-Time</th>
                 <th>Donation Status</th>
                 <th>View</th>
                 <th>Update</th>
@@ -75,7 +76,9 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
                       <td>{item.city}</td>
                       <td>{item.state}</td>
                       <td>{item.phoneNumber}</td>
-                      <td>Not Donated</td>
+                      <td>{new Date(item.date).toLocaleDateString()}</td>
+                      <td>{item.phoneNumber}</td>
+                      <td>{item.donationStatus==="false"?"Not Donated":"Donated"}</td>
                       <td>
                         <button onClick={()=>
                           {
