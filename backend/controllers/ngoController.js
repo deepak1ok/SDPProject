@@ -1,5 +1,6 @@
 import ngo from '../models/ngomodel.js'
 import bcrypt from 'bcryptjs'
+import Donate from "../models/donationModel.js";
 
 export const createNgo = async (req, res) => {
 
@@ -62,3 +63,56 @@ export const createNgo = async (req, res) => {
 
 
    }
+
+   export const aboutNgo = async (req, res) => {
+
+    console.log(req.params.id);
+
+    const ngoData = await ngo.findOne({email:req.params.id},{password:0,lat:0,lng:0,totalCampaigns:0,totalFeeds:0,volunteers:0,adults:0,childrens:0});
+
+    
+    if(ngoData)
+        {
+            return res.status(200).json({
+                ngoData,
+                status:false
+            });
+        }
+        else{
+            return res.status(200).json({
+                status:true
+            });
+        }   
+
+
+   }
+
+   export const acceptDonation = async (req, res) => {
+
+    console.log(req.body);
+
+        let result;
+
+        if(req.body.removeDonation)
+        {
+             result=await Donate.updateOne({_id:req.body.data._id},{$set:{donationStatus:"true"}});
+        }
+        else
+        {
+             result=await Donate.updateOne({_id:req.body.data._id},{$set:{items:req.body.data.items}});
+        }
+   
+        if(result)
+        {
+            return res.status(200).json({
+                result,
+                
+            });
+        }
+        else{
+            return res.status(200).json({
+            });
+        }
+
+   }
+

@@ -13,12 +13,12 @@ function Submit() {
 
   async function submitDonation() {
 
+    setUserData({...userData});
+
     const res = await axios.post(
       "http://localhost:3000/api/donation/request",
       userData
     );
-
-    console.log(userData);
     
     navigate("/")
     

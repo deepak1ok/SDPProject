@@ -11,6 +11,8 @@ import NavBar from "./components/NavBar/NavBar";
 import Partner from "./components/Partners/Partner.js";
 import DeliveryAgents from "./components/DeliveryAgents/DeliveryAgents.js";
 
+// import {UserIcon, Bars3Icon} from "@heroicons/react/24/solid"
+
 import DonationsHome from "./MainPages/Donations/DonationList.js";
 import Location from "./MainPages/Donations/Location.js";
 import Form from "./MainPages/Donations/Form.js";
@@ -20,6 +22,9 @@ import { UserContext } from "./Context/UserContext.js";
 import Profile from "./components/Profile/Profile.jsx";
 import DonationList from "./MainPages/Donations/DonationList.js";
 import AboutDonation from "./MainPages/Donations/AboutDonation/AboutDonation.jsx";
+import MyDonations from "./components/Profile/MyDonations.jsx";
+import Forms from '../src/MainPages/Donations/ss/form.js'
+import AcceptDonationConfirmation from '../src/MainPages/Donations/AboutDonation/AcceptDonationConfirmation.jsx'
 
 // import DonationsHome from "./MainPages/Donations/view.js";
 function App() {
@@ -31,7 +36,7 @@ function App() {
            <Route path='/main' exact element={<Main />} />
           <Route path='/signup' exact element={<Signup/>} />
           <Route path='/login' exact element={<Login />} />
-          <Route path='/' element={<Home />} />
+          <Route exact path='/' element={<Home />} />
           <Route path='/about' exact element={<About />} />
           <Route path='/contact' exact element={<Contact />} />
           <Route path='/donations' exact element={<Donate />} />
@@ -44,10 +49,19 @@ function App() {
 
           <Route path='/location' element={<Location></Location>} />
 
-          <Route path='/profile' element={<Profile></Profile>} />
+
           <Route path='/donationslist' element={<DonationList></DonationList>} />
 
           <Route path='/donationslist/aboutdonation/:id' element={<AboutDonation></AboutDonation>} />
+
+          <Route path='/profile' element={<MyDonations></MyDonations>} />
+
+          <Route path='/donation1' element={<Forms></Forms>} />
+
+          <Route path='/acceptdonation' element={<AcceptDonationConfirmation></AcceptDonationConfirmation>} />
+
+
+
           
 
         

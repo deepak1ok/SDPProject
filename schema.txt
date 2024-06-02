@@ -32,7 +32,8 @@ phone v
 email v
 zip code v
 Address v
-lat 
-lng
+lat v
+lng v
 desc v
+pass v
 
