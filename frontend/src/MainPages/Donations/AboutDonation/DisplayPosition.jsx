@@ -1,29 +1,26 @@
 import { React,useState,useRef,useMemo,useCallback,useContext,useEffect } from "react";
 
 import { MapContainer,TileLayer, Marker,Popup, } from "react-leaflet";
-import { StepperContext } from "./Context/StepperContext";
+import L, { Icon } from 'leaflet';
 
-  export default function DraggableMarker() {
-    const {userData,setUserData}=useContext(StepperContext);
+const customIcon=new Icon({
+    iconUrl:"/placeholder.png",
+    iconSize:[38,38]
+})
+
+
+  export default function DraggableMarker({lat,lng,ngoLat,ngoLng}) {
     const [draggable, setDraggable] = useState(false)
     const [position, setPosition] = useState({
-      lat:0,
-      lng:0
+      lat:lat,
+      lng:lng
     })
+
+    const [ngoPosition, setNgoPosition] = useState({
+        lat:ngoLat,
+        lng:ngoLng
+      })
     const markerRef = useRef(null);
-
-    useEffect(()=>
-    {
-        navigator.geolocation.getCurrentPosition((position)=>
-        {
-          setPosition({
-            ...position,
-            lat:position.coords.latitude,
-            lng:position.coords.longitude
-          })
-        })
-    },[])
-
 
     const eventHandlers = useMemo(
       () => ({
@@ -40,28 +37,38 @@ import { StepperContext } from "./Context/StepperContext";
     )
     const toggleDraggable = useCallback(() => {
       setDraggable((d) => !d)
-      setUserData({
-        ...userData,
-        lat:position.lat,
-        lng:position.lng
-      })
+
     })
   
     return (
       <>
       <Marker
+        icon={customIcon}
         draggable={draggable}
         eventHandlers={eventHandlers}
         position={position}
         ref={markerRef}>
         <Popup minWidth={90}>
           <span onClick={toggleDraggable}>
-            {draggable
-              ? 'Marker is draggable'
-              : 'Click here to make marker draggable'}
+            Donor Location
           </span>
         </Popup>
       </Marker>
+
+      <Marker
+        icon={customIcon}
+        draggable={draggable}
+        eventHandlers={eventHandlers}
+        position={ngoPosition}
+        ref={markerRef}>
+        <Popup minWidth={90}>
+          <span onClick={toggleDraggable}>
+            Your NGO Location
+          </span>
+        </Popup>
+      </Marker>
+
+      
 
       </>
     )

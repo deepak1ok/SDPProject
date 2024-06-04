@@ -23,8 +23,13 @@ import Profile from "./components/Profile/Profile.jsx";
 import DonationList from "./MainPages/Donations/DonationList.js";
 import AboutDonation from "./MainPages/Donations/AboutDonation/AboutDonation.jsx";
 import MyDonations from "./components/Profile/MyDonations.jsx";
-import Forms from '../src/MainPages/Donations/ss/form.js'
 import AcceptDonationConfirmation from '../src/MainPages/Donations/AboutDonation/AcceptDonationConfirmation.jsx'
+import ManageRequest from './MainPages/Donations/RequestManage/ManageRequest.jsx'
+import AboutRequest from './MainPages/Donations/RequestManage/AboutRequest.jsx'
+import SubmitRequest from "./MainPages/Donations/RequestManage/SubmitRequest.js";
+import RejectRequest from "./MainPages/Donations/RequestManage/RejectRequest.jsx";
+import NGOProfile from '../src/components/Profile/NGOProfile.jsx'
+
 
 // import DonationsHome from "./MainPages/Donations/view.js";
 function App() {
@@ -47,6 +52,8 @@ function App() {
 
           <Route path='/create-donations' element={<Form />} />
 
+          <Route path='/ngoprofile' element={<NGOProfile></NGOProfile>} />
+
           <Route path='/location' element={<Location></Location>} />
 
 
@@ -56,9 +63,16 @@ function App() {
 
           <Route path='/profile' element={<MyDonations></MyDonations>} />
 
-          <Route path='/donation1' element={<Forms></Forms>} />
-
           <Route path='/acceptdonation' element={<AcceptDonationConfirmation></AcceptDonationConfirmation>} />
+          <Route path='/profile/manage/:id' element={<ManageRequest></ManageRequest>} />
+
+          <Route path='aboutrequest/:id' element={<AboutRequest></AboutRequest>} />
+
+          <Route path='/submitrequest' element={<SubmitRequest></SubmitRequest>} />
+
+          <Route path='/rejectrequest' element={<RejectRequest></RejectRequest>} />
+
+
 
 
 

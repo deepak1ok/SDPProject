@@ -36,6 +36,9 @@ function LogoutButton() {
         {user.role==='donor' && <Link to="/profile">
           Profile
         </Link>}
+        {user.role==='ngo' && <Link to="/ngoprofile">
+          Profile
+        </Link>}
       </li>
       <li><a>Settings</a></li>
       <li><button onClick={handleLogout}>Logout</button></li>

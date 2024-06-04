@@ -1,6 +1,7 @@
 import ngo from '../models/ngomodel.js'
 import bcrypt from 'bcryptjs'
 import Donate from "../models/donationModel.js";
+import Request from '../models/requestModel.js';
 
 export const createNgo = async (req, res) => {
 
@@ -68,7 +69,7 @@ export const createNgo = async (req, res) => {
 
     console.log(req.params.id);
 
-    const ngoData = await ngo.findOne({email:req.params.id},{password:0,lat:0,lng:0,totalCampaigns:0,totalFeeds:0,volunteers:0,adults:0,childrens:0});
+    const ngoData = await ngo.findOne({_id:req.params.id},{password:0});
 
     
     if(ngoData)
@@ -115,4 +116,27 @@ export const createNgo = async (req, res) => {
         }
 
    }
+
+   export const ngoRequests = async (req, res) => {
+
+    console.log(req.params.id)
+
+    const ngoRequest = await Request.find({ngoId:req.params.id}).populate("donationId").populate("ngoId").populate("donorId");
+
+    console.log(ngoRequest)
+
+    if(ngoRequest)
+        {
+            return res.status(200).json({
+                data:ngoRequest,
+                
+            });
+        }
+        else{
+            return res.status(400).json({
+                message: "Data not found",
+              });
+        }   
+  
+  }
 
