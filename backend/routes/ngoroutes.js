@@ -1,5 +1,5 @@
 import express from "express";
-import { createNgo,checkEmail,aboutNgo,acceptDonation } from "../controllers/ngoController.js";
+import { createNgo,checkEmail,aboutNgo,acceptDonation,ngoRequests } from "../controllers/ngoController.js";
 
 
 const router = express.Router();
@@ -12,6 +12,8 @@ router.get("/aboutngo/:id", aboutNgo);
 
 router.post("/acceptdonation", acceptDonation);
 
+router.get("/ngorequests/:id", ngoRequests);
 
 
-export default router
+
+export default router   

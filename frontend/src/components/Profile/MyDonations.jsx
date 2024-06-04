@@ -11,6 +11,19 @@ function MyDonations() {
     const {user}=useContext(UserContext);
     const [donations,setDonations]=useState([]);
 
+    console.log(user)
+
+  const [requestId,setRequestId]=useState({});
+
+    const handleDelete=async()=>
+      {
+        const res=await axios.post(`http://localhost:3000/api/donation/deleterequest/${requestId}`);
+        console.log(res);
+
+        window.location.reload();
+      }
+
+   
 
   useEffect(()=>
 {
@@ -45,9 +58,37 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
   return (
     <div>
       <NavBar></NavBar>
-      <h1 style={{textAlign:'center'}}>My Profile</h1>
-      <div style={{fontSize:'20px',textAlign:'center'}}>Donor's Name: {user.fname} {user.lname}</div>
-      <div style={{fontSize:'20px',textAlign:'center'}}>Donor's Email: {user.email}</div>
+      <div style={{ padding: "12em" }}>
+        <div className='px-4 sm:px-0'>
+          <h3 className='text-base font-semibold leading-7 text-gray-900'>
+            My Profile
+          </h3>
+        </div>
+        <div className='mt-6 border-t border-gray-100'>
+          <dl className='divide-y divide-gray-100'>
+            <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
+              <dt className='text-sm font-medium leading-6 text-gray-900'>
+                Donor Name:
+              </dt>
+              <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
+                {user && user.fname} {user && user.lname}
+              </dd>
+            </div>
+            </dl>
+        </div>
+        <div className='mt-6 border-t border-gray-100'>
+          <dl className='divide-y divide-gray-100'>
+            <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
+              <dt className='text-sm font-medium leading-6 text-gray-900'>
+                Donor Email:
+              </dt>
+              <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
+                {user && user.email}
+              </dd>
+            </div>
+            </dl>
+        </div>
+      </div>
       <div style={{textAlign:'center',fontSize:'30px'}}>My Donations</div>
       <table style={ modalIsOpen ? { opacity:0.3} : {display : ''} } >
             <thead>
@@ -58,11 +99,11 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
                 <th>City</th>
                 <th>State</th>
                 <th>Phone Number</th>
-                <th>Donation Request Date</th>
-                <th>Donation Pickup Date-Time</th>
+                <th>Donation Post Date</th>
                 <th>Donation Status</th>
-                <th>View</th>
-                <th>Update</th>
+                <th>View Requests</th>
+                <th>Food Items</th>
+                <th>Delete </th>
               </tr>
             </thead>
             <tbody>
@@ -77,8 +118,8 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
                       <td>{item.state}</td>
                       <td>{item.phoneNumber}</td>
                       <td>{new Date(item.date).toLocaleDateString()}</td>
-                      <td>{item.phoneNumber}</td>
                       <td>{item.donationStatus==="false"?"Not Donated":"Donated"}</td>
+                      <td><Link to={`/profile/manage/${item._id}`}>Manage</Link></td>
                       <td>
                         <button onClick={()=>
                           {
@@ -87,10 +128,9 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
                           }
                         }>
                       Food Items</button></td>
-        
-                      <td><Link>
-                        Update
-                        </Link>
+                      <td>
+                       
+                      <label htmlFor="my_modal_7" className="btn" onClick={(e)=>setRequestId(item._id)}>Delete</label>
                       </td>
                     </tr>
                   </>
@@ -98,6 +138,17 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
               })}
             </tbody>
           </table>
+
+          <input type="checkbox" id="my_modal_7" className="modal-toggle" />
+<div className="modal" role="dialog">
+  <div className="modal-box">
+    <h3 className="text-lg font-bold">Confirmation!</h3>
+    <p className="py-4">Do you want to delete this donation?</p>
+    <button onClick={handleDelete}>Delete</button>
+  </div>
+  <label className="modal-backdrop" htmlFor="my_modal_7">Close</label>
+</div>
+
 
           <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
             <div style={{display:'flex',justifyContent:'center'}}>

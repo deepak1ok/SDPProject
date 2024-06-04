@@ -10,7 +10,8 @@ function Personal() {
   useEffect(()=>
 {
   setUserData({
-    email:user.email
+    email:user.email,
+    donorId:user._id
   })
 
 },[])

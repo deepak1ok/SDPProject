@@ -2,6 +2,12 @@ import { React,useState,useRef,useMemo,useCallback,useContext,useEffect } from "
 
 import { MapContainer,TileLayer, Marker,Popup, } from "react-leaflet";
 import { StepperContext } from "./Context/StepperContext";
+import L, { Icon } from 'leaflet';
+
+const customIcon=new Icon({
+    iconUrl:"/placeholder.png",
+    iconSize:[38,38]
+})
 
   export default function DraggableMarker() {
     const {userData,setUserData}=useContext(StepperContext);
@@ -53,6 +59,7 @@ import { StepperContext } from "./Context/StepperContext";
       <Marker
         draggable={draggable}
         eventHandlers={eventHandlers}
+        icon={customIcon}
         position={position}
         ref={markerRef}>
         <Popup minWidth={90}>

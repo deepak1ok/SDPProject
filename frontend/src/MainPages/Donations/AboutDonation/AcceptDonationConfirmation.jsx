@@ -31,11 +31,13 @@ function handleClick2()
       <div style={{textAlign:'center',fontSize:'20px'}}>
         Thank You for you contribution.
       </div>
-      <div>
-        <button onClick={handleClick1}>Home</button>
+      <div style={{textAlign:'center',display:'flex',justifyContent:'center',margin:'20px'}}>
+      <div style={{margin:'10px'}}>
+        <button className="btn btn-outline btn-success" onClick={handleClick1}>Home</button>
       </div>
-      <div>
-        <button onClick={handleClick2}>On Going Food Donation</button>
+      <div style={{margin:'10px'}}>
+        <button className="btn btn-outline btn-info" onClick={handleClick2}>On Going Food Donation</button>
+      </div>
       </div>
     </div>
   )

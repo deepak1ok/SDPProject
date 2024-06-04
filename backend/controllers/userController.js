@@ -13,11 +13,8 @@ export const createUser = asyncHandler(async (req, res, next) => {
      throw new Error("Please fill all the inputs");
   }
 
-  console.log(req.body)
-
   const userExists = await User.findOne({ email });
 
-  console.log(userExists)
   if (userExists) return res.status(400).send("User already exists!");
 
   
@@ -185,7 +182,6 @@ export const loginNgo = asyncHandler(async (req, res) => {
       existingUser.password
     );
 
-    console.log("sssss")
 
     if (isPasswordValid) {
       createToken(res, existingUser._id);

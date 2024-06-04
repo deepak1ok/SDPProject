@@ -3,11 +3,12 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import NavBar from "../../../components/NavBar/NavBar";
 import "./aboutdonation.css";
-import Map from "./Map";
+
 import Modal from 'react-modal';
 import { UserContext } from "../../../Context/UserContext";
 import InputField from "./InputField";
 import { useNavigate } from "react-router-dom";
+import Map from './Location.jsx'
 
 
 function AboutDonation() {
@@ -22,11 +23,13 @@ function AboutDonation() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState({});
 
+  const [ngoData,setNgoData]=useState([]);
+
   const [items, setItems] = useState([]);
 
   const [pickupTime,setPickupTime]=useState('');
 
-  const navigate=useNavigate()
+  const navigate=useNavigate();
 
   useEffect(() => {
     getData();
@@ -81,30 +84,23 @@ function AboutDonation() {
           return;
         }
 
-        let temp=data;
+  
+    let request={
+      donationId:data._id,
+      ngoId:user._id,
+      donorId:data.donorId, 
+      itemsRequested:items,
+      pickupTime:pickupTime,
+      status:"pending",
+      lat:data.lat,
+      lng:data.lng,
+    }
+
+    console.log(request);
 
 
-        temp.pickuptime=pickupTime;
-
-        temp.ngoID=user._id;
-
-        console.log(temp)
-
-        for(let i=0;i<temp.items.length;i++)
-          {
-            temp.items[i].quantity=parseInt(temp.items[i].quantity)-parseInt(items[i].quantity);
-            if(temp.items[i].quantity!==0)
-              {
-                  removeDonation=false;
-              }
-
-          }
-
-          setData(temp);
-    
-        const res=await axios.post(`http://localhost:3000/api/ngo/acceptdonation`,{
-      data:data,
-      removeDonation:removeDonation
+    const res=await axios.post(`http://localhost:3000/api/donation/requestdonation`,{
+      data:request,
     }).then((res)=>
     {
       console.log(res);
@@ -113,7 +109,7 @@ function AboutDonation() {
       console.log(err);
     })
 
-    // navigate('/acceptdonation')
+    navigate('/acceptdonation');
 
     
   }
@@ -140,12 +136,14 @@ function AboutDonation() {
     console.log(user);
     
     const res = await axios.get(
-      `http://localhost:3000/api/ngo/aboutngo/${user.email}`
+      `http://localhost:3000/api/ngo/aboutngo/${user._id}`
     );
 
-    console.log(res.data.ngoData);
+    setNgoData(res.data.ngoData)
 
     setModalData(res.data.ngoData);
+
+    console.log(res.data.ngoData)
 
   
   }
@@ -201,7 +199,7 @@ function AboutDonation() {
                 Donor name
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {data.firstName} {data.lastName}
+                {data && data.firstName} {data && data.lastName}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -209,7 +207,7 @@ function AboutDonation() {
                 Donor Address
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {data.address}
+                {data && data.address}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -217,7 +215,7 @@ function AboutDonation() {
                 Donor State
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {data.state}
+                {data && data.state}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -225,7 +223,7 @@ function AboutDonation() {
                 Donor Phone Number
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {data.phoneNumber}
+                {data && data.phoneNumber}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -233,7 +231,7 @@ function AboutDonation() {
                 Donor Email
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {data.email}
+                {data && data.email}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -241,7 +239,7 @@ function AboutDonation() {
                 Pin Code
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {data.postalCode}
+                {data && data.postalCode}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -271,10 +269,18 @@ function AboutDonation() {
             </div>
           </dl>
         </div>
+        
+        <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
+              <dt className='text-sm font-medium leading-6 text-gray-900'>
+                Location
+              </dt>
+        </div>
+        
+        <div style={ modalIsOpen ? { opacity:0.3} : {display : ''} }>{data.lat && data.lng && ngoData.lat && <Map lat={data.lat.$numberDecimal} lng={data.lng.$numberDecimal} ngoLat={ngoData.lat.$numberDecimal} ngoLng={ngoData.lng.$numberDecimal}></Map> }</div>
+        
         <div>
           <button onClick={handleModal} className='donor-accept-btn'>
-                      
-           
+                      Request Donation
           </button>
         </div>
       </div>
@@ -376,7 +382,7 @@ function AboutDonation() {
   <label for="pickup time">Pickup Date and Time</label>
   {data.date && <input type="datetime-local" id="pickup" name="pickup" min={`${data.date.substring(0,16)}`} value={pickupTime} onChange={(e)=>setPickupTime(e.target.value)}/>}
   
-                <button onClick={submitClick}>Submit</button>
+                <button className="btn btn-outline btn-success" onClick={submitClick}>Submit</button>
       </Modal>
 
       
