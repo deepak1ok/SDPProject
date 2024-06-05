@@ -3,15 +3,30 @@ import asyncHandler from "../middlewares/asyncHandler.js";
 import bcrypt from "bcryptjs";
 import createToken from "../utils/createTokens.js";
 import Ngo from "../models/ngomodel.js";
+import {sendMail} from '../config/helper.js'
+import Otp from '../models/otpModel.js'
+
+const generateRandom4Digits=()=>
+  {
+    return Math.floor(1000+Math.random()*9000);
+  }
 
 export const createUser = asyncHandler(async (req, res, next) => {
 
   const { fname, lname, email, password } = req.body;
 
+  console.log(process.env.SMTP_MAIL)
+
+  console.log(process.env.SMTP_PASSWORD)
+
+
+  console.log(req.body)
+
   if (!fname || !lname || !email || !password) 
   {
      throw new Error("Please fill all the inputs");
   }
+
 
   const userExists = await User.findOne({ email });
 
@@ -21,6 +36,14 @@ export const createUser = asyncHandler(async (req, res, next) => {
   const hashedPassword = await bcrypt.hash(password,10);
   
   const newUser = await User.create({ fname, lname, email, password: hashedPassword });
+
+  const g_otp=generateRandom4Digits();
+
+  const enter_otp=await Otp.create({userId:newUser._id,otp:g_otp});
+
+  const msg="<span>Hii</span>"+fname+" "+lname+"Thank you for creating an account in FoodShare"+"Your OTP is "+g_otp;
+
+  //sendMail(email,'Mail Verification',msg);
 
   try {
     createToken(res, newUser._id);
@@ -196,3 +219,48 @@ export const loginNgo = asyncHandler(async (req, res) => {
     return;
   }
 });
+
+
+export const otpMailValidator = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    if (user.isAdmin) {
+      res.status(400);
+      throw new Error("Cannot delete admin user");
+    }
+
+    await User.deleteOne({ _id: user._id });
+    res.json({ message: "User removed" });
+  } else {
+    res.status(404);
+    throw new Error("User not found.");
+  }
+});
+
+
+
+export const sendOtp = asyncHandler(async (req, res) => {
+ 
+  const {email}=req.body;
+
+  const userData=await User.findOne({email:email});
+
+  if(!userData)
+    {
+      return res.status(400).
+      json({
+        success:false,
+        msg:"Email doesnt exist"
+      });
+    }
+
+    const msg='<p> Hii <b>'+userData.name+'<b>, </br> <h4></h4></p>';
+
+    mailer.sendMail(userData.email,'OTP Verfication',msg)
+
+
+
+
+});
+

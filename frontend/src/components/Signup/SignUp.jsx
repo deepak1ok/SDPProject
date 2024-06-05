@@ -16,6 +16,7 @@ const Signup = () => {
     lname: "",
     email: "",
     password: "",
+    phoneNumber:""
   });
 
   const location = useLocation()
@@ -40,7 +41,7 @@ const Signup = () => {
     try {
       const url = "http://localhost:3000/api/users";
       const res = await axios.post(url, data);
-      navigate("/login",{state:{role:location.state.role}});
+      //navigate("/login",{state:{role:location.state.role}});
       console.log(res);
     } catch (error) {
       if (
@@ -162,6 +163,18 @@ const Signup = () => {
               name='password'
               onChange={handleChange}
               value={data.password}
+              required
+            />
+            <br />
+
+            <label>Phone Number</label>
+            <br />
+            <input
+              type='number'
+              placeholder='phoneNumber'
+              name='phoneNumber'
+              onChange={handleChange}
+              value={data.phoneNumber}
               required
             />
             <br />
