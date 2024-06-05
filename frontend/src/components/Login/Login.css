@@ -17,7 +17,7 @@
     display: flex;
     align-items: center;
 }
-.text-logo .text{
+.text-logo .text_{
     font-weight: 600;
     font-size: 3.2rem;
     color: chocolate;
@@ -50,7 +50,7 @@
   .signup_link{
     color: #303ffb;
   }
-  .btn button{
+  .btn_google button{
     all: unset;
     border: 1px solid #707070;
     padding: 0.5em 6em;
@@ -61,7 +61,7 @@
     margin-top: 2em;
     cursor: pointer;
   }
-  .btn button:hover{
+  .btn_google button:hover{
     background-color: #303ffb;
     color: white;
   }
@@ -80,7 +80,7 @@
     background-color: black;
     margin-top: 7px;
   }
-  .para3 .text{
+  .para3 .text_{
     padding: 0 5px;
     color: #636363;
   }

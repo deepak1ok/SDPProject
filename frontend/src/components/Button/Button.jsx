@@ -31,7 +31,6 @@ function Button() {
         <ul
           tabIndex={0}
           className='dropdown-content z-[1] bg-white menu p-2 shadow bg-base-100 rounded-box '
-          
         >
           <li>
             <button onClick={() => handleClick()}>Get Started with NGO</button>
