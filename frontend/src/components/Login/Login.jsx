@@ -70,7 +70,7 @@ const Login = () => {
             <span className='Logo_img'>
               <img src={Logo} alt='' />
             </span>
-            <span className='text'>FoodShare</span>
+            <span className='text_'>FoodShare</span>
           </div>
           <div className='para1'>Log in to Your account</div>
           <p className='para2'>
@@ -80,11 +80,11 @@ const Login = () => {
               <button onClick={handleClick}>Sign Up</button>
             </span>
           </p>
-          <div className='btn'>
+          <div className='btn_google'>
             <button>Google</button>
             <div className='para3'>
               <p></p>
-              <div className='text'> Or with email and password </div>
+              <div className='text_'> Or with email and password </div>
               <p></p>
             </div>
           </div>

@@ -7,7 +7,7 @@ import Logo from "../../Images/Logo/logo.png";
 import Background from "../../Images/BackgroundImg/main-bg.png";
 import "../Login/Login.css";
 
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -19,8 +19,8 @@ const Signup = () => {
     phoneNumber:""
   });
 
-  const location = useLocation()
-  console.log(location.state); 
+  const location = useLocation();
+  console.log(location.state);
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -29,13 +29,11 @@ const Signup = () => {
     setData({ ...data, [input.name]: input.value });
   };
 
-  const handleClick=()=>
-  {
-    navigate('/login',{state:{role:location.state.role}})
-  }
+  const handleClick = () => {
+    navigate("/login", { state: { role: location.state.role } });
+  };
 
   const handleSubmit = async (e) => {
-
     console.log(data);
     e.preventDefault();
     try {
@@ -104,7 +102,7 @@ const Signup = () => {
             </span>
             <span className='text'>FoodShare</span>
           </div> */}
-          <div className="container"></div>
+          <div className='container'></div>
           <div className='para1'>Create Your account</div>
           <p className='para2'>
             <span>Already have an account?</span>
@@ -113,11 +111,11 @@ const Signup = () => {
               <button onClick={handleClick}>Sign In</button>
             </span>
           </p>
-          <div className='btn'>
+          <div className='btn_google'>
             <button>Google</button>
             <div className='para3'>
               <p></p>
-              <div className='text'> Or with email and password </div>
+              <div className='text_'> Or with email and password </div>
               <p></p>
             </div>
           </div>
@@ -166,29 +164,17 @@ const Signup = () => {
               required
             />
             <br />
-
-            <label>Phone Number</label>
-            <br />
-            <input
-              type='number'
-              placeholder='phoneNumber'
-              name='phoneNumber'
-              onChange={handleChange}
-              value={data.phoneNumber}
-              required
-            />
-            <br />
             
               {/* <label for="cars">Role</label>
               <select id="cars" name="role" onChange={handleChange} value={data.role}>
                   <option value="donor">Donor</option>
                   <option value="ngo">NGO</option>
                 </select> */}
-
-             Role<input type="text" disabled={true} value={location.state.role} />
-          
+            <label>Role</label>
+            <br />
+            <input type='text' disabled={true} value={location.state.role} />
             {error && <div>{error}</div>}
-            <button className='signup' type='submit'>
+            <button className='signup_btn' type='submit'>
               SignUp{" "}
             </button>
           </form>

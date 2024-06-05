@@ -6,8 +6,12 @@ body
 {
     background: #f1f5f9;
     color: rgb(36, 35, 35);
+    min-height: 100vh;
 }
 .dropdown .dropdown-content {
     position: absolute;
     left: -72px;
+}
+.bg-base-100 {
+    background-color: oklch(1 0 0) !important;
 }
