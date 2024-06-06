@@ -37,6 +37,8 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log(formData)
     // try {
 
     // } catch (error) {
@@ -52,9 +54,9 @@ const Login = () => {
     let url;
 
     if (location.state.role === "donor") {
-      url = "http://localhost:3001/api/users/auth";
+      url = "http://localhost:3000/api/users/auth";
     } else {
-      url = "http://localhost:3001/api/users/ngologin";
+      url = "http://localhost:3000/api/users/ngologin";
     }
 
     const res = await axios.post(url, formData);

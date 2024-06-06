@@ -59,7 +59,7 @@ const Signup = () => {
       const url = "http://localhost:3000/api/users/send-otp";
       const res = await axios.post(url, data);
 
-      navigate("/register-otp", { state: { role: location.state.role,email:data.email,password:data.password} },)
+      navigate("/register-otp", { state: { role: location.state.role,email:data.email,password:data.password}});
       
     } catch (error) {
       if (

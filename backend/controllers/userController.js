@@ -14,8 +14,6 @@ const generateRandom4Digits=()=>
 export const createUser = asyncHandler(async (req, res, next) => {
   const { role, fname, lname, email, password } = req.body;
 
-  const { fname, lname, email, password } = req.body;
-
   console.log(process.env.SMTP_MAIL)
 
   console.log(process.env.SMTP_PASSWORD)
@@ -51,6 +49,8 @@ export const createUser = asyncHandler(async (req, res, next) => {
 
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+
+  console.log(req.body)
 
   const existingUser = await User.findOne({ email });
 
