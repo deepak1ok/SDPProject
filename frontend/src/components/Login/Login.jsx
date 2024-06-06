@@ -19,6 +19,8 @@ const Login = () => {
   const { data, setUser } = useContext(UserContext);
   const location = useLocation();
 
+  console.log(location.state)
+
   const handleChange = ({ currentTarget: input }) => {
     setFormData({ ...formData, [input.name]: input.value });
   };
@@ -59,7 +61,7 @@ const Login = () => {
 
     setUser(res.data);
 
-    navigate("/");
+    navigate("/",{replace:true});
   };
 
   return (

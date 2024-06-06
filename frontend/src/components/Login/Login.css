@@ -1,7 +1,7 @@
-.Outer{
+/* .Outer{
     display: flex;
     width: 100%;
-    /* height: 100vh; */
+    height: 100vh;
     height: auto;
     justify-content: space-between;
     background-color: rgb(255 249 49 / 67%);
@@ -114,4 +114,4 @@
     margin-top: .2em;
     cursor: pointer;
     background-color: chocolate;
-  }
+  }  */

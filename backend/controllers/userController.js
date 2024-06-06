@@ -19,14 +19,10 @@ export const createUser = asyncHandler(async (req, res, next) => {
 
   console.log(process.env.SMTP_PASSWORD)
 
-
-  console.log(req.body)
-
   if (!fname || !lname || !email || !password) 
   {
      throw new Error("Please fill all the inputs");
   }
-
 
   const userExists = await User.findOne({ email });
 
@@ -39,7 +35,13 @@ export const createUser = asyncHandler(async (req, res, next) => {
 
   const g_otp=generateRandom4Digits();
 
-  const enter_otp=await Otp.create({userId:newUser._id,otp:g_otp});
+  const cDate=new Date();
+
+  const otpResult=await Otp.findOneAndUpdate(
+    {userId:newUser._id},{otp:g_otp,timestamp:new Date(cDate.getTime())},{upsert:true,new:true,setDefaultsOnInsert:true}
+  );
+
+  console.log(otpResult)
 
   const msg="<span>Hii</span>"+fname+" "+lname+"Thank you for creating an account in FoodShare"+"Your OTP is "+g_otp;
 
@@ -242,25 +244,113 @@ export const otpMailValidator = asyncHandler(async (req, res) => {
 
 export const sendOtp = asyncHandler(async (req, res) => {
  
-  const {email}=req.body;
+  const {email,fname,lname}=req.body;
+
+  if(!email || !fname || !lname)
+    {
+      throw new Error("Please fill all the inputs")
+    }
 
   const userData=await User.findOne({email:email});
 
-  if(!userData)
+  if(userData)
     {
       return res.status(400).
       json({
         success:false,
-        msg:"Email doesnt exist"
+        message:"Email already exist"
       });
     }
 
-    const msg='<p> Hii <b>'+userData.name+'<b>, </br> <h4></h4></p>';
+    //const newUser = await User.create({ fname, lname, email, password: hashedPassword });
+  
+    const g_otp=generateRandom4Digits();
+  
+    const cDate=new Date();
 
-    mailer.sendMail(userData.email,'OTP Verfication',msg)
+    const otpResult=await Otp.findOneAndUpdate(
+      {email:email},{otp:g_otp,fName:fname,lName:lname,timestamp:new Date(cDate.getTime())},{upsert:true,new:true,setDefaultsOnInsert:true}
+    );
 
+    const msg='<p> Hi <b>'+fname+lname+'<b>, </br> <h4>Your OTP for registering to Food Share is</h4>'+g_otp+'</br></br><h4>Happy Contributions!!</h4></p>';
 
+    sendMail(email,'OTP Verfication--Food Share',msg)
 
+    return res.status(200).json(
+      {
+        data:otpResult,
+        status:true
+      }
+    )
 
 });
 
+
+export const verifyOtp = asyncHandler(async (req, res) => {
+
+  const {email,otp,password}=req.body;
+
+  console.log(otp,password);
+
+  if(!email || !otp)
+    {
+      throw new Error("Please fill all the inputs");
+    }
+
+  const data=await Otp.findOne({email:email});
+
+  console.log(data.otp)
+
+  if(parseInt(data.otp)===parseInt(otp))
+    {
+      const hashedPassword = await bcrypt.hash(password,10);
+
+      const newUser = await User.create({ fname:data.fName, lname:data.lName, email, password: hashedPassword });
+
+      try {
+        createToken(res, newUser._id);
+        res.status(201).json({
+          _id: newUser._id,
+          fname: newUser.fname,
+          lname: newUser.lname,
+          email: newUser.email,
+        });
+      } catch (error) {
+        res.status(400);
+        throw new Error("invalid user data");
+      }
+    }
+    else
+    {
+      return res.status(400).json(
+        {
+          message:"OTP is invalid"
+        }
+      )
+    }
+
+
+
+
+  // const newUser = await User.create({ fname, lname, email, password: hashedPassword });
+  
+  //   const g_otp=generateRandom4Digits();
+  
+  //   const cDate=new Date();
+
+  //   const otpResult=await Otp.findOneAndUpdate(
+  //     {email:email},{otp:g_otp,fName:fname,lName:lname,timestamp:new Date(cDate.getTime())},{upsert:true,new:true,setDefaultsOnInsert:true}
+  //   );
+
+  //   const msg='<p> Hii <b>'+fname+'<b>, </br> <h4></h4></p>'+g_otp;
+
+  //   //sendMail(email,'OTP Verfication',msg)
+
+  //   return res.status(200).json(
+  //     {
+  //       data:otpResult,
+  //       status:true
+  //     }
+  //   )
+
+});

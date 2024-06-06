@@ -29,6 +29,7 @@ import AboutRequest from './MainPages/Donations/RequestManage/AboutRequest.jsx'
 import SubmitRequest from "./MainPages/Donations/RequestManage/SubmitRequest.js";
 import RejectRequest from "./MainPages/Donations/RequestManage/RejectRequest.jsx";
 import NGOProfile from '../src/components/Profile/NGOProfile.jsx'
+import RegisterOtpPage from '../src/components/Signup/RegisterOtpPage.jsx'
 
 
 // import DonationsHome from "./MainPages/Donations/view.js";
@@ -71,6 +72,8 @@ function App() {
           <Route path='/submitrequest' element={<SubmitRequest></SubmitRequest>} />
 
           <Route path='/rejectrequest' element={<RejectRequest></RejectRequest>} />
+
+          <Route path='/register-otp' element={<RegisterOtpPage></RegisterOtpPage>} />
 
 
 
