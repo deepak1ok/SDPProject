@@ -51,56 +51,26 @@ const Signup = () => {
     }
   };
 
+  const buttonStyle = {
+    border: "2px solid #ef6d1e",
+    backgroundColor: "#ef9712",
+    padding: "10px 20px",
+    color: "white",
+    borderRadius: "10px",
+    marginLeft: "10px",
+    fontSize: "12px",
+  };
+
   return (
     <>
-      {/* <div>
-        <div>
-          <div>
-            <h1>Welcome Back!</h1>
-            <Link to='/login'>
-              <button type='button'>Sign in</button>
-            </Link>
-          </div>
-          <div>
-            <form onSubmit={handleSubmit}>
-              <h1>FoodShare</h1>
-              <h1>Create an account</h1>
-              <input
-                type='text'
-                placeholder='User Name'
-                name='username'
-                onChange={handleChange}
-                value={data.username}
-                required
-              />
-
-              <input
-                type='email'
-                placeholder='Email'
-                name='email'
-                onChange={handleChange}
-                value={data.email}
-                required
-              />
-              <input
-                type='password'
-                placeholder='Password'
-                name='password'
-                onChange={handleChange}
-                value={data.password}
-                required
-              />
-              {error && <div>{error}</div>}
-              <button type='submit'>Sign Up</button> */}
-      {/* ----- */}
       <div className='Outer'>
         <div className='cont1'>
-          {/* <div className='text-logo'>
+          <div className='text-logo'>
             <span className='Logo_img'>
               <img src={Logo} alt='' />
             </span>
-            <span className='text'>FoodShare</span>
-          </div> */}
+            <span className='text_'>FoodShare</span>
+          </div>
           <div className='container'></div>
           <div className='para1'>Create Your account</div>
           <p className='para2'>
@@ -110,14 +80,7 @@ const Signup = () => {
               <button onClick={handleClick}>Sign In</button>
             </span>
           </p>
-          <div className='btn_google'>
-            <button>Google</button>
-            <div className='para3'>
-              <p></p>
-              <div className='text_'> Or with email and password </div>
-              <p></p>
-            </div>
-          </div>
+
           <form onSubmit={handleSubmit}>
             <label>First Name</label>
             <br />
@@ -172,7 +135,7 @@ const Signup = () => {
             <br />
             <input type='text' disabled={true} value={location.state.role} />
             {error && <div>{error}</div>}
-            <button className='signup_btn' type='submit'>
+            <button style={buttonStyle} className='signup_btn' type='submit'>
               SignUp{" "}
             </button>
           </form>

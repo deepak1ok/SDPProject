@@ -74,7 +74,7 @@
     background-color: black;
     margin-top: 7px;
   }
-  .para3 .text{
+  .para3 .text_{
     padding: 0 5px;
     color: #636363;
   }
@@ -98,7 +98,7 @@
     background-color: aliceblue;
   }
   .signup_btn{
-    all: unset;
+    /* all: unset;
     border: 1px solid #707070;
     padding: 0.5em 2em;
     font-size: 2em;
@@ -107,6 +107,16 @@
     border-radius: 7px;
     margin-top: .2em;
     cursor: pointer;
-    background-color: chocolate;
+    background-color: chocolate; */
+    
   }
   
+.btn_signup{
+  border: 2px solid #ef6d1e !important;
+  background-color: #ef9712 !important;
+  padding: 10px 20px !important;
+  color: white;
+  border-radius: 10px;
+  margin-left: 10px;
+  font-size: 12px;
+}

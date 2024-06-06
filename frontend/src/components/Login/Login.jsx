@@ -19,12 +19,6 @@ const Login = () => {
   const { data, setUser } = useContext(UserContext);
   const location = useLocation();
 
-  // google btn setup in handleclick in google button line 90
-  const loginWithGoogle = () => {
-    const role = location.state?.role || "donor";
-    window.open(`http://localhost:3000/auth/google?role=${role}`, "_self");
-  };
-
   const handleChange = ({ currentTarget: input }) => {
     setFormData({ ...formData, [input.name]: input.value });
   };
@@ -86,14 +80,14 @@ const Login = () => {
               <button onClick={handleClick}>Sign Up</button>
             </span>
           </p>
-          <div className='btn_google'>
-            <button onClick={loginWithGoogle}>Google</button>
+          {/* <div className='btn_google'>
+            <button>Google</button>
             <div className='para3'>
               <p></p>
               <div className='text_'> Or with email and password </div>
               <p></p>
             </div>
-          </div>
+          </div> */}
           <form onSubmit={handleSubmit}>
             <label>Email Address</label>
             <br />
