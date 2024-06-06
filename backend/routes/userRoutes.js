@@ -11,6 +11,9 @@ import {
   getUserById,
   updateUserById,
   loginNgo,
+  otpMailValidator,
+  sendOtp,
+  verifyOtp
 } from "../controllers/userController.js";
 import { authenticate, authorizeAdmin } from "../middlewares/authMiddleware.js";
 
@@ -37,5 +40,9 @@ router
   .delete(authenticate, authorizeAdmin, deleteUserById)
   .get(authenticate, authorizeAdmin, getUserById)
   .put(authenticate, authorizeAdmin, updateUserById);
+
+  router.post("/send-otp",sendOtp);
+
+  router.post("/verify-otp",verifyOtp);
 
 export default router;

@@ -11,7 +11,6 @@ function AboutRequest() {
     const [request,setRequest]=useState({});
     const navigate=useNavigate();
 
-
     const [status,setStatus]=useState(null)
 
     const [checkValid,setCheckValid]=useState(false);
@@ -22,9 +21,9 @@ function AboutRequest() {
         const res=await axios.get(`http://localhost:3000/api/donation/aboutrequest/${id}`);
 
         setRequest(res.data.data);
-
-        console.log(res.data)
         setCheckValid(res.data.checkValid);
+
+
         setStatus(res.data.data.status);
     }
 
@@ -197,7 +196,8 @@ function AboutRequest() {
           </tbody>
         </table>
       <div>
-        {/* { lat && lng && ngoLat && ngoLng && <Map lat={lat} lng={lng} ngoLat={ngoLat} ngoLng={ngoLng}></Map> } */}
+
+     
         
 
       {status==="Rejected" && <div className='mt-6 border-t border-gray-100 text-2xl' style={{textAlign:'center'}}>

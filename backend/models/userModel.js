@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 
+
+
 const userSchema = mongoose.Schema(
   {
     fname: {
@@ -15,7 +17,6 @@ const userSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-
     password: {
       type: String,
       required: true,

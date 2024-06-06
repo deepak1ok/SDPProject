@@ -4,8 +4,9 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 
 import Logo from "../../Images/Logo/logo.png";
-// import "../Signup/SignUp.css";
-import "../Signup/SignUp.css";
+import Background from "../../Images/BackgroundImg/main-bg.png";
+import "../Login/Login.css";
+import '../Signup/SignUp.css';
 
 import { useLocation } from "react-router-dom";
 
@@ -18,6 +19,10 @@ const Signup = () => {
     password: "",
   });
 
+  const [otp,setOtp]=useState('')
+
+  const [otpStatus,setOtpStatus]=useState(false);  
+
   const location = useLocation();
   console.log(location.state);
 
@@ -29,17 +34,33 @@ const Signup = () => {
   };
 
   const handleClick = () => {
-    navigate("/login", { state: { role: location.state.role } });
+    navigate("/login", { state: { role: location.state.role} });
   };
 
   const handleSubmit = async (e) => {
     console.log(data);
     e.preventDefault();
-    try {
-      const url = "http://localhost:3000/api/users";
+    // try {
+    //   const url = "http://localhost:3000/api/users";
+    //   const res = await axios.post(url, data);
+    //   navigate("/login", { state: { role: location.state.role } });
+    //   console.log(res);
+    // } catch (error) {
+    //   if (
+    //     error.response &&
+    //     error.response.status >= 400 &&
+    //     error.response.status <= 500
+    //   ) {
+    //     setError(error.response.data.message);
+    //   }
+    // }
+
+     try {
+      const url = "http://localhost:3000/api/users/send-otp";
       const res = await axios.post(url, data);
-      navigate("/login", { state: { role: location.state.role } });
-      console.log(res);
+
+      navigate("/register-otp", { state: { role: location.state.role,email:data.email,password:data.password}});
+      
     } catch (error) {
       if (
         error.response &&
@@ -49,6 +70,8 @@ const Signup = () => {
         setError(error.response.data.message);
       }
     }
+
+
   };
 
   const buttonStyle = {
@@ -149,6 +172,9 @@ const Signup = () => {
                   <option value="donor">Donor</option>
                   <option value="ngo">NGO</option>
                 </select> */}
+ <label>Role</label>
+            <br />
+            <input type='text' disabled={true} value={location.state.role} />
 
             {error && <div>{error}</div>}
             <button style={buttonStyle} className='signup_btn' type='submit'>

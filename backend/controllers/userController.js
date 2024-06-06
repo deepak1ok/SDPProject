@@ -3,27 +3,34 @@ import asyncHandler from "../middlewares/asyncHandler.js";
 import bcrypt from "bcryptjs";
 import createToken from "../utils/createTokens.js";
 import Ngo from "../models/ngomodel.js";
+import {sendMail} from '../config/helper.js'
+import Otp from '../models/otpModel.js'
+
+const generateRandom4Digits=()=>
+  {
+    return Math.floor(1000+Math.random()*9000);
+  }
 
 export const createUser = asyncHandler(async (req, res, next) => {
   const { role, fname, lname, email, password } = req.body;
 
-  if (!fname || !lname || !email || !password) {
-    throw new Error("Please fill all the inputs");
+  console.log(process.env.SMTP_MAIL)
+
+  console.log(process.env.SMTP_PASSWORD)
+
+  if (!fname || !lname || !email || !password) 
+  {
+     throw new Error("Please fill all the inputs");
   }
 
   const userExists = await User.findOne({ email });
 
   if (userExists) return res.status(400).send("User already exists!");
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  const newUser = await User.create({
-    fname,
-    lname,
-    email,
-    password: hashedPassword,
-    role,
-  });
+  
+  const hashedPassword = await bcrypt.hash(password,10);
+  
+  const newUser = await User.create({ fname, lname, email, password: hashedPassword });
 
   try {
     createToken(res, newUser._id);
@@ -42,6 +49,8 @@ export const createUser = asyncHandler(async (req, res, next) => {
 
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+
+  console.log(req.body)
 
   const existingUser = await User.findOne({ email });
 
@@ -196,4 +205,137 @@ export const loginNgo = asyncHandler(async (req, res) => {
     }
     return;
   }
+});
+
+
+export const otpMailValidator = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  if (user) {
+    if (user.isAdmin) {
+      res.status(400);
+      throw new Error("Cannot delete admin user");
+    }
+
+    await User.deleteOne({ _id: user._id });
+    res.json({ message: "User removed" });
+  } else {
+    res.status(404);
+    throw new Error("User not found.");
+  }
+});
+
+
+
+export const sendOtp = asyncHandler(async (req, res) => {
+ 
+  const {email,fname,lname}=req.body;
+
+  if(!email || !fname || !lname)
+    {
+      throw new Error("Please fill all the inputs")
+    }
+
+  const userData=await User.findOne({email:email});
+
+  if(userData)
+    {
+      return res.status(400).
+      json({
+        success:false,
+        message:"Email already exist"
+      });
+    }
+
+    //const newUser = await User.create({ fname, lname, email, password: hashedPassword });
+  
+    const g_otp=generateRandom4Digits();
+  
+    const cDate=new Date();
+
+    const otpResult=await Otp.findOneAndUpdate(
+      {email:email},{otp:g_otp,fName:fname,lName:lname,timestamp:new Date(cDate.getTime())},{upsert:true,new:true,setDefaultsOnInsert:true}
+    );
+
+    const msg='<p> Hi <b>'+fname+lname+'<b>, </br> <h4>Your OTP for registering to Food Share is</h4>'+g_otp+'</br></br><h4>Happy Contributions!!</h4></p>';
+
+    sendMail(email,'OTP Verfication--Food Share',msg)
+
+    return res.status(200).json(
+      {
+        data:otpResult,
+        status:true
+      }
+    )
+
+});
+
+
+export const verifyOtp = asyncHandler(async (req, res) => {
+
+  const {email,otp,password}=req.body;
+
+  console.log(otp,password);
+
+  if(!email || !otp)
+    {
+      throw new Error("Please fill all the inputs");
+    }
+
+  const data=await Otp.findOne({email:email});
+
+  console.log(data.otp)
+
+  if(parseInt(data.otp)===parseInt(otp))
+    {
+      const hashedPassword = await bcrypt.hash(password,10);
+
+      const newUser = await User.create({ fname:data.fName, lname:data.lName, email, password: hashedPassword });
+
+      try {
+        createToken(res, newUser._id);
+        res.status(201).json({
+          _id: newUser._id,
+          fname: newUser.fname,
+          lname: newUser.lname,
+          email: newUser.email,
+        });
+      } catch (error) {
+        res.status(400);
+        throw new Error("invalid user data");
+      }
+    }
+    else
+    {
+      return res.status(400).json(
+        {
+          message:"OTP is invalid"
+        }
+      )
+    }
+
+
+
+
+  // const newUser = await User.create({ fname, lname, email, password: hashedPassword });
+  
+  //   const g_otp=generateRandom4Digits();
+  
+  //   const cDate=new Date();
+
+  //   const otpResult=await Otp.findOneAndUpdate(
+  //     {email:email},{otp:g_otp,fName:fname,lName:lname,timestamp:new Date(cDate.getTime())},{upsert:true,new:true,setDefaultsOnInsert:true}
+  //   );
+
+  //   const msg='<p> Hii <b>'+fname+'<b>, </br> <h4></h4></p>'+g_otp;
+
+  //   //sendMail(email,'OTP Verfication',msg)
+
+  //   return res.status(200).json(
+  //     {
+  //       data:otpResult,
+  //       status:true
+  //     }
+  //   )
+
 });
