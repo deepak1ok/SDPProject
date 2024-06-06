@@ -1,5 +1,5 @@
 import express from "express";
-import { createDonations,donationList,aboutDonation,mydonation,requestToDonate,donationRequests,aboutRequest,acceptRequest, rejectRequest,deleteRequest } from "../controllers/donationController.js";
+import { createDonations,donationList,aboutDonation,mydonation,requestToDonate,donationRequests,aboutRequest,acceptRequest, rejectRequest,deleteRequest,deleteDonation } from "../controllers/donationController.js";
 
 const router = express.Router();
 
@@ -20,6 +20,8 @@ router.post("/acceptdonation/:id", acceptRequest);
 router.post("/rejectrequest/:id", rejectRequest);
 
 router.post("/deleterequest/:id", deleteRequest);
+
+router.post("/deletedonation/:id", deleteDonation);
 
 router.get("/:id", mydonation);
 

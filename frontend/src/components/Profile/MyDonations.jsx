@@ -17,7 +17,7 @@ function MyDonations() {
 
     const handleDelete=async()=>
       {
-        const res=await axios.post(`http://localhost:3000/api/donation/deleterequest/${requestId}`);
+        const res=await axios.post(`http://localhost:3000/api/donation/deletedonation/${requestId}`);
         console.log(res);
 
         window.location.reload();
@@ -94,11 +94,6 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
             <thead>
               <tr>
                 {/* <th></th> */}
-                <th>Name</th>
-                <th>Email</th>
-                <th>City</th>
-                <th>State</th>
-                <th>Phone Number</th>
                 <th>Donation Post Date</th>
                 <th>Donation Status</th>
                 <th>View Requests</th>
@@ -112,11 +107,6 @@ const [modalIsOpen, setModalIsOpen] = useState(false);
                   <>
                     <tr>
                       {/* <td></td> */}
-                      <td>{item.firstName} {item.lastName}</td>
-                      <td>{item.email}</td>
-                      <td>{item.city}</td>
-                      <td>{item.state}</td>
-                      <td>{item.phoneNumber}</td>
                       <td>{new Date(item.date).toLocaleDateString()}</td>
                       <td>{item.donationStatus==="false"?"Not Donated":"Donated"}</td>
                       <td><Link to={`/profile/manage/${item._id}`}>Manage</Link></td>

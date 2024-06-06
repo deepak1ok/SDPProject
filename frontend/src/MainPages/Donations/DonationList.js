@@ -91,7 +91,6 @@ function DonationList() {
                 fontSize: "15px",
               }}
             >
-              <th>Name</th>
               <th>Address</th>
               <th>Phone</th>
               <th>Email</th>
@@ -111,7 +110,6 @@ function DonationList() {
           >
             {donationList.map((d, i) => (
               <tr key={i}>
-                <td>{d.firstName}</td>
                 <td>{d.address}</td>
                 <td>{d.phoneNumber}</td>
                 <td>{d.email}</td>

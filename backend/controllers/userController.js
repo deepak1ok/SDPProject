@@ -187,6 +187,8 @@ export const loginNgo = asyncHandler(async (req, res) => {
 
   const existingUser = await Ngo.findOne({ email });
 
+  console.log(existingUser)
+
   if (existingUser) {
     const isPasswordValid = await bcrypt.compare(
       password,

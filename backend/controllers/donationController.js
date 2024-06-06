@@ -67,7 +67,7 @@ export const donationList = async (req, res) => {
 
 export const aboutDonation = async (req, res) => {
 
-  const data = await Donate.findById(req.params.id);
+  const data = await Donate.findById(req.params.id).populate("donorId");
 
   if (data) {
     return res.status(201).json({
@@ -225,6 +225,24 @@ export const deleteRequest = async (req, res) => {
   console.log(req.params.id)
 
   const data=await Request.deleteOne({_id:req.params.id});
+
+  if (data) {
+    return res.status(201).json({
+      data: data,
+    });
+  } else {
+    return res.status(400).json({
+      message: "Data not found",
+    });
+  }
+
+}
+
+export const deleteDonation = async (req, res) => {
+
+  console.log(req.params.id)
+
+  const data=await Donate.deleteOne({_id:req.params.id});
 
   if (data) {
     return res.status(201).json({

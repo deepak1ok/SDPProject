@@ -2,14 +2,6 @@ import mongoose from "mongoose";
 
 const donateSchema = mongoose.Schema(
   {
-    firstName: {
-      type: String,
-      required: true,
-    },
-    lastName: {
-      type: String,
-      required: true,
-    },
     donorId:
       {
           type:mongoose.Schema.Types.ObjectId,
@@ -20,18 +12,6 @@ const donateSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    city: {
-      type: String,
-      required: true,
-    },
-    state: {
-      type: String,
-      required: true,
-    },
-    phoneNumber: {
-        type: Number,
-        required: true,
-      },
     lat: {
         type: mongoose.Decimal128 ,
         required: true,

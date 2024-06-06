@@ -3,6 +3,8 @@ import { useContext,useEffect } from "react";
 import { StepperContext } from "./Context/StepperContext";
 import "../Donations/Personal.css";
 import { UserContext } from "../../Context/UserContext";
+
+
 function Personal() {
   const { userData, setUserData } = useContext(StepperContext);
   const {user} = useContext(UserContext);
@@ -22,52 +24,11 @@ function Personal() {
 
     console.log(userData);
   };
-
   return (
     <div className='outer'>
       <div class='border-b border-gray-900/10 pb-12'>
-        <div class='mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
-          <div class='sm:col-span-3'>
-            <label
-              for='firstName'
-              class='block text-sm font-medium leading-6 text-gray-900 text-2xl'
-            >
-              First name
-            </label>
-            <div class='mt-2'>
-              <input
-                type='text'
-                name='firstName'
-                id='firstName'
-                autocomplete='given-name'
-                class='block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 w-22'
-                onChange={handleChange}
-                value={userData["firstName"]}
-              />
-            </div>
-          </div>
-
-          <div class='sm:col-span-3'>
-            <label
-              for='lastName'
-              class='block text-sm font-medium leading-6 text-gray-900 text-2xl'
-            >
-              Last name
-            </label>
-            <div class='mt-2'>
-              <input
-                type='text'
-                name='lastName'
-                id='lastName'
-                autocomplete='family-name'
-                class='block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6  w-22'
-                onChange={handleChange}
-                value={userData["lastName"]}
-              />
-            </div>
-          </div>
-
-          <div class='sm:col-span-4'>
+        <div class='mt-10 grid grid-cols-4 gap-4 sm:grid-cols-6'>
+          <div class='sm:col-span-2 sm:col-start-1'>
             <label
               for='email'
               class='block text-sm font-medium leading-6 text-gray-900 text-2xl'
@@ -84,6 +45,7 @@ function Personal() {
                 onChange={handleChange}
                 value={user.email}
                 disabled={true}
+                required
               />
             </div>
           </div>
@@ -104,6 +66,7 @@ function Personal() {
                 class='block rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 w-22'
                 onChange={handleChange}
                 value={userData["phoneNumber"]}
+                required
               />
             </div>
           </div>
