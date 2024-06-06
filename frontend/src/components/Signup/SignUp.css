@@ -1,4 +1,3 @@
-
 .Outer{
   display: flex;
   width: 100%;
@@ -98,7 +97,7 @@
     margin: .5em 10px 2em;
     background-color: aliceblue;
   }
-  .signup_btn{
+ .signup_btn{
     all: unset;
     border: 1px solid #707070;
     padding: 0.5em 2em;
@@ -110,4 +109,3 @@
     cursor: pointer;
     background-color: chocolate;
   }
-  

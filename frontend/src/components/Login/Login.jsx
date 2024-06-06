@@ -119,9 +119,9 @@ const Login = () => {
             </button>
           </form>
         </div>
-        <div className='cont2'>
+        {/* <div className='cont2'>
           <img src={Background} alt='' />
-        </div>
+        </div> */}
         {/* <div>
           <h1>New Here ?</h1>
           <Link to='/signup'>

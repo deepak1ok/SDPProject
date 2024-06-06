@@ -86,8 +86,8 @@ const Signup = () => {
 
   return (
     <>
-      <div className='Outer'>
-        <div className='cont1'>
+      <div className='Outer_'>
+        <div className='cont1_' style={{ width: "70rem" }}>
           <div className='text-logo'>
             <span className='Logo_img'>
               <img src={Logo} alt='' />
@@ -105,39 +105,57 @@ const Signup = () => {
           </p>
 
           <form onSubmit={handleSubmit}>
-            <label>First Name</label>
-            <br />
-            <input
-              type='text'
-              placeholder='First Name'
-              name='fname'
-              onChange={handleChange}
-              value={data.fname}
-              required
-            />
-            <br />
-            <label>Last Name</label>
-            <br />
-            <input
-              type='text'
-              placeholder='Last Name'
-              name='lname'
-              onChange={handleChange}
-              value={data.lname}
-              required
-            />
-            <br />
-            <label>Email Address</label>
-            <br />
-            <input
-              type='email'
-              placeholder='Email'
-              name='email'
-              onChange={handleChange}
-              value={data.email}
-              required
-            />
-            <br />
+            <div className='row_1'>
+              <div style={{ textAlign: "left" }}>
+                <label>First Name</label>
+                <br />
+                <input
+                  type='text'
+                  placeholder='First Name'
+                  name='fname'
+                  onChange={handleChange}
+                  value={data.fname}
+                  required
+                />
+              </div>
+              {/* <br /> */}
+              <div style={{ textAlign: "left" }}>
+                <label>Last Name</label>
+                <br />
+                <input
+                  type='text'
+                  placeholder='Last Name'
+                  name='lname'
+                  onChange={handleChange}
+                  value={data.lname}
+                  required
+                />
+              </div>
+            </div>
+            <div className='row_2'>
+              <div style={{ textAlign: "left" }}>
+                <label>Email Address</label>
+                <br />
+                <input
+                  type='email'
+                  placeholder='Email'
+                  name='email'
+                  onChange={handleChange}
+                  value={data.email}
+                  required
+                />
+              </div>
+              <div style={{ textAlign: "left" }}>
+                <label>Role</label>
+                <br />
+                <input
+                  type='text'
+                  disabled={true}
+                  value={location.state.role}
+                />
+              </div>
+            </div>
+
             <label>Password</label>
             <br />
             <input
@@ -154,19 +172,19 @@ const Signup = () => {
                   <option value="donor">Donor</option>
                   <option value="ngo">NGO</option>
                 </select> */}
-
-            <label>Role</label>
+ <label>Role</label>
             <br />
             <input type='text' disabled={true} value={location.state.role} />
+
             {error && <div>{error}</div>}
             <button style={buttonStyle} className='signup_btn' type='submit'>
               SignUp{" "}
             </button>
           </form>
         </div>
-        <div className='cont2'>
+        {/* <div className='cont2'>
           <img src={Background} alt='' />
-        </div>
+        </div> */}
       </div>
     </>
   );
