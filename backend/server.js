@@ -210,12 +210,11 @@ import OAuth2Strategy from "passport-google-oauth2";
 
 OAuth2Strategy.Strategy;
 
-const clientid =
-  "239559767458-hur6hpr90imul71vf5ge0qhns8fmu9uu.apps.googleusercontent.com";
-const clientsecret = "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";
+const clientid = process.env.clientid;
+const clientsecret = process.env.clientsecret;
 
 const sessionOptions = {
-  secret: "1324567ygrdgjhgffd",
+  secret: process.env.secret,
   resave: false,
   saveUninitialized: true,
 };
@@ -243,7 +242,7 @@ passport.use(
 
       // Access req.session.role safely
       const role = req.session.role || "unknown";
-      console.log(req.query);
+      // console.log(req.query);
       try {
         let user = await User.findOne({ googleID: profile.id });
         // Rest of your code...
@@ -263,7 +262,7 @@ passport.deserializeUser((user, done) => {
 
 // Route for initiating Google OAuth
 app.get("/auth/google", (req, res, next) => {
-  console.log(req.query.role);
+  // console.log(req.query.role);
   req.session.role = req.query.role;
   passport.authenticate("google", { scope: ["profile", "email"] })(
     req,
@@ -281,7 +280,7 @@ app.get(
   (req, res) => {
     // Access req.session.role safely
     const role = req.session && req.session.role ? req.session.role : "unknown";
-    console.log(role);
+    // console.log(role);
     res.redirect(`http://localhost:3001/auth/google/callback?role=${role}`);
   }
 );
