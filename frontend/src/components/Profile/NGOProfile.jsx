@@ -180,9 +180,6 @@ function NGOProfile() {
                 fontSize: "15px",
               }}
             >
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone Number</th>
               <th>Item Requested</th>
               <th>Status</th>
               <th>About Donation</th>
@@ -210,9 +207,6 @@ function NGOProfile() {
           >
             {ngoRequests && ngoRequests.map((d, i) => (
               <tr key={i}>
-                <td>{d.donorId.fname} {d.donorId.lname}</td>
-                <td>{d.donorId.email}</td>
-                <td>{d.donorId.phoneNumber}11111111111111</td>
                 <td>
                         <button onClick={()=>
                           {

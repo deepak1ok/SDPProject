@@ -172,9 +172,6 @@ const Signup = () => {
                   <option value="donor">Donor</option>
                   <option value="ngo">NGO</option>
                 </select> */}
- <label>Role</label>
-            <br />
-            <input type='text' disabled={true} value={location.state.role} />
 
             {error && <div>{error}</div>}
             <button style={buttonStyle} className='signup_btn' type='submit'>

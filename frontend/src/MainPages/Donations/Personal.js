@@ -3,6 +3,8 @@ import { useContext,useEffect } from "react";
 import { StepperContext } from "./Context/StepperContext";
 import "../Donations/Personal.css";
 import { UserContext } from "../../Context/UserContext";
+
+
 function Personal() {
   const { userData, setUserData } = useContext(StepperContext);
   const {user} = useContext(UserContext);
@@ -22,7 +24,6 @@ function Personal() {
 
     console.log(userData);
   };
-
   return (
     <div className='outer'>
       <div class='border-b border-gray-900/10 pb-12'>
