@@ -12,10 +12,12 @@
 .cont1{
     padding: 6rem 2rem 2rem;
     width: 45rem;
-    min-height: 100vh;
-    margin-right: 2em;
+    min-height: 60vh;
+    position: absolute;
+    right: 50px;
     box-shadow: 5px 5px 13px 0px orange;
-    background-color: rgb(253 235 207 / 1%);
+    border-radius: 10px;
+    background: linear-gradient(357deg, rgb(255 216 136 / 72%) 47%, rgb(255 235 254) 100%);
 }
 
 .text-logo{
@@ -120,4 +122,12 @@
     margin-top: .2em;
     cursor: pointer;
     background-color: chocolate;
+  }
+
+  @media(max-width:500px){
+    .cont1{
+      min-height: 100vh;
+      width: 100%;
+      position: static;
+    }
   }
