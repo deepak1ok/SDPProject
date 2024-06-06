@@ -32,7 +32,7 @@ app.use(cookieParser());
 
 const corsOptions = {
   origin: "http://localhost:3001",
-  methos: "GET, POST, PUT DELETE",
+  methods: "GET, POST, PUT, DELETE",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
