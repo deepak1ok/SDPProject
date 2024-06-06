@@ -19,7 +19,11 @@ const Login = () => {
   const { data, setUser } = useContext(UserContext);
   const location = useLocation();
 
-  console.log(location.state)
+  // google btn setup in handleclick in google button line 90
+  const loginWithGoogle = () => {
+    const role = location.state?.role || "donor";
+    window.open(`http://localhost:3000/auth/google?role=${role}`, "_self");
+  };
 
   const handleChange = ({ currentTarget: input }) => {
     setFormData({ ...formData, [input.name]: input.value });
@@ -48,9 +52,9 @@ const Login = () => {
     let url;
 
     if (location.state.role === "donor") {
-      url = "http://localhost:3000/api/users/auth";
+      url = "http://localhost:3001/api/users/auth";
     } else {
-      url = "http://localhost:3000/api/users/ngologin";
+      url = "http://localhost:3001/api/users/ngologin";
     }
 
     const res = await axios.post(url, formData);
@@ -83,7 +87,7 @@ const Login = () => {
             </span>
           </p>
           <div className='btn_google'>
-            <button>Google</button>
+            <button onClick={loginWithGoogle}>Google</button>
             <div className='para3'>
               <p></p>
               <div className='text_'> Or with email and password </div>

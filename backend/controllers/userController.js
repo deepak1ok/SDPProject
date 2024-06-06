@@ -12,6 +12,7 @@ const generateRandom4Digits=()=>
   }
 
 export const createUser = asyncHandler(async (req, res, next) => {
+  const { role, fname, lname, email, password } = req.body;
 
   const { fname, lname, email, password } = req.body;
 
@@ -33,20 +34,6 @@ export const createUser = asyncHandler(async (req, res, next) => {
   
   const newUser = await User.create({ fname, lname, email, password: hashedPassword });
 
-  const g_otp=generateRandom4Digits();
-
-  const cDate=new Date();
-
-  const otpResult=await Otp.findOneAndUpdate(
-    {userId:newUser._id},{otp:g_otp,timestamp:new Date(cDate.getTime())},{upsert:true,new:true,setDefaultsOnInsert:true}
-  );
-
-  console.log(otpResult)
-
-  const msg="<span>Hii</span>"+fname+" "+lname+"Thank you for creating an account in FoodShare"+"Your OTP is "+g_otp;
-
-  //sendMail(email,'Mail Verification',msg);
-
   try {
     createToken(res, newUser._id);
     res.status(201).json({
@@ -54,6 +41,7 @@ export const createUser = asyncHandler(async (req, res, next) => {
       fname: newUser.fname,
       lname: newUser.lname,
       email: newUser.email,
+      role,
     });
   } catch (error) {
     res.status(400);
@@ -79,7 +67,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         fname: existingUser.fname,
         lname: existingUser.lname,
         email: existingUser.email,
-        role:'donor',
+        role: "donor",
       });
     }
     return;
@@ -199,14 +187,11 @@ export const loginNgo = asyncHandler(async (req, res) => {
 
   const existingUser = await Ngo.findOne({ email });
 
-  
-
   if (existingUser) {
     const isPasswordValid = await bcrypt.compare(
       password,
       existingUser.password
     );
-
 
     if (isPasswordValid) {
       createToken(res, existingUser._id);
@@ -215,7 +200,7 @@ export const loginNgo = asyncHandler(async (req, res) => {
         fname: existingUser.fname,
         lname: existingUser.lname,
         email: existingUser.email,
-        role: 'ngo',
+        role: "ngo",
       });
     }
     return;
