@@ -12,6 +12,7 @@ function Button() {
         role: "ngo",
       },
     });
+    // loginWithGoogle("ngo");
   };
 
   const handleClickDonor = () => {
@@ -20,6 +21,7 @@ function Button() {
         role: "donor",
       },
     });
+    // loginWithGoogle("donor");
   };
 
   return (

@@ -5,22 +5,25 @@ import createToken from "../utils/createTokens.js";
 import Ngo from "../models/ngomodel.js";
 
 export const createUser = asyncHandler(async (req, res, next) => {
+  const { role, fname, lname, email, password } = req.body;
 
-  const { fname, lname, email, password } = req.body;
-
-  if (!fname || !lname || !email || !password) 
-  {
-     throw new Error("Please fill all the inputs");
+  if (!fname || !lname || !email || !password) {
+    throw new Error("Please fill all the inputs");
   }
 
   const userExists = await User.findOne({ email });
 
   if (userExists) return res.status(400).send("User already exists!");
 
-  
-  const hashedPassword = await bcrypt.hash(password,10);
-  
-  const newUser = await User.create({ fname, lname, email, password: hashedPassword });
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const newUser = await User.create({
+    fname,
+    lname,
+    email,
+    password: hashedPassword,
+    role,
+  });
 
   try {
     createToken(res, newUser._id);
@@ -29,6 +32,7 @@ export const createUser = asyncHandler(async (req, res, next) => {
       fname: newUser.fname,
       lname: newUser.lname,
       email: newUser.email,
+      role,
     });
   } catch (error) {
     res.status(400);
@@ -54,7 +58,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         fname: existingUser.fname,
         lname: existingUser.lname,
         email: existingUser.email,
-        role:'donor',
+        role: "donor",
       });
     }
     return;
@@ -174,14 +178,11 @@ export const loginNgo = asyncHandler(async (req, res) => {
 
   const existingUser = await Ngo.findOne({ email });
 
-  
-
   if (existingUser) {
     const isPasswordValid = await bcrypt.compare(
       password,
       existingUser.password
     );
-
 
     if (isPasswordValid) {
       createToken(res, existingUser._id);
@@ -190,7 +191,7 @@ export const loginNgo = asyncHandler(async (req, res) => {
         fname: existingUser.fname,
         lname: existingUser.lname,
         email: existingUser.email,
-        role: 'ngo',
+        role: "ngo",
       });
     }
     return;

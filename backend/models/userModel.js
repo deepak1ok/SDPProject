@@ -2,10 +2,18 @@ import mongoose from "mongoose";
 
 const userSchema = mongoose.Schema(
   {
-    // username: {
-    //   type: String,
-    //   required: true,
-    // },
+    googleId: {
+      type: String,
+    },
+    displayName: {
+      type: String,
+    },
+    image: {
+      type: String,
+    },
+    role: {
+      type: String,
+    },
     fname: {
       type: String,
       required: true,
