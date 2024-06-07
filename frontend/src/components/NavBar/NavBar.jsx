@@ -48,9 +48,14 @@ function NavBar() {
         )}
 
         {user && (
-          <div className='navbar-end'>
-            <LogoutButton></LogoutButton>
-          </div>
+          <>
+            <div className='navbar-end'>
+              <span style={{ userSelect: "none" }}>
+                {user.fname + " " + user.lname}
+              </span>
+              <LogoutButton></LogoutButton>
+            </div>
+          </>
         )}
       </div>
     </>
