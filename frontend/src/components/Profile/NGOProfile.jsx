@@ -276,10 +276,20 @@ function NGOProfile() {
 
         <input type='checkbox' id='my_modal_7' className='modal-toggle' />
         <div className='modal' role='dialog'>
-          <div className='modal-box'>
+          <div className='modal-box' style={{ backgroundColor: "#ffd489" }}>
             <h3 className='text-lg font-bold'>Hello!</h3>
             <p className='py-4'>Do you want to delete this request</p>
-            <button onClick={handleDelete}>Delete</button>
+            <button
+              style={{
+                backgroundColor: "black",
+                color: "white",
+                borderRadius: "5px",
+                padding: "4px 8px",
+              }}
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
           </div>
           <label className='modal-backdrop' htmlFor='my_modal_7'>
             Close
