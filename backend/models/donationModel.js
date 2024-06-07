@@ -12,6 +12,14 @@ const donateSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    city: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
     lat: {
         type: mongoose.Decimal128 ,
         required: true,
@@ -21,6 +29,10 @@ const donateSchema = mongoose.Schema(
         required: true,
       },
     postalCode: {
+        type: Number,
+        required: true,
+      },
+      phoneNumber: {
         type: Number,
         required: true,
       },
