@@ -51,7 +51,8 @@ function NavBar() {
           <>
             <div className='navbar-end'>
               <span style={{ userSelect: "none" }}>
-                {user.fname + " " + user.lname}
+                {user.role === "donor" && user.fname + " " + user.lname}
+                {user.role === "ngo" && user.email}
               </span>
               <LogoutButton></LogoutButton>
             </div>
