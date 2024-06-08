@@ -32,6 +32,7 @@ import NGOProfile from "../src/components/Profile/NGOProfile.jsx";
 import RegisterOtpPage from '../src/components/Signup/RegisterOtpPage.jsx'
 import LinearStepper from "./MainPages/Donations/DonateNow-Donor/CreateDonation.jsx"
 import CreateDonation from "./MainPages/Donations/DonateNow-Donor/CreateDonation.jsx";
+import NGORegistration from "./components/Signup/NGORegistration/NGORegistration.jsx";
 
 
 // import DonationsHome from "./MainPages/Donations/view.js";
@@ -48,7 +49,11 @@ function App() {
           <Route path='/contact' exact element={<Contact />} />
           <Route path='/donations' exact element={<Donate />} />
 
-          <Route path='/needyPeople' exact element={<NGOPage></NGOPage>} />
+          {/* <Route path='/needyPeople' exact element={<NGOPage></NGOPage>} /> */}
+
+          <Route path='/needyPeople' exact element={<NGORegistration></NGORegistration>} />
+
+
           <Route path='/partners' exact element={<Partner />} />
           <Route path='/deliveryagents' exact element={<DeliveryAgents />} />
 

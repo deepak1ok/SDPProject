@@ -83,7 +83,7 @@ function NGOProfile() {
                 Ngo Name
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {ngoDetails && ngoDetails.ngoName}
+                {ngoDetails && ngoDetails.ngoname}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -107,7 +107,7 @@ function NGOProfile() {
                 Donor Phone Number
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {ngoDetails && ngoDetails.phoneNumber}
+                {ngoDetails && ngoDetails.phonenumber}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -123,7 +123,7 @@ function NGOProfile() {
                 Pin Code
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {ngoDetails && ngoDetails.pinCode}
+                {ngoDetails && ngoDetails.pincode}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -131,7 +131,7 @@ function NGOProfile() {
                 Total Campaigns
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {ngoDetails && ngoDetails.totalCampaigns}
+                {ngoDetails && ngoDetails.totalcampaigns}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -139,7 +139,7 @@ function NGOProfile() {
                 Total Feeds
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {ngoDetails && ngoDetails.totalFeeds}
+                {ngoDetails && ngoDetails.totalfeeds}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>

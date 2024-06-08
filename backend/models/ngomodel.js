@@ -2,24 +2,15 @@ import mongoose from "mongoose";
 
 const ngoSchema = mongoose.Schema(
   {
-    firstName: {
+    ngoname: {
       type: String,
       required: true,
     },
-    lastName: {
-      type: String,
-      required: true,
-    },
-    ngoName: {
-      type: String,
-      required: true,
-    },
-
-    volunteers: {
+    numberofvolunteers: {
       type: Number,
       required: true,
     },
-    totalCampaigns: {
+    totalcampaigns: {
       type: Number,
       required: true,
     },
@@ -42,7 +33,7 @@ const ngoSchema = mongoose.Schema(
       required: true,
     },
     
-    phoneNumber: {
+    phonenumber: {
       type: Number,
       required: true,
     },
@@ -55,7 +46,7 @@ const ngoSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    pinCode: {
+    pincode: {
       type: Number,
       required: true,
     },
@@ -71,12 +62,11 @@ const ngoSchema = mongoose.Schema(
       type: mongoose.Decimal128,
       required: true,
     },
-
     description: {
       type: String,
       required: true,
     },
-    totalFeeds: {
+    totalfeeds: {
       type: Number,
       required: true,
     },

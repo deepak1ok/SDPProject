@@ -89,9 +89,9 @@ function ManageRequest() {
               {donationRequests &&
                 donationRequests.map((d, i) => (
                   <tr key={i}>
-                    <td>{d.ngoId.ngoName}</td>
+                    <td>{d.ngoId.ngoname}</td>
                     <td>{d.ngoId.email}</td>
-                    <td>{d.ngoId.phoneNumber}</td>
+                    <td>{d.ngoId.phonenumber}</td>
                     <td>
                       {new Date(d.pickupTime).toLocaleDateString()}-
                       {new Date(d.pickupTime).toLocaleTimeString()}

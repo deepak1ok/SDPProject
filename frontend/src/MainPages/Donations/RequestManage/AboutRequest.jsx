@@ -83,7 +83,7 @@ function AboutRequest() {
                 Ngo Name
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {request.ngoId && request.ngoId.ngoName}
+                {request.ngoId && request.ngoId.ngoname}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -107,7 +107,7 @@ function AboutRequest() {
                 Donor Phone Number
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {request.ngoId && request.ngoId.phoneNumber}
+                {request.ngoId && request.ngoId.phonenumber}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -123,7 +123,7 @@ function AboutRequest() {
                 Pin Code
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {request.ngoId && request.ngoId.pinCode}
+                {request.ngoId && request.ngoId.pincode}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -131,7 +131,7 @@ function AboutRequest() {
                 Total Campaigns
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {request.ngoId && request.ngoId.totalCampaigns}
+                {request.ngoId && request.ngoId.totalcampaigns}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -139,7 +139,7 @@ function AboutRequest() {
                 Total Feeds
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {request.ngoId && request.ngoId.totalFeeds}
+                {request.ngoId && request.ngoId.totalfeeds}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>

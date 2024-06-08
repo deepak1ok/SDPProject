@@ -3,12 +3,10 @@ import mongoose from 'mongoose';
 const otpSchema = mongoose.Schema(
     {
         fName: {
-            type: String,
-            required: true,
+            type: String,  
         },
         lName: {
             type: String,
-            required: true,
         },
         email: {
             type: String,

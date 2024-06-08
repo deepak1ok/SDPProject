@@ -8,10 +8,10 @@ export const createNgo = async (req, res) => {
     
     console.log(req.body);
 
-    const {firstName,lastName,ngoName,state,city,pinCode,phoneNumber,email,password,address,volunteers,totalFeeds,totalCampaigns, 
+    const {ngoname,state,city,pincode,phonenumber,email,password,address,numberofvolunteers,totalfeeds,totalcampaigns, 
     adults,childrens,description,lat,lng} = req.body;
 
-    if(!firstName || !lastName || !ngoName || !state || !city || !pinCode || !phoneNumber || !email || !password || !address || !volunteers || !totalFeeds || !totalCampaigns ||
+    if(!ngoname || !state || !city || !pincode || !phonenumber || !email || !password || !address || !numberofvolunteers || !totalfeeds || !totalcampaigns ||
     !adults || !childrens || !description || !lat || !lng)
     {
         throw new Error("Please fill all the inputs");
@@ -21,7 +21,7 @@ export const createNgo = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-   const newNgo = await ngo.create({firstName,lastName,ngoName,state,city,pinCode,phoneNumber,email,password:hashedPassword,address,volunteers,totalFeeds,totalCampaigns, 
+   const newNgo = await ngo.create({ngoname,state,city,pincode,phonenumber,email,password:hashedPassword,address,numberofvolunteers,totalfeeds,totalcampaigns, 
     adults,childrens,description,lat,lng});
 
   try {
