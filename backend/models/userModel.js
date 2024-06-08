@@ -21,10 +21,6 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    phoneNumber: {
-      type: Number,
-      required: true,
-    },
   },
   { timeStamps: true }
 );
