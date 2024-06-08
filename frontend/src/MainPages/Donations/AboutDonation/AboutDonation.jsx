@@ -62,6 +62,8 @@ function AboutDonation() {
           
       }
 
+      console.log(data);
+
     if(items.length==0 || isAllZero)
       {
         alert("Please select atleast one item");
