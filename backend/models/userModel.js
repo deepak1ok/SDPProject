@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
 
-
-
 const userSchema = mongoose.Schema(
   {
     fname: {
@@ -23,7 +21,7 @@ const userSchema = mongoose.Schema(
     },
     phoneNumber: {
       type: Number,
-      required: true,
+      // required: true,
     },
   },
   { timeStamps: true }
