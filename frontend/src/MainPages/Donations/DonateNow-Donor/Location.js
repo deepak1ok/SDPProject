@@ -3,7 +3,7 @@ import DraggableMarker from "./DisplayPosition";
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
-export default function Map({state,setState}) {
+export default function Map({ state, setState }) {
   const [latitude, setLatitude] = useState(0);
   const [longitude, setLongitude] = useState(0);
 
@@ -21,7 +21,7 @@ export default function Map({state,setState}) {
           center={[latitude, longitude]}
           zoom={13}
           scrollWheelZoom={true}
-          style={{ height: "200px ", margin: "10em 2em 5em" }}
+          style={{ height: "290px ", margin: "10em 2em 5em" }}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
