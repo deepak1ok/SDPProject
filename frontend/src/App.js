@@ -52,6 +52,8 @@ function App() {
           <Route path='/partners' exact element={<Partner />} />
           <Route path='/deliveryagents' exact element={<DeliveryAgents />} />
 
+          <Route path='/temp' element={<Form />} />
+
           <Route path='/ngoprofile' element={<NGOProfile></NGOProfile>} />
 
           <Route path='/location' element={<Location></Location>} />
