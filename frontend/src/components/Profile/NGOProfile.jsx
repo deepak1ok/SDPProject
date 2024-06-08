@@ -1,78 +1,76 @@
-import React, { useContext, useEffect,useState } from 'react'
-import axios from 'axios'
-import { UserContext } from '../../Context/UserContext';
-import NavBar from '../NavBar/NavBar';
-import { Link } from 'react-router-dom';
-import Modal from 'react-modal';
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
+import { UserContext } from "../../Context/UserContext";
+import NavBar from "../NavBar/NavBar";
+import { Link } from "react-router-dom";
+import Modal from "react-modal";
 
 function NGOProfile() {
-
-  const {user,setUser}=useContext(UserContext);
-  const [ngoRequests,setNgoRequests]=useState([]);
+  const { user, setUser } = useContext(UserContext);
+  const [ngoRequests, setNgoRequests] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-   const [modalData, setModalData] = useState(null);
+  const [modalData, setModalData] = useState(null);
 
-   const [requestId,setRequestId]=useState([]);
-   const [ngoDetails,setNgoDetails]=useState({});
+  const [requestId, setRequestId] = useState([]);
+  const [ngoDetails, setNgoDetails] = useState({});
 
-  const ngoRequest=async ()=>
-    {
-      const res=await axios.get(`http://localhost:3000/api/ngo/ngorequests/${user._id}`);
+  const ngoRequest = async () => {
+    const res = await axios.get(
+      `http://localhost:3000/api/ngo/ngorequests/${user._id}`
+    );
 
-      setNgoRequests(res.data.data);
+    setNgoRequests(res.data.data);
 
-      console.log(res)
-    }
+    console.log(res);
+  };
 
-    const aboutNgo=async ()=>
-      {
-        const res=await axios.get(`http://localhost:3000/api/ngo/aboutngo/${user._id}`);
+  const aboutNgo = async () => {
+    const res = await axios.get(
+      `http://localhost:3000/api/ngo/aboutngo/${user._id}`
+    );
 
-        console.log(res.data.ngoData)
-  
-        setNgoDetails(res.data.ngoData);
-      }
-  
+    console.log(res.data.ngoData);
 
-    const handleDelete=async ()=>
-      {
+    setNgoDetails(res.data.ngoData);
+  };
 
-        console.log(requestId)
-        
-        const request=await axios.post(`http://localhost:3000/api/donation/deleterequest/${requestId}`);
+  const handleDelete = async () => {
+    console.log(requestId);
 
-        console.log(request)
+    const request = await axios.post(
+      `http://localhost:3000/api/donation/deleterequest/${requestId}`
+    );
 
-        window.location.reload();
-      }
+    console.log(request);
 
-      const click=(e,id)=>
-        {
-          setRequestId(id);
-        }
+    window.location.reload();
+  };
 
-    const customStyles = {
-      content: {
-        top: '35%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        width: '60%',
-        transform: 'translate(-40%, -10%)',
-        zIndex: '1000',
-      },
-    }
+  const click = (e, id) => {
+    setRequestId(id);
+  };
 
-  useEffect(()=>
-  { 
+  const customStyles = {
+    content: {
+      top: "35%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      width: "60%",
+      transform: "translate(-40%, -10%)",
+      zIndex: "1000",
+    },
+  };
+
+  useEffect(() => {
     ngoRequest();
     aboutNgo();
-  },[])
+  }, []);
   return (
     <>
-    <NavBar></NavBar>
-    <div style={{ padding: "12em" }}>
+      <NavBar></NavBar>
+      <div style={{ padding: "12em" }}>
         <div className='px-4 sm:px-0'>
           <h3 className='text-base font-semibold leading-7 text-gray-900'>
             NGO Information
@@ -82,10 +80,10 @@ function NGOProfile() {
           <dl className='divide-y divide-gray-100'>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
               <dt className='text-sm font-medium leading-6 text-gray-900'>
-               Ngo Name
+                Ngo Name
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {ngoDetails && ngoDetails.ngoName} 
+                {ngoDetails && ngoDetails.ngoName}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -162,16 +160,17 @@ function NGOProfile() {
             </div>
           </dl>
         </div>
-
-    </div>  
-    <div className='px-4 sm:px-0 my-6'>
-          <h3 className='text-base font-semibold leading-7 text-gray-900' style={{textAlign:'center'}}>
-            Requests Made by you
-          </h3>
-    </div>
-    <div>
-    <table
-            style={ modalIsOpen ? { opacity:0.3} : {display : ''} }>
+      </div>
+      <div className='px-4 sm:px-0 my-6'>
+        <h3
+          className='text-base font-semibold leading-7 text-gray-900'
+          style={{ textAlign: "center" }}
+        >
+          Requests Made by you
+        </h3>
+      </div>
+      <div>
+        <table style={modalIsOpen ? { opacity: 0.3 } : { display: "" }}>
           <thead>
             <tr
               style={{
@@ -193,9 +192,7 @@ function NGOProfile() {
               fontSize: "13px",
               textAlign: "center",
             }}
-          >
-           
-          </tbody>
+          ></tbody>
 
           <tbody
             style={{
@@ -205,75 +202,102 @@ function NGOProfile() {
               textAlign: "center",
             }}
           >
-            {ngoRequests && ngoRequests.map((d, i) => (
-              <tr key={i}>
-                <td>
-                        <button onClick={()=>
-                          {
-                            setModalData(d.itemsRequested);
-                            setModalIsOpen(true);
-                          }
-                        }>
-                      Food Items</button></td>
-                <td>{d.status}</td>
-                {/* <td><button className="btn" onClick={(e)=>click(e,d._id)} >Delete</button></td> */}
-                <td><Link to={`/donationslist/aboutdonation/${d.donationId._id}`}>About Donation</Link></td>
-                <td><label htmlFor="my_modal_7" className="btn" onClick={(e)=>click(e,d._id)}>Delete</label></td>
-              </tr>
-                
-            ))}
+            {ngoRequests &&
+              ngoRequests.map((d, i) => (
+                <tr key={i}>
+                  <td>
+                    <button
+                      onClick={() => {
+                        setModalData(d.itemsRequested);
+                        setModalIsOpen(true);
+                      }}
+                    >
+                      Food Items
+                    </button>
+                  </td>
+                  <td>{d.status}</td>
+                  {/* <td><button className="btn" onClick={(e)=>click(e,d._id)} >Delete</button></td> */}
+                  <td>
+                    <Link
+                      to={`/donationslist/aboutdonation/${d.donationId._id}`}
+                    >
+                      About Donation
+                    </Link>
+                  </td>
+                  <td>
+                    <label
+                      htmlFor='my_modal_7'
+                      className='btn'
+                      onClick={(e) => click(e, d._id)}
+                    >
+                      Delete
+                    </label>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
 
-        <Modal isOpen={modalIsOpen} onRequestClose={() => setModalIsOpen(false)} style={customStyles}>
-            <div style={{display:'flex',justifyContent:'center'}}>
-              <h1 style={{marginTop:'0px'}}>Donation Food Items</h1>
-            </div>
-          
-         
-        <table>
-          
-        <thead>
-          <tr>
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          style={customStyles}
+        >
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <h1 style={{ marginTop: "0px" }}>Donation Food Items</h1>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
                 {/* <th></th> */}
                 <th>Name </th>
                 <th>Quantity</th>
                 <th>Type of Food</th>
-          </tr>
-              
-        </thead>
+              </tr>
+            </thead>
             <tbody>
-              {modalData && modalData.map((item,index) => {
-                return (
-                  <>
-                    <tr>
-                      {/* <td></td> */}
-                      <td>{item.name}</td>
-                      <td>{item.quantity}</td>
-                      <td>{item.typeOfFood}</td>
-                    </tr>
-                  </>
-                    
-                )})}
-              </tbody>
-         </table>
-        
-      </Modal>
+              {modalData &&
+                modalData.map((item, index) => {
+                  return (
+                    <>
+                      <tr>
+                        {/* <td></td> */}
+                        <td>{item.name}</td>
+                        <td>{item.quantity}</td>
+                        <td>{item.typeOfFood}</td>
+                      </tr>
+                    </>
+                  );
+                })}
+            </tbody>
+          </table>
+        </Modal>
 
-      <input type="checkbox" id="my_modal_7" className="modal-toggle" />
-<div className="modal" role="dialog">
-  <div className="modal-box">
-    <h3 className="text-lg font-bold">Hello!</h3>
-    <p className="py-4">Do you want to delete this request</p>
-    <button onClick={handleDelete}>Delete</button>
-  </div>
-  <label className="modal-backdrop" htmlFor="my_modal_7">Close</label>
-</div>
-    </div>
-    
-    
-  </>
-  )
+        <input type='checkbox' id='my_modal_7' className='modal-toggle' />
+        <div className='modal' role='dialog'>
+          <div className='modal-box' style={{ backgroundColor: "#ffd489" }}>
+            <h3 className='text-lg font-bold'>Hello!</h3>
+            <p className='py-4'>Do you want to delete this request</p>
+            <button
+              style={{
+                backgroundColor: "black",
+                color: "white",
+                borderRadius: "5px",
+                padding: "4px 8px",
+              }}
+              onClick={handleDelete}
+            >
+              Delete
+            </button>
+          </div>
+          <label className='modal-backdrop' htmlFor='my_modal_7'>
+            Close
+          </label>
+        </div>
+      </div>
+    </>
+  );
 }
 
-export default NGOProfile
+export default NGOProfile;

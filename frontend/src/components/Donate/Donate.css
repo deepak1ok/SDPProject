@@ -53,3 +53,17 @@
     background-color: black;
     padding: 10px 15px;
 }
+@media(max-width:1080px){
+    .about-main {
+        flex-direction: column;
+    }
+    .about-main__text{
+        text-align: center;
+    }
+    .hero-content__text__btns{
+        justify-content: center;
+    }
+    .about-main__img {
+        max-height: 58rem;
+    }
+}

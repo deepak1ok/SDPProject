@@ -1,77 +1,89 @@
-import React, { useEffect,useState } from 'react'
-import { useParams } from 'react-router-dom'
-import NavBar from '../../../components/NavBar/NavBar'
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import NavBar from "../../../components/NavBar/NavBar";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import Map from './Location.jsx'
+import Map from "./Location.jsx";
+
+import { Button } from "react-bootstrap";
+import { FaWhatsapp } from "react-icons/fa";
 
 function AboutRequest() {
-    const {id}=useParams();
-    const [request,setRequest]=useState({});
-    const navigate=useNavigate();
+  const { id } = useParams();
+  const [request, setRequest] = useState({});
+  const navigate = useNavigate();
 
-    const [status,setStatus]=useState(null)
+  const [status, setStatus] = useState(null);
 
-    const [checkValid,setCheckValid]=useState(false);
+  const [checkValid, setCheckValid] = useState(false);
 
+  async function aboutRequest() {
+    const res = await axios.get(
+      `http://localhost:3000/api/donation/aboutrequest/${id}`
+    );
 
-    async function aboutRequest()
-    {
-        const res=await axios.get(`http://localhost:3000/api/donation/aboutrequest/${id}`);
+    setRequest(res.data.data);
+    setCheckValid(res.data.checkValid);
+    setStatus(res.data.data.status);
+  }
 
-        setRequest(res.data.data);
-        setCheckValid(res.data.checkValid);
+  const handleClick = async () => {
+    const res = await axios.post(
+      `http://localhost:3000/api/donation/acceptdonation/${id}`
+    );
 
+    console.log(res);
 
-        setStatus(res.data.data.status);
-    }
+    navigate("/submitRequest");
+  };
 
-    const handleClick=async ()=>
-        {
-            const res=await axios.post(`http://localhost:3000/api/donation/acceptdonation/${id}`);
+  const handleReject = async () => {
+    const res = await axios.post(
+      `http://localhost:3000/api/donation/rejectrequest/${id}`
+    );
 
-            console.log(res);
+    console.log(res);
 
-            navigate('/submitRequest')
-        }
+    navigate("/rejectrequest");
+  };
 
-      const handleReject=async()=>
-        {
-            const res=await axios.post(`http://localhost:3000/api/donation/rejectrequest/${id}`);
+  useEffect(() => {
+    aboutRequest();
+  }, []);
 
-            console.log(res);
+  const phoneNumber = request.ngoId && request.ngoId.phoneNumber;
+  const href = phoneNumber ? `https://wa.me/${phoneNumber}` : "#";
 
-            navigate('/rejectrequest')
-        }
-
-    useEffect(()=>
-    {   
-        aboutRequest();
-       
-    },[])
   return (
     <div>
       <NavBar></NavBar>
       <div style={{ padding: "12em" }}>
         <div className='px-4 sm:px-0'>
-          <h3 className='text-base font-semibold leading-7 text-gray-900' style={{textAlign:'center'}}>
-           NGO Information
+          <h3
+            className='text-base font-semibold leading-7 text-gray-900'
+            style={{ textAlign: "center" }}
+          >
+            NGO Information
           </h3>
         </div>
         <div className='px-4 sm:px-0 my-6'>
-          <h3 className='text-base leading-7 text-gray-900' style={{fontSize:'20px'}}>
-           This NGO are requesting for the following items.The Details shown below: 
+          <h3
+            className='text-base leading-7 text-gray-900'
+            style={{ fontSize: "20px" }}
+          >
+            This NGO are requesting for the following items.The Details shown
+            below:
           </h3>
         </div>
         <div className='mt-6 border-t border-gray-100'>
           <dl className='divide-y divide-gray-100'>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
               <dt className='text-sm font-medium leading-6 text-gray-900'>
-               Ngo Name
+                Ngo Name
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {request.ngoId && request.ngoId.ngoName} 
+                {request.ngoId && request.ngoId.ngoName}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -148,14 +160,15 @@ function AboutRequest() {
             </div>
           </dl>
         </div>
-            
 
         <div>
-            <h2 style={{textAlign:'center',fontSize:'20px'}}>Requested Item</h2>
+          <h2 style={{ textAlign: "center", fontSize: "20px" }}>
+            Requested Item
+          </h2>
         </div>
 
         <table
-            style={{
+          style={{
             borderCollapse: "flex",
             width: "100%",
             marginBottom: "30px",
@@ -184,52 +197,98 @@ function AboutRequest() {
               textAlign: "center",
             }}
           >
-            {request.itemsRequested && request.itemsRequested.map((d, i) => (
-              <tr key={i}>
-                <td>{d.name}</td>
-                <td>{d.typeOfFood}</td>
-                <td>{d.quantity}</td>
-                <td>{request.donationId.items[i].quantity}</td>
-              </tr>
-                
-            ))}
+            {request.itemsRequested &&
+              request.itemsRequested.map((d, i) => (
+                <tr key={i}>
+                  <td>{d.name}</td>
+                  <td>{d.typeOfFood}</td>
+                  <td>{d.quantity}</td>
+                  <td>{request.donationId.items[i].quantity}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
-      <div>
-
-     
-        
-
-      {status==="Rejected" && <div className='mt-6 border-t border-gray-100 text-2xl' style={{textAlign:'center'}}>
-        <span className='font-semibold my-3'> Status of this Request:</span> You have rejected the request.Check out other requests.
-            </div>}
-
-        {status==="Accepted" && <div className='mt-6 border-t border-gray-100 text-2xl' style={{textAlign:'center'}}>
-        <span className='font-semibold my-3'> Status of this Request:</span>You have accepted the request.Please contact the respective NGO for pickup and further coordination.
-            </div>}
-        
-      {checkValid && status==="pending" ? <>
-      <div style={{textAlign:'center'}}>
-       <button className="btn btn-success" onClick={handleClick}>Accept</button>
-       <button className="btn btn-error" onClick={handleReject}>Reject</button>
-      </div>
-      
-      </>:<>
-            {status!=="Accepted" && status!=="Rejected" && <><div className='mt-6 border-t border-gray-100 text-2xl' style={{textAlign:'center'}}>
-        <span className='font-semibold my-3'> Status of this Request:</span> The request is not valid as the items requested are not available.Kindly reject the request.
+        <div>
+          {status === "Rejected" && (
+            <div
+              className='mt-6 border-t border-gray-100 text-2xl'
+              style={{ textAlign: "center" }}
+            >
+              <span className='font-semibold my-3'>
+                {" "}
+                Status of this Request:
+              </span>{" "}
+              You have rejected the request.Check out other requests.
             </div>
-            <div className='text-center'>
-            <button className="btn btn-error " onClick={handleReject}>Reject</button>
-            </div></>}
-      </>}
-        
+          )}
+
+          {status === "Accepted" && (
+            <div
+              className='mt-6 border-t border-gray-100 text-2xl'
+              style={{ textAlign: "center" }}
+            >
+              <span className='font-semibold my-3'>
+                {" "}
+                Status of this Request:
+              </span>
+              You have accepted the request.Please contact the respective NGO
+              for pickup and further coordination.
+            </div>
+          )}
+
+          {checkValid && status === "pending" ? (
+            <>
+              <div style={{ textAlign: "center" }}>
+                <button className='btn btn-success' onClick={handleClick}>
+                  Accept
+                </button>
+                <button className='btn btn-error' onClick={handleReject}>
+                  Reject
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              {status !== "Accepted" && status !== "Rejected" && (
+                <>
+                  <div
+                    className='mt-6 border-t border-gray-100 text-2xl'
+                    style={{ textAlign: "center" }}
+                  >
+                    <span className='font-semibold my-3'>
+                      {" "}
+                      Status of this Request:
+                    </span>{" "}
+                    The request is not valid as the items requested are not
+                    available.Kindly reject the request.
+                  </div>
+                  <div className='text-center'>
+                    <button className='btn btn-error ' onClick={handleReject}>
+                      Reject
+                    </button>
+                  </div>
+                </>
+              )}
+            </>
+          )}
+        </div>
+        {request.ngoId ? (
+          <Button
+            href={href}
+            target='_blank'
+            rel='noopener noreferrer'
+            variant='success'
+            className='d-flex align-items-center'
+          >
+            <FaWhatsapp className='me-2' />
+            Contact us on WhatsApp
+          </Button>
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
-        </div>
-        
-        </div>
-      
-    
-  )
+    </div>
+  );
 }
 
-export default AboutRequest
+export default AboutRequest;
