@@ -28,11 +28,11 @@ const donateSchema = mongoose.Schema(
         type: mongoose.Decimal128 ,
         required: true,
       },
-    postalCode: {
+    pincode: {
         type: Number,
         required: true,
       },
-      phoneNumber: {
+      phonenumber: {
         type: Number,
         required: true,
       },
@@ -53,14 +53,6 @@ const donateSchema = mongoose.Schema(
         type:String,
         required:true
       },
-      ngoID:
-      {
-        type:String,
-      },
-      pickuptime:
-      {
-        type:String,
-      }
 
   },
   { timeStamps: true }
