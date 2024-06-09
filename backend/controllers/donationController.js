@@ -54,7 +54,7 @@ export const createDonations = async (req, res) => {
 };
 
 export const donationList = async (req, res) => {
-  const donationLists = await Donate.find({donationStatus:"false"});
+  const donationLists = await Donate.find({donationStatus:"false"}).populate("donorId");
   try {
     res.status(201).json({
       donationLists,
@@ -82,7 +82,7 @@ export const aboutDonation = async (req, res) => {
 
 export const mydonation = async (req, res) => {
 
-  const data = await Donate.find({email:req.params.id});
+  const data = await Donate.find({donorId:req.params.id});
   if (data) {
     return res.status(201).json({
       data: data,

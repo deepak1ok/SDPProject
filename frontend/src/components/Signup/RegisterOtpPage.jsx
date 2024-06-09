@@ -30,6 +30,8 @@ function RegisterOtpPage() {
   };
 
   const handleSubmit = async (e) => {
+
+    console.log(data);
     
     e.preventDefault();
     try {

@@ -291,7 +291,7 @@ export const sendOtp = asyncHandler(async (req, res) => {
 
         const msg='<p> Hi <b>'+'<b>, </br> <h4>Your OTP for registering to Food Share as NGO is</h4>'+g_otp+'</br></br><h4>Happy Contributions!!</h4></p>';
     
-        //sendMail(email,'OTP Verfication--Food Share',msg);
+        sendMail(email,'OTP Verfication--Food Share',msg);
 
         console.log(g_otp);
     
@@ -318,7 +318,7 @@ export const verifyOtp = asyncHandler(async (req, res) => {
 
   if(role!=='ngo')
     {
-      const {email,otp,password}=req.body;
+      const {email,otp,password}=req.body.data;
 
       console.log(otp,password);
     
@@ -395,10 +395,6 @@ export const verifyOtp = asyncHandler(async (req, res) => {
           )
         }
     }
-
- 
-
-
 
 
   // const newUser = await User.create({ fname, lname, email, password: hashedPassword });

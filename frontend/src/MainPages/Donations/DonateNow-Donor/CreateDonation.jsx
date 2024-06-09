@@ -444,7 +444,7 @@ function CreateDonation() {
   const { user, setUser } = useContext(UserContext);
 
   const [state, setState] = useState({
-    email: "",
+    email: user.email,
     phonenumber: "",
     address: "",
     city: "",
@@ -576,6 +576,7 @@ function CreateDonation() {
                     name='email'
                     placeholder='Email'
                     id='email'
+                    disabled
                   />
                 </div>
                 <div className='form-group_'>
@@ -763,5 +764,6 @@ function CreateDonation() {
     </>
   );
 }
+
 
 export default CreateDonation;

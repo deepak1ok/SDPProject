@@ -26,7 +26,7 @@ function MyDonations() {
   useEffect(() => {
     const fetchDonations = async () => {
       const res = await axios.get(
-        `http://localhost:3000/api/donation/${user.email}`
+        `http://localhost:3000/api/donation/${user._id}`
       );
 
       console.log(res.data.data);
