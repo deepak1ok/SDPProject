@@ -444,7 +444,7 @@ function CreateDonation() {
   const { user, setUser } = useContext(UserContext);
 
   const [state, setState] = useState({
-    email: "",
+    email: user.email,
     phonenumber: "",
     address: "",
     city: "",
@@ -513,26 +513,6 @@ function CreateDonation() {
       setFormNo(formNo + 1);
     } else {
       toast.error("Please fill up all input fields");
-    if (formNo === 1 && state.email && state.phonenumber && state.address && state.city && state.state && state.pincode) {
-      setFormNo(formNo + 1)
-    }
-    else if (formNo === 2 && foodItem.length!==0) {
-      setState({...state,items:foodItem})
-      setFormNo(formNo + 1)
-    } 
-    else if(formNo === 3 && state.lat && state.lng){
-    
-      setState({...state,date:new Date()})
-      setFormNo(formNo + 1)
-    }
-    else if(formNo === 4){
-      console.log(state)
-      
-      setFormNo(formNo + 1)
-    }
-    
-    else {
-      toast.error('Please fillup all input field')
     }
   };
 
@@ -596,6 +576,7 @@ function CreateDonation() {
                     name='email'
                     placeholder='Email'
                     id='email'
+                    disabled
                   />
                 </div>
                 <div className='form-group_'>
@@ -783,5 +764,6 @@ function CreateDonation() {
     </>
   );
 }
+
 
 export default CreateDonation;

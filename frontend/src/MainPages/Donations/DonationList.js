@@ -111,8 +111,8 @@ function DonationList() {
             {donationList.map((d, i) => (
               <tr key={i}>
                 <td>{d.address}</td>
-                <td>{d.phoneNumber}</td>
-                <td>{d.email}</td>
+                <td>{d.phonenumber}</td>
+                <td>{d.donorId.email}</td>
                 <td>{new Date(d.date).toLocaleDateString()}</td>
                 <td>{d.city}</td>
                 <td>{d.state}</td>
