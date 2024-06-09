@@ -34,7 +34,7 @@ function RegisterOtpPage() {
     e.preventDefault();
     try {
       const url = "http://localhost:3000/api/users/verify-otp";
-      const res = await axios.post(url, data);
+      const res = await axios.post(url, {data:data,role:"donor"});
       navigate("/login",{ replace: true,state: { role: location.state.role }}  );
 
       console.log(res);

@@ -225,7 +225,7 @@ function AboutDonation() {
                 Donor Phone Number
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {data && data.phoneNumber}
+                {data && data.phonenumber}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -241,7 +241,7 @@ function AboutDonation() {
                 Pin Code
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {data && data.postalCode}
+                {data && data.pincode}
               </dd>
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
@@ -302,7 +302,7 @@ function AboutDonation() {
             </div>
             <div>
               <label>NGO Name</label>
-              <input type="text" value={modalData.ngoName} style={{width:'200px'}} disabled />
+              <input type="text" value={modalData.ngoname} style={{width:'200px'}} disabled />
             </div>
             <div>
               <label>Email</label>

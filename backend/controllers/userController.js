@@ -230,91 +230,173 @@ export const otpMailValidator = asyncHandler(async (req, res) => {
 
 
 export const sendOtp = asyncHandler(async (req, res) => {
+
+  if(req.body.role!=="ngo")
+    {
+      const {email,fname,lname}=req.body;
+
+      if(!email || !fname || !lname)
+        {
+          throw new Error("Please fill all the inputs")
+        }
+    
+      const userData=await User.findOne({email:email});
+    
+      if(userData)
+        {
+          return res.status(400).
+          json({
+            success:false,
+            message:"Email already exist"
+          });
+        }
+    
+        //const newUser = await User.create({ fname, lname, email, password: hashedPassword });
+      
+        const g_otp=generateRandom4Digits();
+      
+        const cDate=new Date();
+    
+        const otpResult=await Otp.findOneAndUpdate(
+          {email:email},{otp:g_otp,fName:fname,lName:lname,timestamp:new Date(cDate.getTime())},{upsert:true,new:true,setDefaultsOnInsert:true}
+        );
+    
+        const msg='<p> Hi <b>'+fname+lname+'<b>, </br> <h4>Your OTP for registering to Food Share is</h4>'+g_otp+'</br></br><h4>Happy Contributions!!</h4></p>';
+    
+        sendMail(email,'OTP Verfication--Food Share',msg)
+    
+        return res.status(200).json(
+          {
+            data:otpResult,
+            status:true
+          }
+        )
+    }
+    else
+    {
+      const {email}=req.body;
+
+      if(!email)
+        {
+          throw new Error("Please fill all the inputs")
+        }
+
+        const g_otp=generateRandom4Digits();
+      
+        const cDate=new Date();
+    
+        const otpResult=await Otp.findOneAndUpdate(
+          {email:email},{otp:g_otp,timestamp:new Date(cDate.getTime())},{upsert:true,new:true,setDefaultsOnInsert:true}
+        );
+
+        const msg='<p> Hi <b>'+'<b>, </br> <h4>Your OTP for registering to Food Share as NGO is</h4>'+g_otp+'</br></br><h4>Happy Contributions!!</h4></p>';
+    
+        //sendMail(email,'OTP Verfication--Food Share',msg);
+
+        console.log(g_otp);
+    
+        return res.status(200).json(
+          {
+            data:otpResult,
+            status:true
+          }
+        )
+
+
+
+
+    }
  
-  const {email,fname,lname}=req.body;
-
-  if(!email || !fname || !lname)
-    {
-      throw new Error("Please fill all the inputs")
-    }
-
-  const userData=await User.findOne({email:email});
-
-  if(userData)
-    {
-      return res.status(400).
-      json({
-        success:false,
-        message:"Email already exist"
-      });
-    }
-
-    //const newUser = await User.create({ fname, lname, email, password: hashedPassword });
   
-    const g_otp=generateRandom4Digits();
-  
-    const cDate=new Date();
-
-    const otpResult=await Otp.findOneAndUpdate(
-      {email:email},{otp:g_otp,fName:fname,lName:lname,timestamp:new Date(cDate.getTime())},{upsert:true,new:true,setDefaultsOnInsert:true}
-    );
-
-    const msg='<p> Hi <b>'+fname+lname+'<b>, </br> <h4>Your OTP for registering to Food Share is</h4>'+g_otp+'</br></br><h4>Happy Contributions!!</h4></p>';
-
-    sendMail(email,'OTP Verfication--Food Share',msg)
-
-    return res.status(200).json(
-      {
-        data:otpResult,
-        status:true
-      }
-    )
 
 });
 
 
 export const verifyOtp = asyncHandler(async (req, res) => {
 
-  const {email,otp,password}=req.body;
+  const {role}=req.body;
 
-  console.log(otp,password);
-
-  if(!email || !otp)
+  if(role!=='ngo')
     {
-      throw new Error("Please fill all the inputs");
-    }
+      const {email,otp,password}=req.body;
 
-  const data=await Otp.findOne({email:email});
-
-  console.log(data.otp)
-
-  if(parseInt(data.otp)===parseInt(otp))
-    {
-      const hashedPassword = await bcrypt.hash(password,10);
-
-      const newUser = await User.create({ fname:data.fName, lname:data.lName, email, password: hashedPassword });
-
-      try {
-        createToken(res, newUser._id);
-        res.status(201).json({
-          _id: newUser._id,
-          fname: newUser.fname,
-          lname: newUser.lname,
-          email: newUser.email,
-        });
-      } catch (error) {
-        res.status(400);
-        throw new Error("invalid user data");
-      }
+      console.log(otp,password);
+    
+      if(!email || !otp)
+        {
+          throw new Error("Please fill all the inputs");
+        }
+    
+      const data=await Otp.findOne({email:email});
+    
+      console.log(data.otp)
+    
+      if(parseInt(data.otp)===parseInt(otp))
+        {
+          const hashedPassword = await bcrypt.hash(password,10);
+    
+          const newUser = await User.create({ fname:data.fName, lname:data.lName, email, password: hashedPassword });
+    
+          try {
+            createToken(res, newUser._id);
+            res.status(201).json({
+              _id: newUser._id,
+              fname: newUser.fname,
+              lname: newUser.lname,
+              email: newUser.email,
+            });
+          } catch (error) {
+            res.status(400);
+            throw new Error("invalid user data");
+          }
+        }
+        else
+        {
+          return res.status(400).json(
+            {
+              message:"OTP is invalid"
+            }
+          )
+        }
     }
     else
     {
-      return res.status(400).json(
+      const {tempOtp,email}=req.body;
+      
+      console.log("ss");
+    
+      if(!tempOtp)
         {
-          message:"OTP is invalid"
+          console.log("sss");
+          throw new Error("Please fill all the inputs");
         }
-      )
+    
+      const result=await Otp.findOne({email:email});
+    
+      console.log(result);
+    
+      if(parseInt(result.otp)===parseInt(tempOtp))
+        {
+          try {
+            res.status(201).json({
+              message:"OTP is valid"
+            });
+          } catch (error) {
+            res.status(400);
+            throw new Error("invalid user data");
+          }
+        }
+        else
+        {
+          return res.status(400).json(
+            {
+              message:"OTP is invalid"
+            }
+          )
+        }
     }
+
+ 
 
 
 
