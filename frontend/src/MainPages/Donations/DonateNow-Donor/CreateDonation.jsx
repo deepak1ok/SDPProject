@@ -74,8 +74,8 @@ function CreateDonation() {
       setFormNo(formNo + 1)
     } 
     else if(formNo === 3 && state.lat && state.lng){
-      console.log(state)
-      
+    
+      setState({...state,date:new Date()})
       setFormNo(formNo + 1)
     }
     else if(formNo === 4){
