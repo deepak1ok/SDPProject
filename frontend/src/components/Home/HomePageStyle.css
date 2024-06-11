@@ -18,10 +18,7 @@
     align-items:center;
     justify-content:center;
     gap:50px;
-    color:#fff;
-    
+    color:#fff; 
     scroll-snap-align:start;
-
-
 }
 
