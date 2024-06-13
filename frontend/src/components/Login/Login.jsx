@@ -8,6 +8,8 @@ import Background from "../../Images/BackgroundImg/main-bg.png";
 import "../Login/Login.css";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/UserContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { useLocation } from "react-router-dom";
 
@@ -33,18 +35,9 @@ const Login = () => {
     e.preventDefault();
 
     console.log(formData)
-    // try {
+    try {
 
-    // } catch (error) {
-    //   if (
-    //     error.response &&
-    //     error.response.status >= 400 &&
-    //     error.response.status <= 500
-    //   ) {
-    //     setError(error.response.data.message);
-    //   }
-    // }
-
+      
     let url;
 
     if (location.state.role === "donor") {
@@ -62,10 +55,24 @@ const Login = () => {
     setUser(res.data);
 
     navigate("/",{replace:true});
+
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        console.log(error)
+        setError(error.response.data.message);
+        toast.error(error.response.data.message);
+      }
+    }
+
   };
 
   return (
     <>
+    <ToastContainer className='toast-container_' />
       <div className='Outer'>
         <div className='cont1'>
           <div className='text-logo'>
@@ -113,7 +120,6 @@ const Login = () => {
               required
             />
             <br />
-            {error && <div>{error}</div>}
             <button className='login' type='submit'>
               Login{" "}
             </button>

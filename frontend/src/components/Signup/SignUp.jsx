@@ -7,6 +7,8 @@ import Logo from "../../Images/Logo/logo.png";
 import Background from "../../Images/BackgroundImg/main-bg.png";
 import "../Login/Login.css";
 import '../Signup/SignUp.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import { useLocation } from "react-router-dom";
 
@@ -68,6 +70,7 @@ const Signup = () => {
         error.response.status <= 500
       ) {
         setError(error.response.data.message);
+        toast.error(error.response.data.message)
       }
     }
 
@@ -86,6 +89,7 @@ const Signup = () => {
 
   return (
     <>
+      <ToastContainer className='toast-container_' />
       <div className='Outer_'>
         <div className='cont1_' style={{ width: "70rem" }}>
           <div className='text-logo'>

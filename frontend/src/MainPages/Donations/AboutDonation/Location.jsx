@@ -12,7 +12,7 @@ export default function Map({lat,lng,ngoLat,ngoLng}) {
           center={[lat,lng]}
           zoom={13}
           scrollWheelZoom={true}
-          style={{ height: "200px ", margin: "10em 2em 5em" }}
+          style={{ height: "300px ", margin: "10em 2em 5em" }}
         >
           <TileLayer
             attribution='&copy;<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

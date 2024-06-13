@@ -161,7 +161,7 @@ function NGOProfile() {
           </dl>
         </div>
       </div>
-      <div className='px-4 sm:px-0 my-6'>
+      <div className='px-4 sm:px-0 my-6' style={{marginTop:'-120px'}}>
         <h3
           className='text-base font-semibold leading-7 text-gray-900'
           style={{ textAlign: "center" }}

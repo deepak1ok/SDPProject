@@ -32,6 +32,7 @@ function MyDonations() {
       console.log(res.data.data);
 
       setDonations(res.data.data);
+
     };
     fetchDonations();
   }, []);

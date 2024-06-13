@@ -70,6 +70,12 @@ export const loginUser = asyncHandler(async (req, res) => {
         role: "donor",
       });
     }
+    else
+    {
+      res.status(400).json({
+        message:"Invalid password"
+      })
+    }
     return;
   }
 });
@@ -195,9 +201,11 @@ export const loginNgo = asyncHandler(async (req, res) => {
       existingUser.password
     );
 
+    console.log(isPasswordValid)
+
     if (isPasswordValid) {
       createToken(res, existingUser._id);
-      res.status(201).json({
+      return res.status(201).json({
         _id: existingUser._id,
         fname: existingUser.fname,
         lname: existingUser.lname,
@@ -205,7 +213,19 @@ export const loginNgo = asyncHandler(async (req, res) => {
         role: "ngo",
       });
     }
-    return;
+    else
+    {
+      return res.status(401).json({
+        message:"Invalid password"
+      })
+    }
+   
+  }
+  else
+  {
+    return res.status(401).json({
+      message:"Email doesn't exist"
+    })
   }
 });
 
@@ -302,13 +322,7 @@ export const sendOtp = asyncHandler(async (req, res) => {
           }
         )
 
-
-
-
     }
- 
-  
-
 });
 
 

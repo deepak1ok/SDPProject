@@ -1,3 +1,11 @@
+.toast-container_ {
+  z-index: 100000000; /* Ensure it appears above other elements */
+  font-size: 1.6rem;
+  
+}
+
+
+
 /* .Outer{
     display: flex;
     width: 100%;
