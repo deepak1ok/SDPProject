@@ -33,10 +33,8 @@ import RegisterOtpPage from '../src/components/Signup/RegisterOtpPage.jsx'
 import LinearStepper from "./MainPages/Donations/DonateNow-Donor/CreateDonation.jsx"
 import CreateDonation from "./MainPages/Donations/DonateNow-Donor/CreateDonation.jsx";
 import NGORegistration from "./components/Signup/NGORegistration/NGORegistration.jsx";
-import Admin from '../src/components/Admin/Admin.jsx'
-import Users from '../src/components/Admin/Users.jsx'
-import Donations from '../src/components/Admin/Donations.jsx'
-import NGO from "./components/Admin/NGO.jsx";
+import Dropdown from "./components/city-state/Dropdown.jsx";
+
 
 
 // import DonationsHome from "./MainPages/Donations/view.js";
@@ -65,13 +63,15 @@ function App() {
 
           <Route path='/ngoprofile' element={<NGOProfile></NGOProfile>} />
 
-          <Route path='/admin/donations' element={<Donations></Donations>} />
+          <Route path='/state' element={<Dropdown></Dropdown>} />
+
+
+
+         
 
           <Route path='/location' element={<Location></Location>} />
 
-          <Route path='/admin/users' element={<Users></Users>} />
-
-          <Route path='/admin/ngo' element={<NGO></NGO>} />
+        
 
           <Route
             path='/donationslist'
@@ -110,7 +110,7 @@ function App() {
 
           <Route path='/create-donations' element={<CreateDonation></CreateDonation>} />
 
-          <Route path='/admin' element={<Admin></Admin>} />
+          
 
 
 

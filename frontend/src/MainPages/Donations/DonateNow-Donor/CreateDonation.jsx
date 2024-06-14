@@ -434,6 +434,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../../../components/NavBar/NavBar.jsx";
 import "./CreateDonation.css"; // Import the CSS file
+import Dropdown from "../../../components/city-state/Dropdown.jsx";
 
 function CreateDonation() {
   const formArray = ["Personal", "Donation", "Location", "Confirm"];
@@ -445,7 +446,7 @@ function CreateDonation() {
 
   const [state, setState] = useState({
     email: user.email,
-    phonenumber: "",
+    phonenumber: user.phonenumber,
     address: "",
     city: "",
     state: "",
@@ -503,6 +504,7 @@ function CreateDonation() {
     ) {
       setFormNo(formNo + 1);
     } else if (formNo === 2 && foodItem.length !== 0) {
+      console.log(state);
       setState({ ...state, items: foodItem });
       setFormNo(formNo + 1);
     } else if (formNo === 3 && state.lat && state.lng) {
@@ -588,9 +590,10 @@ function CreateDonation() {
                     name='phonenumber'
                     placeholder='Phone Number'
                     id='phonenumber'
+                    disabled
                   />
                 </div>
-                <div className='form-group_'>
+                {/* <div className='form-group_'>
                   <label htmlFor='state'>State</label>
                   <input
                     value={state.state}
@@ -611,7 +614,8 @@ function CreateDonation() {
                     placeholder='City'
                     id='city'
                   />
-                </div>
+                </div> */}
+               
                 <div className='form-group_'>
                   <label htmlFor='address'>Address</label>
                   <input
@@ -635,6 +639,7 @@ function CreateDonation() {
                   />
                 </div>
               </div>
+              <Dropdown state={state} setState={setState}></Dropdown>
               <div className='button-group_'>
                 <button onClick={next} className='button_ next-button_'>
                   Next

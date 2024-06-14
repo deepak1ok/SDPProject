@@ -1,11 +1,13 @@
 import express from "express";
-import { createDonations,donationList,aboutDonation,mydonation,requestToDonate,donationRequests,aboutRequest,acceptRequest, rejectRequest,deleteRequest,deleteDonation } from "../controllers/donationController.js";
+import { createDonations,donationList,aboutDonation,mydonation,requestToDonate,donationRequests,aboutRequest,acceptRequest, rejectRequest,deleteRequest,deleteDonation,searchDonation } from "../controllers/donationController.js";
 
 const router = express.Router();
 
 router.post("/request", createDonations);
 
 router.get("/donationlist", donationList);
+
+router.get("/donationlist/:state/:city", searchDonation);
 
 router.post("/requestdonation", requestToDonate);
 

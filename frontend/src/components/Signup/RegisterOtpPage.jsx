@@ -8,12 +8,15 @@ import Background from "../../Images/BackgroundImg/main-bg.png";
 import "../Login/Login.css";
 import "../Signup/SignUp.css";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import { useLocation } from "react-router-dom";
 
 function RegisterOtpPage() {
   const location = useLocation();
 
-  console.log(location.state.password);
+  console.log(location.state.phonenumber);
 
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -21,6 +24,7 @@ function RegisterOtpPage() {
   const [data, setData] = useState({
     email: location.state.email,
     password: location.state.password,
+    phonenumber: location.state.phonenumber,
   });
 
   const handleChange = ({ currentTarget: input }) => {
@@ -47,6 +51,7 @@ function RegisterOtpPage() {
         error.response.status <= 500
       ) {
         setError(error.response.data.message);
+        toast.error(error.response.data.message);
       }
     }
   };
@@ -60,6 +65,8 @@ function RegisterOtpPage() {
     borderRadius: "10px",
   };
   return (
+    <>
+    <ToastContainer className='toast-container_' />
     <div className='Outer'>
       <div className='cont1'>
         <div className='container'></div>
@@ -75,13 +82,13 @@ function RegisterOtpPage() {
             required
           />
           <br />
-          {error && <div>{error}</div>}
           <button style={customStyle} className='signup_btn' type='submit'>
             SignUp{" "}
           </button>
         </form>
       </div>
     </div>
+    </>
   );
 }
 

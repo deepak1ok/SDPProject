@@ -300,16 +300,7 @@ function AboutDonation() {
                 <label>First Name</label>
                 <input
                   type='text'
-                  value={modalData.firstName}
-                  style={{ width: "200px" }}
-                  disabled
-                />
-              </div>
-              <div className=' flex flex-col'>
-                <label>Last Name</label>
-                <input
-                  type='text'
-                  value={modalData.lastName}
+                  value={modalData.nameofvolunteer}
                   style={{ width: "200px" }}
                   disabled
                 />
@@ -355,16 +346,6 @@ function AboutDonation() {
                 <input
                   type='text'
                   value={modalData.city}
-                  style={{ width: "200px" }}
-                  disabled
-                />
-              </div>
-
-              <div className=' flex flex-col'>
-                <label>PinCode</label>
-                <input
-                  type='text'
-                  value={modalData.pincode}
                   style={{ width: "200px" }}
                   disabled
                 />
@@ -446,7 +427,6 @@ function AboutDonation() {
         <label for='pickup time'>Pickup Date and Time</label>
         {data.date && (
           <input
-            style={{ backgroundColor: "cyan" }}
             type='datetime-local'
             id='pickup'
             name='pickup'
@@ -456,10 +436,20 @@ function AboutDonation() {
           />
         )}
 
-        <button className='btn btn-outline btn-success' onClick={submitClick}>
+        <br />
+
+        <div style={{width:'100%',textAlign:'center'}}>
+
+        <button className='btn btn-outline btn-success' style={{height:'20px',width:'100px'}}  onClick={submitClick}>
           Submit
         </button>
+
+        </div>
+
+        
       </Modal>
+
+      
     </>
   );
 }

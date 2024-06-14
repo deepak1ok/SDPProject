@@ -36,8 +36,6 @@ const Login = () => {
 
     console.log(formData)
     try {
-
-      
     let url;
 
     if (location.state.role === "donor") {
@@ -48,7 +46,7 @@ const Login = () => {
 
     const res = await axios.post(url, formData);
 
-    console.log(res.data);
+    console.log(res);
 
     localStorage.setItem("token", JSON.stringify(res.data));
 

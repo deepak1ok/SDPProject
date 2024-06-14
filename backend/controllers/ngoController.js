@@ -2,16 +2,16 @@ import ngo from '../models/ngomodel.js'
 import bcrypt from 'bcryptjs'
 import Donate from "../models/donationModel.js";
 import Request from '../models/requestModel.js';
+import createToken from "../utils/createTokens.js";
 
 export const createNgo = async (req, res) => {
 
-    
     console.log(req.body);
 
-    const {ngoname,state,city,pincode,phonenumber,email,password,address,numberofvolunteers,totalfeeds,totalcampaigns, 
-    adults,childrens,description,lat,lng} = req.body;
+    const {ngoname,state,city,phonenumber,email,password,address,numberofvolunteers,totalfeeds,totalcampaigns, 
+    adults,childrens,description,lat,lng,nameofvolunteer} = req.body;
 
-    if(!ngoname || !state || !city || !pincode || !phonenumber || !email || !password || !address || !numberofvolunteers || !totalfeeds || !totalcampaigns ||
+    if(!ngoname || !state || !city ||  !phonenumber || !email || !password || !address || !numberofvolunteers || !totalfeeds || !totalcampaigns ||
     !adults || !childrens || !description || !lat || !lng)
     {
         throw new Error("Please fill all the inputs");
@@ -21,8 +21,8 @@ export const createNgo = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-   const newNgo = await ngo.create({ngoname,state,city,pincode,phonenumber,email,password:hashedPassword,address,numberofvolunteers,totalfeeds,totalcampaigns, 
-    adults,childrens,description,lat,lng});
+   const newNgo = await ngo.create({ngoname,state,city,phonenumber,email,password:hashedPassword,address,numberofvolunteers,totalfeeds,totalcampaigns, 
+    adults,childrens,description,lat,lng,nameofvolunteer});
 
   try {
     return res.status(201).json({

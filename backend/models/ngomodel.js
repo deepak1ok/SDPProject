@@ -22,17 +22,15 @@ const ngoSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-
     city: {
       type: String,
       required: true,
     },
-
     state: {
       type: String,
       required: true,
     },
-    
+
     phonenumber: {
       type: Number,
       required: true,
@@ -44,10 +42,6 @@ const ngoSchema = mongoose.Schema(
     },
     password: {
       type: String,
-      required: true,
-    },
-    pincode: {
-      type: Number,
       required: true,
     },
     address: {
@@ -68,6 +62,10 @@ const ngoSchema = mongoose.Schema(
     },
     totalfeeds: {
       type: Number,
+      required: true,
+    },
+    nameofvolunteer: {
+      type: String,
       required: true,
     },
   },
