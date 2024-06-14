@@ -65,6 +65,30 @@ export const donationList = async (req, res) => {
   }
 };
 
+export const searchDonation = async (req, res) => {
+ 
+  console.log("state"+req.params.state);
+  console.log(req.params.city);
+
+  const donationLists = await Donate.find({state:req.params.state,city:req.params.city,donationStatus:"false"}).populate("donorId");
+
+  console.log(donationLists)
+
+
+  if (donationLists) {
+    return res.status(201).json({
+      data: donationLists,
+    });
+  } else {
+    return res.status(400).json({
+      message: "Data not found",
+    });
+  }
+
+
+};
+
+
 export const aboutDonation = async (req, res) => {
 
   const data = await Donate.findById(req.params.id).populate("donorId");

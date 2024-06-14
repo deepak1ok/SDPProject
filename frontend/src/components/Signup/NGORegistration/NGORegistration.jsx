@@ -33,16 +33,16 @@ function NGORegistration() {
     address: "",
     city: "",
     state: "",
-    pincode: "",
     lat: "",
     lng: "",
     description: "",
     childrens: "",
     adults: "",
     totalfeeds: "",
-    numberofvolunteers: "",
     totalcampaigns: "",
     password: "",
+    nameofvolunteer:"",
+    numberofvolunteers:""
   });
 
   const submit = async () => {
@@ -129,19 +129,31 @@ function NGORegistration() {
     } else if (formNo == 3 && state.password) {
       setFormNo(formNo + 1);
     } else if (
-      formNo === 4 &&
-      state.ngoname &&
+      formNo === 4 && state.ngoname &&
       state.address &&
       state.city &&
       state.state &&
-      state.pincode &&
       state.description &&
       state.childrens &&
       state.adults &&
       state.totalfeeds &&
-      state.numberofvolunteers
+      state.numberofvolunteers && 
+      state.phonenumber &&
+      state.nameofvolunteer && 
+      state.totalcampaigns
+      
+     
     ) {
-      setFormNo(formNo + 1);
+      console.log(state)
+      if(state.phonenumber && state.phonenumber.length===10)
+        {
+          setFormNo(formNo + 1);
+        }
+        else
+        {
+          toast.error("Please enter a valid phone number");
+        }
+      
     } else if (formNo === 5 && state.lat && state.lng) {
       console.log(state);
 
@@ -152,8 +164,9 @@ function NGORegistration() {
       console.log(state);
 
       setFormNo(formNo + 1);
-    } else {
-      toast.error("Please fillup all input field");
+    } 
+    else {
+      toast.error("Please fill up all input field");
     }
   };
   const pre = () => {
@@ -224,7 +237,6 @@ function NGORegistration() {
                     className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
                     type='text'
                     name='email'
-                    placeholder='email'
                     id='name'
                     style={{ width: "200px" }}
                   />
@@ -347,25 +359,25 @@ function NGORegistration() {
               <div className='form_'>
                 <div className='flex flex-row '>
                   <div className='flex flex-col flex-col_'>
-                    <label htmlFor='name'>Name of NGO</label>
+                    <label htmlFor='name'>Name of Volunteer</label>
+                    <input
+                      value={state.nameofvolunteer}
+                      onChange={inputHandle}
+                      className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
+                      type='text'
+                      name='nameofvolunteer'
+                      id='name'
+                      style={{ width: "200px" }}
+                    />
+                  </div>
+                  <div className='flex flex-col flex-col_'>
+                    <label htmlFor='dept'>NGO Name</label>
                     <input
                       value={state.ngoname}
                       onChange={inputHandle}
                       className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
                       type='text'
                       name='ngoname'
-                      id='name'
-                      style={{ width: "200px" }}
-                    />
-                  </div>
-                  <div className='flex flex-col flex-col_'>
-                    <label htmlFor='dept'>Phone Number</label>
-                    <input
-                      value={state.phonenumber}
-                      onChange={inputHandle}
-                      className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
-                      type='number'
-                      name='phonenumber'
                       id='dept'
                       style={{ width: "200px" }}
                     />
@@ -374,29 +386,55 @@ function NGORegistration() {
 
                 <div className='flex flex-row'>
                   <div className='flex flex-col flex-col_'>
-                    <label htmlFor='batch'>State</label>
+                    <label htmlFor='batch'>Email</label>
                     <input
-                      value={state.state}
+                      value={state.email}
                       onChange={inputHandle}
                       className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
                       type='text'
-                      name='state'
+                      name='email'
                       style={{ width: "200px" }}
                     />
                   </div>
                   <div className='flex flex-col flex-col_'>
-                    <label htmlFor='batch'>City</label>
+                    <label htmlFor='batch'>Phone Number</label>
+                    <input
+                      value={state.phonenumber}
+                      onChange={inputHandle}
+                      className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
+                      type='number'
+                      name='phonenumber'
+                      style={{ width: "200px" }}
+                    />
+                  </div>
+                </div>
+
+                <div className='flex flex-row'>
+                  <div className='flex flex-col flex-col_'>
+                    <label htmlFor='name'>City</label>
                     <input
                       value={state.city}
                       onChange={inputHandle}
                       className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
                       type='text'
                       name='city'
+                      id='name'
+                      style={{ width: "200px" }}
+                    />
+                  </div>
+                  <div className='flex flex-col flex-col_'>
+                    <label htmlFor='dept'>State</label>
+                    <input
+                      value={state.state}
+                      onChange={inputHandle}
+                      className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
+                      type='text'
+                      name='state'
+                      id='dept'
                       style={{ width: "200px" }}
                     />
                   </div>
                 </div>
-
                 <div className='flex flex-row'>
                   <div className='flex flex-col flex-col_'>
                     <label htmlFor='name'>Address</label>
@@ -411,65 +449,39 @@ function NGORegistration() {
                     />
                   </div>
                   <div className='flex flex-col flex-col_'>
-                    <label htmlFor='dept'>Pincode</label>
-                    <input
-                      value={state.pincode}
-                      onChange={inputHandle}
-                      className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
-                      type='text'
-                      name='pincode'
-                      id='dept'
-                      style={{ width: "200px" }}
-                    />
-                  </div>
-                </div>
-                <div className='flex flex-row'>
-                  <div className='flex flex-col flex-col_'>
-                    <label htmlFor='name'>Number of Volunteers</label>
+                    <label htmlFor='name'>Total Volunteers</label>
                     <input
                       value={state.numberofvolunteers}
                       onChange={inputHandle}
                       className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
-                      type='text'
+                      type='number'
                       name='numberofvolunteers'
                       id='name'
                       style={{ width: "200px" }}
                     />
                   </div>
+                </div>
+                <div className='flex flex-row'>
                   <div className='flex flex-col flex-col_'>
-                    <label htmlFor='name'>Total Campaigns</label>
+                    <label htmlFor='dept'>Total Campaigns</label>
                     <input
                       value={state.totalcampaigns}
                       onChange={inputHandle}
                       className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
-                      type='text'
+                      type='number'
                       name='totalcampaigns'
-                      id='name'
+                      id='dept'
                       style={{ width: "200px" }}
                     />
                   </div>
-                </div>
-                <div className='flex flex-row'>
                   <div className='flex flex-col flex-col_'>
-                    <label htmlFor='dept'>Total Feeds</label>
+                    <label htmlFor='name'>Total Feeds</label>
                     <input
                       value={state.totalfeeds}
                       onChange={inputHandle}
                       className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
-                      type='text'
+                      type='number'
                       name='totalfeeds'
-                      id='dept'
-                      style={{ width: "200px" }}
-                    />
-                  </div>
-                  <div className='flex flex-col flex-col_'>
-                    <label htmlFor='name'>Total Adults</label>
-                    <input
-                      value={state.adults}
-                      onChange={inputHandle}
-                      className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
-                      type='text'
-                      name='adults'
                       id='name'
                       style={{ width: "200px" }}
                     />
@@ -477,31 +489,37 @@ function NGORegistration() {
                 </div>
                 <div className='flex flex-row'>
                   <div className='flex flex-col flex-col_'>
-                    <label htmlFor='dept'>Total Childrens</label>
+                    <label htmlFor='dept'>Number of Adults</label>
                     <input
-                      value={state.childrens}
+                      value={state.adults}
                       onChange={inputHandle}
                       className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
-                      type='text'
-                      name='childrens'
+                      type='number'
+                      name='adults'
                       id='dept'
                       style={{ width: "200px" }}
                     />
                   </div>
                   <div className='flex flex-col flex-col_'>
-                    <label htmlFor='name'>About Your NGO</label>
+                    <label htmlFor='name'>Number of Children</label>
                     <input
-                      value={state.description}
+                      value={state.childrens}
                       onChange={inputHandle}
                       className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
-                      type='text'
-                      name='description'
+                      type='number'
+                      name='childrens'
                       id='description'
                       style={{ width: "200px" }}
                     />
                   </div>
                 </div>
               </div>
+
+                    <div style={{textAlign:'center',display:'flex'}}>
+                    <div style={{display:'flex',alignItems:'center',fontSize:'15px',marginLeft:'30px',marginRight:'30px'}}>About you NGO</div>
+                    <textarea name="description" className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md' value={state.description} onChange={inputHandle}></textarea>
+                    </div>
+                 
 
               <div className='button-group_'>
                 <button onClick={next} className='button_ next-button_'>

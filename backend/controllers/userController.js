@@ -12,11 +12,10 @@ const generateRandom4Digits=()=>
   }
 
 export const createUser = asyncHandler(async (req, res, next) => {
-  const { role, fname, lname, email, password } = req.body;
 
-  console.log(process.env.SMTP_MAIL)
-
-  console.log(process.env.SMTP_PASSWORD)
+  console.log(req.body.data)
+  
+  const { role, fname, lname, email, password,phonenumber } = req.body;
 
   if (!fname || !lname || !email || !password) 
   {
@@ -30,7 +29,7 @@ export const createUser = asyncHandler(async (req, res, next) => {
   
   const hashedPassword = await bcrypt.hash(password,10);
   
-  const newUser = await User.create({ fname, lname, email, password: hashedPassword });
+  const newUser = await User.create({ fname, lname, email, password: hashedPassword,phonenumber});
 
   try {
     createToken(res, newUser._id);
@@ -39,6 +38,7 @@ export const createUser = asyncHandler(async (req, res, next) => {
       fname: newUser.fname,
       lname: newUser.lname,
       email: newUser.email,
+      phonenumber:newUser.phonenumber,
       role,
     });
   } catch (error) {
@@ -67,8 +67,15 @@ export const loginUser = asyncHandler(async (req, res) => {
         fname: existingUser.fname,
         lname: existingUser.lname,
         email: existingUser.email,
+        phonenumber:existingUser.phonenumber,
         role: "donor",
       });
+    }
+    else
+    {
+      res.status(400).json({
+        message:"Email or Password is invalid"
+      })
     }
     return;
   }
@@ -183,6 +190,8 @@ export const updateUserById = asyncHandler(async (req, res) => {
 });
 
 export const loginNgo = asyncHandler(async (req, res) => {
+
+  console.log("sss")
   const { email, password } = req.body;
 
   const existingUser = await Ngo.findOne({ email });
@@ -195,17 +204,33 @@ export const loginNgo = asyncHandler(async (req, res) => {
       existingUser.password
     );
 
+    console.log(isPasswordValid)
+
     if (isPasswordValid) {
+      
+      console.log(existingUser._id)
       createToken(res, existingUser._id);
-      res.status(201).json({
+      
+      return res.status(201).json({
         _id: existingUser._id,
-        fname: existingUser.fname,
-        lname: existingUser.lname,
+        fname: existingUser.nameofvolunteer,
         email: existingUser.email,
         role: "ngo",
       });
     }
-    return;
+    else
+    {
+      return res.status(401).json({
+        message:"Email or Password is invalid"
+      })
+    }
+   
+  }
+  else
+  {
+    return res.status(401).json({
+      message:"Email doesn't exist"
+    })
   }
 });
 
@@ -263,7 +288,7 @@ export const sendOtp = asyncHandler(async (req, res) => {
     
         const msg='<p> Hi <b>'+fname+lname+'<b>, </br> <h4>Your OTP for registering to Food Share is</h4>'+g_otp+'</br></br><h4>Happy Contributions!!</h4></p>';
     
-        sendMail(email,'OTP Verfication--Food Share',msg)
+        //sendMail(email,'OTP Verfication--Food Share',msg)
     
         return res.status(200).json(
           {
@@ -302,13 +327,7 @@ export const sendOtp = asyncHandler(async (req, res) => {
           }
         )
 
-
-
-
     }
- 
-  
-
 });
 
 
@@ -318,7 +337,7 @@ export const verifyOtp = asyncHandler(async (req, res) => {
 
   if(role!=='ngo')
     {
-      const {email,otp,password}=req.body.data;
+      const {email,otp,password,phonenumber}=req.body.data;
 
       console.log(otp,password);
     
@@ -335,7 +354,7 @@ export const verifyOtp = asyncHandler(async (req, res) => {
         {
           const hashedPassword = await bcrypt.hash(password,10);
     
-          const newUser = await User.create({ fname:data.fName, lname:data.lName, email, password: hashedPassword });
+          const newUser = await User.create({ fname:data.fName, lname:data.lName, email, password: hashedPassword,phonenumber:phonenumber });
     
           try {
             createToken(res, newUser._id);
@@ -344,6 +363,7 @@ export const verifyOtp = asyncHandler(async (req, res) => {
               fname: newUser.fname,
               lname: newUser.lname,
               email: newUser.email,
+              phonenumber:newUser.phonenumber,
             });
           } catch (error) {
             res.status(400);

@@ -20,6 +20,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
     "react-bootstrap-icons": "^1.11.4",
+    "react-country-state-city": "^1.1.2",
     "react-csv": "^2.2.2",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.5",
@@ -31,6 +32,7 @@
     "react-scripts": "^5.0.1",
     "react-spring": "^9.7.3",
     "react-toastify": "^10.0.5",
+    "recharts": "^2.12.7",
     "sass": "^1.62.1",
     "web-vitals": "^2.1.4"
   },

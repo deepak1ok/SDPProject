@@ -4,11 +4,20 @@ import { Link, useNavigate } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 
 import "../Donations/Donations.css";
+import Dropdown from "../../components/city-state/Dropdown";
+import { ToastContainer, toast } from "react-toastify";
 
 function DonationList() {
+  
   const [donationList, setDonationList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+
+  const [state,setState]=useState({
+    state:'',city:''
+  });
+
+  
 
   const getData = async () => {
     const data = await axios
@@ -66,10 +75,29 @@ function DonationList() {
   //   );
   // }
 
+  const handleClick=async ()=>
+    {
+      if(!state.city || !state.state)
+        {
+          toast.error('Please select city and state')
+        }
+
+        const result=await axios.get(`http://localhost:3000/api/donation/donationlist/${state.state}/${state.city}`)
+
+        setDonationList(result.data.data)
+    }
+
   return (
     <div>
+      <ToastContainer className='toast-container_' />
       <div>
         <NavBar></NavBar>
+      </div>
+      <div style={{width:'100%',textAlign:'center',margin:'10px'}}>
+      <Dropdown state={state} setState={setState}></Dropdown>
+      </div>
+      <div style={{textAlign:'center',margin:'40px'}}>
+        <button className="btn btn-success" onClick={handleClick} style={{width:'80px'}}>Search</button>
       </div>
       <div>
         <h1 style={{textAlign:'center'}}>Food Donations List</h1>
@@ -91,6 +119,8 @@ function DonationList() {
                 fontSize: "15px",
               }}
             >
+              <th>First Name</th>
+              <th>Last Name</th>
               <th>Address</th>
               <th>Phone</th>
               <th>Email</th>
@@ -110,6 +140,8 @@ function DonationList() {
           >
             {donationList.map((d, i) => (
               <tr key={i}>
+                <td>{d.donorId.fname}</td>
+                <td>{d.donorId.lname}</td>
                 <td>{d.address}</td>
                 <td>{d.phonenumber}</td>
                 <td>{d.donorId.email}</td>
