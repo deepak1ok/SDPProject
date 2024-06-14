@@ -120,14 +120,6 @@ function AboutRequest() {
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
               <dt className='text-sm font-medium leading-6 text-gray-900'>
-                Pin Code
-              </dt>
-              <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
-                {request.ngoId && request.ngoId.pincode}
-              </dd>
-            </div>
-            <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
-              <dt className='text-sm font-medium leading-6 text-gray-900'>
                 Total Campaigns
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
@@ -239,10 +231,10 @@ function AboutRequest() {
           {checkValid && status === "pending" ? (
             <>
               <div style={{ textAlign: "center" }}>
-                <button className='btn btn-success' onClick={handleClick}>
+                <button className='btn btn-success' style={{height:'40px',width:'90px',margin:'10px',fontSize:'15px'}} onClick={handleClick}>
                   Accept
                 </button>
-                <button className='btn btn-error' onClick={handleReject}>
+                <button className='btn btn-error' style={{height:'40px',width:'90px',margin:'10px',fontSize:'15px'}} onClick={handleReject}>
                   Reject
                 </button>
               </div>
@@ -263,7 +255,7 @@ function AboutRequest() {
                     available.Kindly reject the request.
                   </div>
                   <div className='text-center'>
-                    <button className='btn btn-error ' onClick={handleReject}>
+                    <button className='btn btn-error' style={{height:'40px',width:'90px',margin:'10px',fontSize:'15px'}} onClick={handleReject}>
                       Reject
                     </button>
                   </div>
