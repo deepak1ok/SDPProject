@@ -21,7 +21,7 @@ export default function Map({ state, setState }) {
           center={[latitude, longitude]}
           zoom={13}
           scrollWheelZoom={true}
-          style={{ height: "290px ", margin: "10em 2em 5em" }}
+          style={{ height: "300px ", margin: "7em 2em 5em" }}
         >
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

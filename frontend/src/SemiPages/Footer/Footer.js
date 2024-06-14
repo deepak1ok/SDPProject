@@ -52,13 +52,7 @@ function Footer() {
                 <a href='/needypeople'>Needy People</a>
               </li>
               <li>
-                <a href='#home'>Donators</a>
-              </li>
-              <li>
-                <a href='#home'>Partners</a>
-              </li>
-              <li>
-                <a href='#home'>Delivery Agents</a>
+                <a href='#'>Donators</a>
               </li>
             </ul>
 

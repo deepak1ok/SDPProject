@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import "../Faq/Faq.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 function Faq() {
   const [activeQ, setActiveQ] = useState("q1");
@@ -35,7 +37,7 @@ function Faq() {
                   className={`faq-box__question  ${getClassQuestion("q1")}`}
                 >
                   <p>1. What is FoodShare?</p>
-                  <i className='fa-solid fa-angle-down'></i>
+                  <FontAwesomeIcon icon={faArrowUp} size='2x' />
                 </div>
                 <div
                   id='q1'
@@ -55,7 +57,7 @@ function Faq() {
                   className={`faq-box__question ${getClassQuestion("q2")}`}
                 >
                   <p>2. How does FoodShare work?</p>
-                  <i className='fa-solid fa-angle-down'></i>
+                  <FontAwesomeIcon icon={faArrowUp} size='2x' />
                 </div>
                 <div
                   id='q2'
@@ -76,7 +78,7 @@ function Faq() {
                   className={`faq-box__question ${getClassQuestion("q3")}`}
                 >
                   <p>3. Who can use FoodShare?</p>
-                  <i className='fa-solid fa-angle-down'></i>
+                  <FontAwesomeIcon icon={faArrowUp} size='2x' />
                 </div>
                 <div
                   id='q3'
@@ -98,7 +100,7 @@ function Faq() {
                   <p>
                     4. Can I volunteer to collect and deliver food donations?
                   </p>
-                  <i className='fa-solid fa-angle-down'></i>
+                  <FontAwesomeIcon icon={faArrowUp} size='2x' />
                 </div>
                 <div
                   id='q4'

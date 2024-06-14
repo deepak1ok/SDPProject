@@ -29,10 +29,11 @@ function NavBar() {
         </div>
         <div className='navbar-center hidden lg:flex'>
           <ul className='menu menu-horizontal px-1'>
+            <li className='text-2xl'>{!user && <Link to='/'>Home </Link>}</li>
             <li className='text-2xl'>
               {user && <Link to='/donations'>Donate Now</Link>}
             </li>
-            <li className='text-2xl'>{!user && <Link to='/'>Home </Link>}</li>
+
             <li className='text-2xl'>
               <Link to='/about'>About Us</Link>
             </li>
