@@ -51,11 +51,7 @@ function LogoutButton() {
             </Link>
           )}
         </li>
-        <li style={{ height: "3em" }}>
-          <a style={{ height: "1.5em", fontSize: "14px", display: "flex" }}>
-            Settings
-          </a>
-        </li>
+        
         <li style={{ height: "3em" }}>
           <button
             style={{ height: "1.5em", fontSize: "14px", display: "flex" }}

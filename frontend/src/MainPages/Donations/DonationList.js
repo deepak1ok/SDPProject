@@ -90,12 +90,14 @@ function DonationList() {
   return (
     <div>
       <ToastContainer className='toast-container_' />
-      <div>
+      <div >
         <NavBar></NavBar>
       </div>
-      <div style={{width:'100%',textAlign:'center',margin:'10px'}}>
+    <div style={{display:'flex',justifyContent:'center'}}>
+      <div style={{width:'50%',textAlign:'center',margin:'10px'}}>
       <Dropdown state={state} setState={setState}></Dropdown>
       </div>
+     </div>
       <div style={{textAlign:'center',margin:'40px'}}>
         <button className="btn btn-success" onClick={handleClick} style={{width:'80px'}}>Search</button>
       </div>
@@ -103,7 +105,7 @@ function DonationList() {
         <h1 style={{textAlign:'center'}}>Food Donations List</h1>
         <br />
         <br />
-        <table
+        {donationList && donationList.length!==0 ?<table
           style={{
             borderCollapse: "flex",
             width: "100%",
@@ -138,7 +140,8 @@ function DonationList() {
               textAlign: "center",
             }}
           >
-            {donationList.map((d, i) => (
+            { 
+             donationList.map((d, i) => (
               <tr key={i}>
                 <td>{d.donorId.fname}</td>
                 <td>{d.donorId.lname}</td>
@@ -154,8 +157,9 @@ function DonationList() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table>:<div style={{fontWeight:'bold',textAlign:'center',fontSize:'30px'}}>No Food Donation availible</div>}
       </div>
+      
     </div>
   );
 }
