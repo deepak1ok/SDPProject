@@ -31,6 +31,7 @@ function Donations() {
 
         <div className='listdonation'>
           <h1>All Donation List</h1>
+
           <div className='listdonation-format-main'>
             <p>First Name</p>
             <p>Last Name</p>

@@ -21,7 +21,10 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
     >
       <div className='sidebar-title'>
         <div className='sidebar-brand'>
-          <img src={Logo} style={{ height: "70px", width: "70px" }}></img>{" "}
+          <img
+            src={Logo}
+            style={{ height: "70px", width: "70px", marginRight: "10px" }}
+          ></img>{" "}
           FoodShare
         </div>
         <span className='icon close_icon' onClick={OpenSidebar}>

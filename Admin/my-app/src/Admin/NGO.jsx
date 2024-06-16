@@ -44,7 +44,7 @@ function NGO() {
           openSidebarToggle={openSidebarToggle}
           OpenSidebar={OpenSidebar}
         />
-        <div style={{ width: "100%", border: "2px solid black" }}>
+        <div style={{}}>
           <table
             style={{
               borderCollapse: "flex",
@@ -66,7 +66,7 @@ function NGO() {
                 <th>Phone Number</th>
                 <th>City</th>
                 <th>State</th>
-                <th>Pincode</th>
+                {/* <th>Pincode</th> */}
                 <th>About</th>
                 <th>Remove NGO</th>
               </tr>
@@ -86,7 +86,7 @@ function NGO() {
                   <td>{d.email}</td>
                   <td>{d.city}</td>
                   <td>{d.state}</td>
-                  <td>{d.pincode}</td>
+                  {/* <td>{d.pincode}</td> */}
                   <td>About</td>
                   <td>
                     <label
@@ -103,7 +103,7 @@ function NGO() {
           </table>
         </div>
 
-        <input type='checkbox' id='my_modal_7' className='modal-toggle' />
+        {/* <input type='checkbox' id='my_modal_7' className='modal-toggle' />
         <div className='modal' role='dialog'>
           <div className='modal-box' style={{ backgroundColor: "#ffd489" }}>
             <h3 className='text-lg font-bold'>Hello!</h3>
@@ -123,7 +123,7 @@ function NGO() {
           <label className='modal-backdrop' htmlFor='my_modal_7'>
             Close
           </label>
-        </div>
+        </div> */}
       </div>
     </>
   );

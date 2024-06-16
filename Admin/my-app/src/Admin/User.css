@@ -1,0 +1,45 @@
+.listuser{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 740px;
+    border-radius: 6px;
+    background: white;
+}
+.listuser-format-main{
+    display: grid;
+    grid-template-columns: 1fr 1fr 3fr 1fr 1fr  !important;
+    gap: 10px;
+    width: 100%;
+    text-align: center;
+    color: #454545;
+    font-size: 15px;
+    font-weight: 600;
+}
+.listuser-format{
+    align-items: center;
+    font-weight: 500;
+}
+
+.listuser-remove-icon{
+    cursor: pointer;
+    margin: auto;
+}
+.listuser-alluser{
+    overflow-y: auto;
+    overflow-x: auto;
+    width: 100%;
+}
+@media(max-width:1200px){
+    .listuser-format-main{
+        font-size: 12px; 
+    }
+    
+}
+@media(max-width:800px){
+    .listuser-format-main{
+        font-size: 10px; 
+    }
+    
+}

@@ -104,7 +104,7 @@ function Home() {
         </div>
       </div>
 
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className='main-cards'>
         <div className='card'>
           <div className='card-inner'>
             <h3>Pending Donations</h3>
