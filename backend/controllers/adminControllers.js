@@ -6,8 +6,8 @@ export const totalInfo = async (req, res) => {
     const countNgo=await Ngo.find({}).count();
     const countDonations=await Donate.find({}).count();
     const countUsers=await User.find({}).count();
-    const pendingDonations=await Donate.find({donationStatus:false}).count();
-    const successfullDonation=await Donate.find({donationStatus:true}).count();
+    const pendingDonations=await Donate.find({donationStatus:"false"}).count();
+    const successfullDonation=await Donate.find({donationStatus:"true"}).count();
 
     try {
         res.status(201).json({

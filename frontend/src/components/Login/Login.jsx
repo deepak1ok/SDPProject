@@ -60,8 +60,7 @@ const Login = () => {
         error.response.status >= 400 &&
         error.response.status <= 500
       ) {
-        console.log(error)
-        setError(error.response.data.message);
+        console.log(error.response.data.message)
         toast.error(error.response.data.message);
       }
     }

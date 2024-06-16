@@ -31,8 +31,8 @@ function About() {
             <div className='verticalline'>
               <div className='member_header'>Saswat Jyoti Das</div>
               <div className='member_subtext'>
-                <a href='#'>Connect on Github</a>
-                <div className='email'>Email : </div>
+                <a href='https://github.com/saswatdas121'>Connect on Github</a>
+                <div className='email'>Email saswatdas121@gmail.com</div>
                 <a href='#'>connect on LinkedIn</a>
               </div>
             </div>

@@ -79,6 +79,12 @@ export const loginUser = asyncHandler(async (req, res) => {
     }
     return;
   }
+  else
+  {
+    res.status(400).json({
+      message:"Email doesn't exist"
+    })
+  }
 });
 
 export const logoutCurrentUser = asyncHandler(async (req, res, next) => {
@@ -196,7 +202,6 @@ export const loginNgo = asyncHandler(async (req, res) => {
 
   const existingUser = await Ngo.findOne({ email });
 
-  console.log(existingUser)
 
   if (existingUser) {
     const isPasswordValid = await bcrypt.compare(
