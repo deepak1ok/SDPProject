@@ -4,17 +4,18 @@
     align-items: center;
     width: 100%;
     height: 740px;
-    padding: 10px 50px;
-    margin: 30px;
+    /* padding: 10px 50px;
+    margin: 30px; */
     border-radius: 6px;
     background: white;
 }
 .listdonation-format-main{
     display: grid;
-    grid-template-columns: 1fr 1fr 2fr 1fr 1fr 1fr 1fr 1fr 1fr !important;
+    grid-template-columns: 1fr 1fr 3fr 1fr 1fr 1fr 1fr 1fr 1fr !important;
     gap: 10px;
     width: 100%;
-    padding: 20px 0px;
+    /* padding: 20px 0px; */
+    text-align: center;
     color: #454545;
     font-size: 15px;
     font-weight: 600;
@@ -32,8 +33,17 @@
     overflow-y: auto;
     overflow-x: auto;
 }
+@media(max-width:1200px){
+    .listdonation-format-main{
+        font-size: 12px; 
+    }
+    
+}
 @media(max-width:800px){
-    .listdonation{
+    .listdonation-format-main{
+        font-size: 10px; 
+    }
+    /* .listdonation{
         box-sizing: border-box;
         width: 95%;
         height: 100%;
@@ -44,6 +54,7 @@
         padding: 15px 0;
         color: #454545;
         font-size: 12px;
-    }
+    } */
+    
     
 }

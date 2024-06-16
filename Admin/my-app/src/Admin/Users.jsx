@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import SideBar from "./SideBar";
 import Header from "./Header";
 import axios from "axios";
+import cross_icon from "../assets/cross_icon.png";
+import "./User.css";
 
 function Users() {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
@@ -37,7 +39,7 @@ function Users() {
           openSidebarToggle={openSidebarToggle}
           OpenSidebar={OpenSidebar}
         />
-        <div style={{ width: "100%", border: "2px solid black" }}>
+        {/* <div style={{ width: "100%", border: "2px solid black" }}>
           <div class='relative overflow-x-auto shadow-md sm:rounded-lg'>
             <table class='w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>
               <thead
@@ -126,6 +128,43 @@ function Users() {
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div> */}
+
+        <div className='listuser'>
+          <h1>All User List</h1>
+
+          <div className='listuser-format-main'>
+            <p>First Name</p>
+            <p>Last Name</p>
+            <p>Email</p>
+            <p>Phone Number</p>
+            <p>Remove</p>
+          </div>
+          <div className='listuser-alluser'>
+            <hr />
+            {users &&
+              users.map((d, i) => {
+                return (
+                  <>
+                    <div
+                      key={i}
+                      className='listuser-format-main listuser-format'
+                    >
+                      <p>{d.fname}</p>
+                      <p>{d.lname}</p>
+                      <p>{d.email}</p>
+                      <p>{d.phonenumber}</p>
+                      <img
+                        src={cross_icon}
+                        alt=''
+                        className='listuser-remove-icon'
+                      />
+                    </div>
+                    <hr />
+                  </>
+                );
+              })}
           </div>
         </div>
       </div>
