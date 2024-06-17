@@ -2,9 +2,22 @@ import React, { useState, useEffect } from "react";
 import SideBar from "./SideBar";
 import Header from "./Header";
 import axios from "axios";
+import Modal from "react-modal";
+import cross_icon from "../assets/cross_icon.png";
 
 function NGO() {
   const [id, setId] = useState("");
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const [modalData, setModalData] = useState(null);
+
+  const [requestId,setRequestId]=useState();
+
+  const [modalIsOpen1, setModalIsOpen1] = useState(false);
+
+  const [requestId1,setRequestId1]=useState();
+
+
   useEffect(() => {
     allNgo();
   }, []);
@@ -23,15 +36,36 @@ function NGO() {
     setOpenSidebarToggle(!openSidebarToggle);
   };
 
-  const handleRemove = async (e, id) => {
-    const res = await axios.post("http://localhost:3000/api/admin/removengo", {
-      id: id,
-    });
-
-    console.log(res);
-
-    window.location.reload();
+  const customStyles = {
+    content: {
+      top: "35%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      width: "60%",
+      transform: "translate(-40%, -10%)",
+      zIndex: "1000",
+    },
   };
+
+
+  const handleClick=async()=>
+    {
+      if(!requestId)
+        {
+          return;
+        }
+
+         console.log(requestId)
+      const res = await axios.post(
+        `http://localhost:3000/api/admin/removengo/${requestId}`
+      );
+      
+      console.log(res);
+  
+      window.location.reload();
+    }
 
   const click = (e, id) => {
     setId(id);
@@ -67,7 +101,6 @@ function NGO() {
                 <th>City</th>
                 <th>State</th>
                 {/* <th>Pincode</th> */}
-                <th>About</th>
                 <th>Remove NGO</th>
               </tr>
             </thead>
@@ -87,43 +120,54 @@ function NGO() {
                   <td>{d.city}</td>
                   <td>{d.state}</td>
                   {/* <td>{d.pincode}</td> */}
-                  <td>About</td>
+                  
+                  
                   <td>
-                    <label
-                      htmlFor='my_modal_7'
-                      className='btn'
-                      onClick={(e) => click(e, d._id)}
-                    >
-                      Delete
-                    </label>
-                  </td>
+                  <button
+                        onClick={() => {
+                          setModalIsOpen(true);
+                          setRequestId(d._id);
+                        }}
+
+                        style={{ backgroundColor: "transparent", border: "none" }}
+                      >
+                         <img
+                        src={cross_icon}
+                        alt=''
+                        className='listuser-remove-icon'
+                      />
+                      </button></td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
 
-        {/* <input type='checkbox' id='my_modal_7' className='modal-toggle' />
-        <div className='modal' role='dialog'>
-          <div className='modal-box' style={{ backgroundColor: "#ffd489" }}>
-            <h3 className='text-lg font-bold'>Hello!</h3>
-            <p className='py-4'>Do you want to delete this request</p>
-            <button
-              style={{
-                backgroundColor: "black",
-                color: "white",
-                borderRadius: "5px",
-                padding: "4px 8px",
-              }}
-              onClick={(e) => handleRemove(e, id)}
-            >
-              Delete
-            </button>
-          </div>
-          <label className='modal-backdrop' htmlFor='my_modal_7'>
-            Close
-          </label>
-        </div> */}
+        <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        style={customStyles}
+      >
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <h1 style={{ marginTop: "0px" }}>Do you want to remove this ngo?</h1>
+        </div>
+        <div style={{textAlign:'center'}} >
+          <button onClick={handleClick}>Remove</button>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={modalIsOpen1}
+        onRequestClose={() => setModalIsOpen1(false)}
+        style={customStyles}
+      >
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <h1 style={{ marginTop: "0px" }}>Food Items</h1>
+        </div>
+        <div style={{textAlign:'center'}} >
+          <button onClick={handleClick}>Remove</button>
+        </div>
+      </Modal>
       </div>
     </>
   );

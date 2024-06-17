@@ -64,14 +64,7 @@ function App() {
           <Route path='/ngoprofile' element={<NGOProfile></NGOProfile>} />
 
           <Route path='/state' element={<Dropdown></Dropdown>} />
-
-
-
-         
-
           <Route path='/location' element={<Location></Location>} />
-
-        
 
           <Route
             path='/donationslist'

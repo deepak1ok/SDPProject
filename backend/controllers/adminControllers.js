@@ -38,9 +38,13 @@ export const userInfo=async(req,res)=>
 
   export const removeUser=async(req,res)=>
     {
-      const id=req.body.id;
+      const id=req.params.id;
+
+      console.log(req.body.id);
 
       const result=await User.findByIdAndDelete(id);
+
+      const result2=await Donate.deleteMany({donorId:id});
 
       try {
         res.status(201).json({
@@ -85,8 +89,23 @@ export const userInfo=async(req,res)=>
       
     export const removeNgo=async(req,res)=>
       {
-        console.log(req.body.id);
-        const result=await Ngo.findByIdAndDelete(req.body.id);
+        console.log(req.params.id);
+        const result=await Ngo.findByIdAndDelete(req.params.id);
+        try {
+          res.status(201).json({
+            result
+          });
+        } catch (error) {
+          res.status(400);
+          throw new Error("invalid user data");
+        }
+      }
+
+          
+    export const removeDonation=async(req,res)=>
+      {
+        console.log(req.params.id);
+        const result=await Donate.findByIdAndDelete(req.params.id);
         try {
           res.status(201).json({
             result
