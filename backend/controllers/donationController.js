@@ -1,5 +1,7 @@
 import Donate from "../models/donationModel.js";
 import Request from "../models/requestModel.js";
+import {sendMail} from '../config/helper.js';
+import Ngo from "../models/ngomodel.js";
 
 export const createDonations = async (req, res) => {
   
@@ -124,6 +126,18 @@ export const requestToDonate = async (req, res) => {
 
    const data=await Request.create(req.body.data);
 
+   const ngoData=await Ngo.findOne({_id:data.ngoId});
+
+   console.log(ngoData);
+
+   const msg=`Hi ${req.body.data.donorId.fname} ${req.body.data.donorId.lname},<br></br>Congragulations! ${ngoData.ngoname} NGO has requested some food items based on your donation done in our website.<br></br><br></br>Go to FoodShare Website to see the request.<br></br><br></br><br></br><br></br> <b>Thanks,Team FoodShare</b>`
+
+   const ngoMsg='Hi '+ngoData.ngoname+',<br></br> Your request for food items has been successfully sent to '+req.body.data.donorId.fname+' '+req.body.data.donorId.lname+'.<br></br>You can see your request in FoodShare Website<br></br><br></br><br></br><br></br> <b>Thanks,Team FoodShare</b>';
+   
+   sendMail(req.body.data.donorId.email,'Request to Donate Food-FoodShare',msg);
+   
+   sendMail(ngoData.email,'Request Successfull',ngoMsg);
+
    if (data) {
     return res.status(201).json({
       data: data,
@@ -136,7 +150,6 @@ export const requestToDonate = async (req, res) => {
 }
 
 export const donationRequests = async (req, res) => {
-
 
    const data=await Request.find({donationId:req.params.id}).populate("ngoId").populate("donorId")
 
@@ -192,6 +205,11 @@ export const acceptRequest = async (req, res) => {
   let items=donationData.items;
 
   let status=true;
+
+  const ngoMsg='Hi '+ngoData.ngoname+',<br></br> Your request for food items has been successfully sent to '+req.body.data.donorId.fname+' '+req.body.data.donorId.lname+'.<br></br>You can see your request in FoodShare Website<br></br><br></br><br></br><br></br> <b>Thanks,Team FoodShare</b>';
+   
+  sendMail(req.body.data.donorId.email,'Request to Donate Food-FoodShare',msg);
+  
 
   for(let i=0;i<data.itemsRequested.length;i++)
   {

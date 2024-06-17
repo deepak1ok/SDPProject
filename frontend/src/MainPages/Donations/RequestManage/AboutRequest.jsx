@@ -88,7 +88,7 @@ function AboutRequest() {
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
               <dt className='text-sm font-medium leading-6 text-gray-900'>
-                Donor Address
+                NGO Address
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
                 {request.ngoId && request.ngoId.address}
@@ -96,7 +96,7 @@ function AboutRequest() {
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
               <dt className='text-sm font-medium leading-6 text-gray-900'>
-                Donor State
+                NGO State
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
                 {request.ngoId && request.ngoId.state}
@@ -104,7 +104,7 @@ function AboutRequest() {
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
               <dt className='text-sm font-medium leading-6 text-gray-900'>
-                Donor Phone Number
+                NGO Phone Number
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
                 {request.ngoId && request.ngoId.phonenumber}
@@ -112,7 +112,7 @@ function AboutRequest() {
             </div>
             <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
               <dt className='text-sm font-medium leading-6 text-gray-900'>
-                Donor Email
+                NGO Email
               </dt>
               <dd className='mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0'>
                 {request.ngoId && request.ngoId.email}
