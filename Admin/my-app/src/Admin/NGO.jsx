@@ -11,12 +11,11 @@ function NGO() {
 
   const [modalData, setModalData] = useState(null);
 
-  const [requestId,setRequestId]=useState();
+  const [requestId, setRequestId] = useState();
 
   const [modalIsOpen1, setModalIsOpen1] = useState(false);
 
-  const [requestId1,setRequestId1]=useState();
-
+  const [requestId1, setRequestId1] = useState();
 
   useEffect(() => {
     allNgo();
@@ -49,23 +48,20 @@ function NGO() {
     },
   };
 
-
-  const handleClick=async()=>
-    {
-      if(!requestId)
-        {
-          return;
-        }
-
-         console.log(requestId)
-      const res = await axios.post(
-        `http://localhost:3000/api/admin/removengo/${requestId}`
-      );
-      
-      console.log(res);
-  
-      window.location.reload();
+  const handleClick = async () => {
+    if (!requestId) {
+      return;
     }
+
+    console.log(requestId);
+    const res = await axios.post(
+      `http://localhost:3000/api/admin/removengo/${requestId}`
+    );
+
+    console.log(res);
+
+    window.location.reload();
+  };
 
   const click = (e, id) => {
     setId(id);
@@ -116,27 +112,26 @@ function NGO() {
                 <tr key={i}>
                   <td>{d.ngoname}</td>
                   <td>{d.email}</td>
-                  <td>{d.email}</td>
+                  <td>{d.phonenumber}</td>
                   <td>{d.city}</td>
                   <td>{d.state}</td>
                   {/* <td>{d.pincode}</td> */}
-                  
-                  
-                  <td>
-                  <button
-                        onClick={() => {
-                          setModalIsOpen(true);
-                          setRequestId(d._id);
-                        }}
 
-                        style={{ backgroundColor: "transparent", border: "none" }}
-                      >
-                         <img
+                  <td>
+                    <button
+                      onClick={() => {
+                        setModalIsOpen(true);
+                        setRequestId(d._id);
+                      }}
+                      style={{ backgroundColor: "transparent", border: "none" }}
+                    >
+                      <img
                         src={cross_icon}
                         alt=''
                         className='listuser-remove-icon'
                       />
-                      </button></td>
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -144,30 +139,32 @@ function NGO() {
         </div>
 
         <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-        style={customStyles}
-      >
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <h1 style={{ marginTop: "0px" }}>Do you want to remove this ngo?</h1>
-        </div>
-        <div style={{textAlign:'center'}} >
-          <button onClick={handleClick}>Remove</button>
-        </div>
-      </Modal>
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          style={customStyles}
+        >
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <h1 style={{ marginTop: "0px" }}>
+              Do you want to remove this ngo?
+            </h1>
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <button onClick={handleClick}>Remove</button>
+          </div>
+        </Modal>
 
-      <Modal
-        isOpen={modalIsOpen1}
-        onRequestClose={() => setModalIsOpen1(false)}
-        style={customStyles}
-      >
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <h1 style={{ marginTop: "0px" }}>Food Items</h1>
-        </div>
-        <div style={{textAlign:'center'}} >
-          <button onClick={handleClick}>Remove</button>
-        </div>
-      </Modal>
+        <Modal
+          isOpen={modalIsOpen1}
+          onRequestClose={() => setModalIsOpen1(false)}
+          style={customStyles}
+        >
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <h1 style={{ marginTop: "0px" }}>Food Items</h1>
+          </div>
+          <div style={{ textAlign: "center" }}>
+            <button onClick={handleClick}>Remove</button>
+          </div>
+        </Modal>
       </div>
     </>
   );

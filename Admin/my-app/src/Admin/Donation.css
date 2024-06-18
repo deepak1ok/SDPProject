@@ -32,6 +32,7 @@
 .listdonation-alldonation{
     overflow-y: auto;
     overflow-x: auto;
+    width: 100%;
 }
 @media(max-width:1200px){
     .listdonation-format-main{

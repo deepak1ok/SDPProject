@@ -14,11 +14,10 @@ function Donations() {
 
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const [modelIsOpen1,setModalIsOpen1]=useState(false);
+  const [modelIsOpen1, setModalIsOpen1] = useState(false);
 
-  const [requestId,setRequestId]=useState();
+  const [requestId, setRequestId] = useState();
 
-  
   const customStyles = {
     content: {
       top: "35%",
@@ -45,16 +44,17 @@ function Donations() {
     setOpenSidebarToggle(!openSidebarToggle);
   };
 
-  const handleRemove=async ()=>
-    {
-      console.log(requestId);
+  const handleRemove = async () => {
+    console.log(requestId);
 
-      const res=await axios.post(`http://localhost:3000/api/admin/removeDonation/${requestId}`);
+    const res = await axios.post(
+      `http://localhost:3000/api/admin/removeDonation/${requestId}`
+    );
 
-      console.log(res);
-  
-      window.location.reload();
-    }
+    console.log(res);
+
+    window.location.reload();
+  };
   return (
     <>
       <div className='grid-container'>
@@ -71,7 +71,7 @@ function Donations() {
             <p>First Name</p>
             <p>Last Name</p>
             <p>Email</p>
-            <p>Address</p>
+            <p>Food Details</p>
             <p>City</p>
             <p>State</p>
             <p>Phone Number</p>
@@ -92,36 +92,42 @@ function Donations() {
                       <p>{d.donorId.lname}</p>
                       <p>{d.donorId.email}</p>
                       <td>
-                      <button
-                        onClick={() => {
-                          setModalIsOpen(true);
-                          setModalData(d.items)
-                        }}
-
-                        style={{ backgroundColor: "transparent", border: "none" }}
-                      >
-                         Food Items
-                      </button></td>
+                        <button
+                          onClick={() => {
+                            setModalIsOpen(true);
+                            setModalData(d.items);
+                          }}
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                          }}
+                        >
+                          Food Items
+                        </button>
+                      </td>
                       <p>{d.city}</p>
                       <p>{d.state}</p>
                       <p>{d.phonenumber}</p>
                       <p>{new Date(d.date).toLocaleDateString()}</p>
                       {/* <p>Remove</p> */}
                       <td>
-                      <button
-                        onClick={() => {
-                          setModalIsOpen1(true);
-                          setRequestId(d._id);
-                        }}
-
-                        style={{ backgroundColor: "transparent", border: "none" }}
-                      >
-                         <img
-                        src={cross_icon}
-                        alt=''
-                        className='listuser-remove-icon'
-                      />
-                      </button></td>
+                        <button
+                          onClick={() => {
+                            setModalIsOpen1(true);
+                            setRequestId(d._id);
+                          }}
+                          style={{
+                            backgroundColor: "transparent",
+                            border: "none",
+                          }}
+                        >
+                          <img
+                            src={cross_icon}
+                            alt=''
+                            className='listuser-remove-icon'
+                          />
+                        </button>
+                      </td>
                     </div>
                     <hr />
                   </>
@@ -131,57 +137,59 @@ function Donations() {
         </div>
 
         <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={() => setModalIsOpen(false)}
-        style={customStyles}
-      >
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <h1 style={{ marginTop: "0px" }}>Food Items</h1>
-        </div>
-        <div style={{display:'flex',justifyContent:'center'}}>
-        <table style={{color:'black',textAlign:'center',width:'100%'}}>
-          <thead>
-            <tr>
-              {/* <th></th> */}
-              <th style={{color:'black'}}>Name </th>
-              <th  style={{color:'black'}}>Quantity</th>
-              <th  style={{color:'black'}}>Type of Food</th>
-            </tr>
-          </thead>
-          <tbody>
-            {modalData &&
-              modalData.map((item, index) => {
-                return (
-                  <>
-                    <tr style={{textAlign:'center'}}>
-                      {/* <td></td> */}
-                      <td>{item.name}</td>
-                      <td>{item.quantity}</td>
-                      <td>{item.typeOfFood}</td>
-                    </tr>
-                  </>
-                );
-              })}
-          </tbody>
-        </table>
-        </div>
-      </Modal>
+          isOpen={modalIsOpen}
+          onRequestClose={() => setModalIsOpen(false)}
+          style={customStyles}
+        >
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <h1 style={{ marginTop: "0px" }}>Food Items</h1>
+          </div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <table
+              style={{ color: "black", textAlign: "center", width: "100%" }}
+            >
+              <thead>
+                <tr>
+                  {/* <th></th> */}
+                  <th style={{ color: "black" }}>Name </th>
+                  <th style={{ color: "black" }}>Quantity</th>
+                  <th style={{ color: "black" }}>Type of Food</th>
+                </tr>
+              </thead>
+              <tbody>
+                {modalData &&
+                  modalData.map((item, index) => {
+                    return (
+                      <>
+                        <tr style={{ textAlign: "center" }}>
+                          {/* <td></td> */}
+                          <td>{item.name}</td>
+                          <td>{item.quantity}</td>
+                          <td>{item.typeOfFood}</td>
+                        </tr>
+                      </>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
+        </Modal>
 
-      <Modal
-        isOpen={modelIsOpen1}
-        onRequestClose={() => setModalIsOpen1(false)}
-        style={customStyles}
-      >
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <h1 style={{ marginTop: "0px" }}>Do you want to remove this donation?</h1>
-        </div>
+        <Modal
+          isOpen={modelIsOpen1}
+          onRequestClose={() => setModalIsOpen1(false)}
+          style={customStyles}
+        >
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <h1 style={{ marginTop: "0px" }}>
+              Do you want to remove this donation?
+            </h1>
+          </div>
 
-        <div style={{textAlign:'center'}}>
-          <button onClick={handleRemove}>Remove</button>
-        </div>
-        
-        
-      </Modal>
+          <div style={{ textAlign: "center" }}>
+            <button onClick={handleRemove}>Remove</button>
+          </div>
+        </Modal>
 
         {/* <div style={{width:'100%',border:'2px solid black'}}>
       <table

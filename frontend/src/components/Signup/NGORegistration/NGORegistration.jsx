@@ -41,8 +41,8 @@ function NGORegistration() {
     totalfeeds: "",
     totalcampaigns: "",
     password: "",
-    nameofvolunteer:"",
-    numberofvolunteers:""
+    nameofvolunteer: "",
+    numberofvolunteers: "",
   });
 
   const submit = async () => {
@@ -129,7 +129,8 @@ function NGORegistration() {
     } else if (formNo == 3 && state.password) {
       setFormNo(formNo + 1);
     } else if (
-      formNo === 4 && state.ngoname &&
+      formNo === 4 &&
+      state.ngoname &&
       state.address &&
       state.city &&
       state.state &&
@@ -137,23 +138,17 @@ function NGORegistration() {
       state.childrens &&
       state.adults &&
       state.totalfeeds &&
-      state.numberofvolunteers && 
+      state.numberofvolunteers &&
       state.phonenumber &&
-      state.nameofvolunteer && 
+      state.nameofvolunteer &&
       state.totalcampaigns
-      
-     
     ) {
-      console.log(state)
-      if(state.phonenumber && state.phonenumber.length===10)
-        {
-          setFormNo(formNo + 1);
-        }
-        else
-        {
-          toast.error("Please enter a valid phone number");
-        }
-      
+      console.log(state);
+      if (state.phonenumber && state.phonenumber.length === 10) {
+        setFormNo(formNo + 1);
+      } else {
+        toast.error("Please enter a valid phone number");
+      }
     } else if (formNo === 5 && state.lat && state.lng) {
       console.log(state);
 
@@ -164,8 +159,7 @@ function NGORegistration() {
       console.log(state);
 
       setFormNo(formNo + 1);
-    } 
-    else {
+    } else {
       toast.error("Please fill up all input field");
     }
   };
@@ -515,11 +509,26 @@ function NGORegistration() {
                 </div>
               </div>
 
-                    <div style={{textAlign:'center',display:'flex'}}>
-                    <div style={{display:'flex',alignItems:'center',fontSize:'15px',marginLeft:'30px',marginRight:'30px'}}>About you NGO</div>
-                    <textarea name="description" className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md' value={state.description} onChange={inputHandle}></textarea>
-                    </div>
-                 
+              <div style={{ textAlign: "center", display: "flex" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    fontSize: "15px",
+                    marginLeft: "30px",
+                    marginRight: "30px",
+                  }}
+                >
+                  About you NGO
+                </div>
+                <textarea
+                  style={{ backgroundColor: "white" }}
+                  name='description'
+                  className='p-2 border border-slate-400 mt-1 outline-0 focus:border-blue-500 rounded-md'
+                  value={state.description}
+                  onChange={inputHandle}
+                ></textarea>
+              </div>
 
               <div className='button-group_'>
                 <button onClick={next} className='button_ next-button_'>
